@@ -1,0 +1,83 @@
+   .loginDiv{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    color: white;
+  }
+  .loginDivBut{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: white;
+
+  }
+  .loginDivBut button{
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font: 36px/1.5 "Inter";
+    width: 150%;
+  }
+  .loginDiv a{
+    color: white;
+    text-decoration: none;
+    font-style: italic;
+    font-weight: 200;
+    text-align: right;
+    font-size: 32px;
+  }
+  .login{
+    display: grid;
+    color: white;
+    gap: 25px;
+  }
+  .login input {
+    width: 70vh;
+    height: 5vh;
+    border: none;
+    border-bottom: 1px solid white;
+    outline: none;
+    background: none;
+    color: white;
+    font: 36px/1.5 "Inter";
+  }
+  .login ::placeholder {
+    color: white;
+    font: 36px/1.5 "Inter";
+    font-weight: lighter;
+    opacity: 50%;
+  }
+  button{
+    padding: 10px;
+    background-color: #CDADF5;
+    color: #351063;
+    border: 1;
+    border-radius: 15px;
+    cursor: pointer;
+    /* width: 150%; */
+    font: 36px/1.5 "Inter";
+  }
+ .signup a::after{
+    content: " \25BC";
+    font-size: 0.8em;
+    margin-left: 15px;
+  }
+  .new {
+    width: 70.87vh; /* 695 / 982 * 100vh */
+    height: 100vh;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 695 982' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 -7.5C1406 76 286.5 525 0 986V-7.5Z' fill='%23CDADF5' stroke='%23C60909'/%3E%3C/svg%3E");
+    background-size: cover; 
+    background-repeat: no-repeat; 
+  }
+  .userType button{
+    background-color: #F7F1FD;
+    color: black;
+  }
+  .signup{
+    /* width: 150%; */
+    display: grid;
+    gap: 40px;
+  }
