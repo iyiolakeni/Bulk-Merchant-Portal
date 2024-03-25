@@ -20,7 +20,6 @@ const Signup = () => {
 
   const handleOnClick = () => {
     setShowLoginDiv(!showLoginDiv);
-    // setSelectedAccountType(target.value);
   };
 
   const handleSubmit = async (e) => {
