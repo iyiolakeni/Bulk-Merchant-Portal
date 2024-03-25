@@ -1,4 +1,4 @@
-import { IsEmail, IsEnum, IsInt, IsNotEmpty} from 'class-validator';
+import { IsEmail, IsEnum, IsInt} from 'class-validator';
 import { FormStatus } from '../entities/form.enum';
 import { ApiProperty } from '@nestjs/swagger';
 import { PrimaryGeneratedColumn } from 'typeorm';

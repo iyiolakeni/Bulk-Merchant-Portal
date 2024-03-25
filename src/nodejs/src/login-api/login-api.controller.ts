@@ -1,4 +1,3 @@
-
 import { Controller, Post, Body, UnauthorizedException,Res, Req } from '@nestjs/common';
 import { LoginService } from './login-api.service';
 import { LoginDto } from './dto/create-login-api.dto';
@@ -12,8 +11,8 @@ export class LoginController {
 
   @Post('login')
   async login(@Body() loginDto: LoginDto, @Session() session: Record<string, any>): Promise<any> {
-    const { username, password } = loginDto;
-    const user = await this.loginService.findByUsernameAndPassword(username, password);
+    const { email, password } = loginDto;
+    const user = await this.loginService.findByEmailAndPassword(email, password);
     if (!user) {
       return { success: false, message: 'Invalid username or password' };
     }

@@ -12,8 +12,8 @@ export class LoginService {
     private readonly userRepository: Repository<User>,
   ) { }
 
-  async findByUsernameAndPassword(username: string, password: string): Promise<User | null> {
-    const user = await this.userRepository.findOne({ where: { username } });
+  async findByEmailAndPassword(email: string, password: string): Promise<User | null> {
+    const user = await this.userRepository.findOne({ where: { email } });
     if (!user) {
       throw new UnauthorizedException('Invalid username');
     }

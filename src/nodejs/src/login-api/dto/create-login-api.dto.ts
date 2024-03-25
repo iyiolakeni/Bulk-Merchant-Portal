@@ -1,6 +1,6 @@
 
 import { ApiProperty } from '@nestjs/swagger';
-import { IsAlphanumeric, Matches, MinLength } from 'class-validator';
+import { IsAlphanumeric, IsEmail, Matches, MinLength } from 'class-validator';
 
 export class LoginDto {
     @ApiProperty()
@@ -8,7 +8,8 @@ export class LoginDto {
     @IsAlphanumeric(null, {
       message: 'Username does not allow other than alpha numeric chars.',
     })
-    username: string;
+    @IsEmail()
+    email: string;
 
   @ApiProperty()
   @Matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, { 
