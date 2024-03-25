@@ -1,11 +1,16 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Dropdown from "react-bootstrap/Dropdown";
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../UserContext";
 
 const SideBar = () => {
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+  const {setUser} = useContext(UserContext);
+
+  const handleLogout = () => {
+    setUser(null);
+    navigate('/');
+  }
 
   const dropDownOpen = () => {  
     setShow(!show);
@@ -34,9 +39,9 @@ const SideBar = () => {
       </ul>
       </div>
       <div className="logout">
-      <Link to="/">
-        Logout
-      </Link>
+       <button style={{borderRadius:"0px", width:"inherit"}}  onClick={handleLogout}>
+       Logout
+        </button>
       </div>
     </nav>
   );

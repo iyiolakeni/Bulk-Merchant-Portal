@@ -72,12 +72,15 @@
     background-size: cover; 
     background-repeat: no-repeat; 
   }
-  .userType button{
-    background-color: #F7F1FD;
-    color: black;
-  }
   .signup{
     /* width: 150%; */
     display: grid;
     gap: 40px;
+  }
+  .userType{
+    height: 70px;
+    border-radius: 10px;
+    width: 150%;
+    padding: 10px;
+    font-size: larger;
   }

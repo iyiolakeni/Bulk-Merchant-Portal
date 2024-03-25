@@ -9,8 +9,8 @@ import image4 from "../images/headshot.png";
 import Notification
  from "./notification";
 
- const RequestCards = ({ requests }) => {
-  const user = { fname: "Iyioluwa", lname: "Awe", role: "Bank Manager" };
+ const RequestCards = ({ requests}) => {
+  // const user = { fname: "Iyioluwa", lname: "Awe", role: "Bank Manager" };
   const chats = [
     {
       image: arabella4,
@@ -60,7 +60,7 @@ import Notification
   ]
       return (
     <div className="request-cards">
-      <Navbar user={user} />
+      <Navbar/>
       {/* TOTAL AMOUNT OF REQUEST */}
       <div className="request_info">
         <div className="card_overview">

@@ -1,6 +1,4 @@
-import ChatSidebar from "../component/chatbox";
 import SideBar from "../component/sidebar";
-
 import RequestCards from "../component/requestcards";
 
 const Dashboard = () => {
@@ -9,7 +7,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <SideBar />
-          <RequestCards requests={requests} />
+          <RequestCards requests={requests}/>
     </div>
   );
 };

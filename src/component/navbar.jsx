@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../UserContext';
 
-const Navbar = ({user}) => {
+const Navbar = () => {
+  const {user} = useContext(UserContext);
   return (
     <nav className="navbar">
       <div className='welcome'>
@@ -11,10 +13,10 @@ const Navbar = ({user}) => {
         <button>📩</button>
         <button>🔔</button>
         {/* A box to get the User name first Letter of user fname and lname */}
-        <p style={{width: 'auto', background:'#EDCFF3', color:'#630678', borderRadius:'10px', padding: '10px', fontSize:'20px', fontWeight:'bold' }}>{user.fname[0] + '.' + user.lname[0]}</p>
+        <p style={{width: 'auto', background:'#EDCFF3', color:'#630678', borderRadius:'10px', padding: '10px', fontSize:'20px', fontWeight:'bold' }}>{user.firstname[0] + '.' + user.surname[0]}</p>
         <div>
-        <p style={{fontSize:'14px', fontWeight:'bold'}}>{user.fname+' '+user.lname}</p>
-        <p style={{fontSize:'10', fontWeight:'lighter'}}>{user.role}</p>
+        <p style={{fontSize:'14px', fontWeight:'bold'}}>{user.firstname +' '+ user.surname}</p>
+        <p style={{fontSize:'10', fontWeight:'lighter'}}>{user.jobPosition}</p>
         </div>
       </div>
     </nav>

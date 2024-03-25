@@ -1,61 +1,99 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [showLoginDiv, setShowLoginDiv] = useState(false);
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [surname, setSurname] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+  const [selectedAccountType, setSelectedAccountType] = useState('');
+
+  
+  // Handles the account type selection
+  const handleAccountTypeClick = (e) => {
+    setSelectedAccountType(e.target.value);
+  };
 
   const handleOnClick = () => {
     setShowLoginDiv(!showLoginDiv);
+    // setSelectedAccountType(target.value);
   };
-  const [show, setShow] = useState(false);
 
-  const dropDownOpen = () => {
-    setShow(!show);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (password !== confirmPassword) {
+      // Handle error
+      console.error('Passwords do not match');
+      return;
+    }
+  
+    try{
+    const response = await fetch('http://localhost:5000/users/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, username, password, firstname, surname, selectedAccountType })
+    });
+  
+    
+    if (!response.ok) {
+      const data = await response.json();
+      console.error('Signup failed:', data.message);
+      return;
+    }
+  
+    // Redirect to home page
+      navigate('/');
+      console.log(selectedAccountType);
+    }
+      // Handle error
+    catch(error)
+    {  console.error('Error', error);
+    }
   };
+  
   return (
     <div className="App">
       <div className="new"></div>
       {!showLoginDiv && (
-        <div className="loginDiv ">
-          <div className="signup">
-            <button onClick={dropDownOpen} style={{width: '150%'}}>
-              <a className="selUser">SELECT USER</a>
-            </button>
-          </div>
-          {show && (
-            <div className="loginDivBut">
-              <button value={"Account Officer"} className="userType">
-                Account Officer
-              </button>
-              <button value={"POS Business Officer"} className="userType">
-                POS Business Officer
-              </button>
-              <button value={"Business Developer"} className="userType">
-                Business Developer
-              </button>
-              <button value={"Account Developer"} className="userType">
-                Account Developer
-              </button>
-              <button style={{ color: 'white', backgroundColor: '#CDADF5', border: '25px'}} onClick={handleOnClick}>CONFIRM</button>
-            </div>
-          )}
-        </div>
-      )}
+  <div className="loginDiv">
+ 
+  <select 
+  style={{backgroundColor: "#F7F1FD",color:"black"}} 
+  onChange={handleAccountTypeClick} 
+  value={selectedAccountType} 
+  className="userType"
+>
+  <option value="">Select Account Type</option>
+  <option value="'Account Officer'">Account Officer</option>
+  <option value="'POS Business Officer'">POS Business Officer</option>
+  <option value="'Business Developer'">Business Developer</option>
+  <option value="'Account Developer'">Account Developer</option>
+</select>
 
+    <button style={{ color: 'white', backgroundColor: '#CDADF5', border: '25px', width:'150%'}} onClick={handleOnClick}>CONFIRM</button>
+  </div>
+)}
       {showLoginDiv && (
         <div className="loginDiv">
-          <div className="login">
-            <input className="username" placeholder="Email" />
-            <input className="username" placeholder="Username" />
-            <input className="username" placeholder="Password" />
-            <input className="password" placeholder="Confirm password" />
-          </div>
-          <button>
-            <Link to="/">SIGN-UP</Link>
-          </button>
-        </div>
-      )}
+          <form className="login" onSubmit={handleSubmit}>
+            <input className="username" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input className="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <input className="username" placeholder="Firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
+            <input className="username" placeholder="Surname" value={surname} onChange={(e) => setSurname(e.target.value)} />
+            <input className="username" placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input className="password" placeholder="Confirm password" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+            <button type="submit">SIGN UP</button>
+          </form>
     </div>
+        )}
+        </div>
   );
 };
 export default Signup;
