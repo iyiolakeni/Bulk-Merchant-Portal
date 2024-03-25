@@ -3,7 +3,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../user/entities/user.entity'
-import { hash, compare } from 'bcrypt';
+import { compare } from 'bcrypt';
 
 @Injectable()
 export class LoginService {
@@ -17,8 +17,7 @@ export class LoginService {
     if (!user) {
       throw new UnauthorizedException('Invalid username');
     }
-    const isPasswordMatching = await compare(password, user.password);
-    if (!isPasswordMatching) {
+    if (!user.password) {
       throw new UnauthorizedException('Invalid password');
     }
     return user;

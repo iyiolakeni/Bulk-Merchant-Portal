@@ -3,7 +3,6 @@ import { Controller, Post, Body, UnauthorizedException,Res, Req } from '@nestjs/
 import { LoginService } from './login-api.service';
 import { LoginDto } from './dto/create-login-api.dto';
 import { Response, Request } from 'express';
-import { Session } from '@nestjs/common';
 import { User } from '../user/entities/user.entity'
 
 @Controller('users')
@@ -11,13 +10,12 @@ export class LoginController {
   constructor(private readonly loginService: LoginService) {}
 
   @Post('login')
-  async login(@Body() loginDto: LoginDto, @Session() session: Record<string, any>): Promise<any> {
+  async login(@Body() loginDto: LoginDto): Promise<any> {
     const { username, password } = loginDto;
     const user = await this.loginService.findByUsernameAndPassword(username, password);
     if (!user) {
       return { success: false, message: 'Invalid username or password' };
     }
-    session.user = user;
     return { success: true, user };
   }
 

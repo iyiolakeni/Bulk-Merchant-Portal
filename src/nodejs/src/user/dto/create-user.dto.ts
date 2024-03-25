@@ -11,8 +11,8 @@ import { JobPosition } from '../entities/user.enum';
 
 export class CreateUserDto {
 
-    @PrimaryGeneratedColumn()
-    id: number;
+    // @PrimaryGeneratedColumn()
+    // id: number;
 
     
     @ApiProperty()

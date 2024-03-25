@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 import { JobPosition } from './user.enum';
 import * as bcrypt from 'bcryptjs';
 
@@ -22,18 +22,19 @@ export class User {
   @Column()
   password: string;
 
-    async setPassword(rawPassword: string) {
-    this.password = await bcrypt.hash(rawPassword, 10); 
-  }
+  // @BeforeInsert()
+  //   async setPassword(rawPassword: string) {
+  //   this.password = await bcrypt.hash(rawPassword, 10); 
+  // }
 
-  async comparePassword(rawPassword: string) {
-    return await bcrypt.compare(rawPassword, this.password); 
-  }
+  // async comparePassword(rawPassword: string) {
+  //   return await bcrypt.compare(rawPassword, this.password); 
+  // }
 
   @Column({
     type: 'enum',
     enum: JobPosition,
-    default: JobPosition.ACCOUNT_OFFICER
+    //default: JobPosition.ACCOUNT_OFFICER
   })
   jobPosition: JobPosition;
 }

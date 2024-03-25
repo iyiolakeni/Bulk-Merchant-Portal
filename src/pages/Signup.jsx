@@ -10,12 +10,12 @@ const Signup = () => {
   const [surname, setSurname] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
-  const [selectedAccountType, setSelectedAccountType] = useState('');
+  const [jobPosition, setJobPosition] = useState('');
 
   
   // Handles the account type selection
   const handleAccountTypeClick = (e) => {
-    setSelectedAccountType(e.target.value);
+    setJobPosition(e.target.value);
   };
 
   const handleOnClick = () => {
@@ -37,7 +37,7 @@ const Signup = () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email, username, password, firstname, surname, selectedAccountType })
+      body: JSON.stringify({ email, username, password, firstname, surname, jobPosition })
     });
   
     
@@ -49,7 +49,7 @@ const Signup = () => {
   
     // Redirect to home page
       navigate('/');
-      console.log(selectedAccountType);
+      console.log(jobPosition);
     }
       // Handle error
     catch(error)
@@ -66,14 +66,14 @@ const Signup = () => {
   <select 
   style={{backgroundColor: "#F7F1FD",color:"black"}} 
   onChange={handleAccountTypeClick} 
-  value={selectedAccountType} 
+  value={jobPosition} 
   className="userType"
 >
   <option value="">Select Account Type</option>
-  <option value="'Account Officer'">Account Officer</option>
-  <option value="'POS Business Officer'">POS Business Officer</option>
-  <option value="'Business Developer'">Business Developer</option>
-  <option value="'Account Developer'">Account Developer</option>
+  <option value="Account Officer">Account Officer</option>
+  <option value="POS Business Officer">POS Business Officer</option>
+  <option value="Business Developer">Business Developer</option>
+  <option value="Account Developer">Account Developer</option>
 </select>
 
     <button style={{ color: 'white', backgroundColor: '#CDADF5', border: '25px', width:'150%'}} onClick={handleOnClick}>CONFIRM</button>

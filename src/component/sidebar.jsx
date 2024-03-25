@@ -39,7 +39,7 @@ const SideBar = () => {
       </ul>
       </div>
       <div className="logout">
-       <button style={{borderRadius:"0px", width:"inherit"}}  onClick={handleLogout}>
+       <button onClick={handleLogout}>
        Logout
         </button>
       </div>
