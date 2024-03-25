@@ -1,34 +1,34 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+// form.controller.ts
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { FormService } from './form.service';
+import { UpdateFormStatusDto } from './dto/update-form-status.dto';
 import { CreateFormDto } from './dto/create-form.dto';
-import { UpdateFormDto } from './dto/update-form.dto';
+import { Form } from './entities/form.entity';
 
-@Controller('form')
+@Controller('forms')
 export class FormController {
   constructor(private readonly formService: FormService) {}
 
-  @Post()
-  create(@Body() createFormDto: CreateFormDto) {
-    return this.formService.create(createFormDto);
+  @Post('Form')
+  createForm(@Body() formData: CreateFormDto): Promise<Form> {
+    return this.formService.createForm(formData);
   }
 
   @Get()
-  findAll() {
-    return this.formService.findAll();
+  getAllForms(): Promise<Form[]> {
+    return this.formService.getAllForms();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.formService.findOne(+id);
+  @Get(':MerchantID')
+  getFormsByMerchantId(@Param('MerchantID') MerchantID: string): Promise<Form[]> {
+    return this.formService.getFormsByMerchantId(MerchantID);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFormDto: UpdateFormDto) {
-    return this.formService.update(+id, updateFormDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.formService.remove(+id);
+  @Patch(':MerchantID/status')
+  updateFormStatus(
+    @Param('MerchantID') MerchantID: string,
+    @Body() updateFormStatusDto: UpdateFormStatusDto,
+  ): Promise<Form> {
+    return this.formService.updateFormStatus(MerchantID, updateFormStatusDto);
   }
 }
