@@ -1,34 +1,43 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { FormService } from './form.service';
 import { CreateFormDto } from './dto/create-form.dto';
-import { UpdateFormDto } from './dto/update-form.dto';
+import { UpdateFormStatusDto } from './dto/update-form-status.dto';
+import { Form } from './entities/form.entity';
+import { ApiTags } from '@nestjs/swagger';
+import { AllowedPositions } from './decorator/allowed-positions.decorator';
+import { JobPositionGuard } from './guard/job-position.guard';
+import { JobPosition } from 'src/user/entities/user.enum';
 
-@Controller('form')
+@Controller('forms')
 export class FormController {
   constructor(private readonly formService: FormService) {}
 
   @Post()
-  create(@Body() createFormDto: CreateFormDto) {
-    return this.formService.create(createFormDto);
+  @UseGuards(JobPositionGuard)
+  @AllowedPositions(JobPosition.ACCOUNT_DEVELOPER) 
+  @ApiTags('Form')
+  createForm(@Body() formData: CreateFormDto): Promise<Form> {
+    return this.formService.createForm(formData);
   }
 
   @Get()
-  findAll() {
-    return this.formService.findAll();
+  @ApiTags('Form')
+  getAllForms(): Promise<Form[]> {
+    return this.formService.getAllForms();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.formService.findOne(+id);
+  @Get(':MerchantID')
+  @ApiTags('Form')
+  getFormsByMerchantId(@Param('MerchantID') MerchantID: string): Promise<Form[]> {
+    return this.formService.getFormsByMerchantId(MerchantID);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFormDto: UpdateFormDto) {
-    return this.formService.update(+id, updateFormDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.formService.remove(+id);
+  @Patch(':MerchantID/status')
+  @ApiTags('Form')
+  updateFormStatus(
+    @Param('MerchantID') MerchantID: string,
+    @Body() updateFormStatusDto: UpdateFormStatusDto,
+  ): Promise<Form> {
+    return this.formService.updateFormStatus(MerchantID, updateFormStatusDto);
   }
 }
