@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UpdateFormStatusDto } from './dto/update-form-status.dto';
 import { CreateFormDto } from './dto/create-form.dto';
+import { UpdateFormStatusDto } from './dto/update-form-status.dto';
 import { Form } from './entities/form.entity';
 import { FormStatus } from './entities/form.enum';
 
@@ -23,21 +23,28 @@ export class FormService {
     return this.formRepository.find();
   }
 
-  async getFormsByMerchantId(MerchantID: string): Promise<Form[]> {
-    return this.formRepository.find({ where: { MerchantID: MerchantID } });
+  async getFormsByMerchantId(merchantId: string): Promise<Form[]> {
+    return this.formRepository.find({ where: { MerchantID: merchantId } });
   }
 
   async updateFormStatus(
     MerchantID: string,
     updateFormStatusDto: UpdateFormStatusDto,
   ): Promise<Form> {
-    const form = await this.formRepository.findOne({ where: { MerchantID } });
+    const form = await this.formRepository.findOne({where: { MerchantID: MerchantID}});
     if (!form) {
       throw new NotFoundException('Form not found');
     }
 
     if (form.status !== FormStatus.PENDING) {
       throw new BadRequestException('Form status cannot be updated');
+    }
+
+    if (
+      updateFormStatusDto.status !== FormStatus.APPROVED &&
+      updateFormStatusDto.status !== FormStatus.DENIED
+    ) {
+      throw new BadRequestException('Invalid status transition');
     }
 
     form.status = updateFormStatusDto.status;

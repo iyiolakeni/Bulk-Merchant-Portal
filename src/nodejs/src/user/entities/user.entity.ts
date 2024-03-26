@@ -37,5 +37,5 @@ export class User {
   })
   jobPosition: JobPosition;
 }
-// export { JobPosition };
+export { JobPosition };
 
