@@ -1,16 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, Timestamp } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { FormStatus } from './form.enum';
-import { Address } from 'cluster';
 import { CardType } from './card.enum';
 import { POS } from './pos.enum';
+import { CategoryBusinessType } from './cate-business.enum';
 
 @Entity()
 export class Form {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column()
-  date: Date;
 
   @Column()
   MerchantID: string;
@@ -31,13 +28,13 @@ export class Form {
   No_of_branches: number;
 
   @Column()
-  openeing_hours: Timestamp;
+  opening_hours: string;
 
   @Column()
   website: string;
 
   @Column()
-  Office_address: Address;
+  Office_address: string;
 
   @Column()
   LGA: string;
@@ -87,8 +84,8 @@ export class Form {
   @Column()
   contact_mobile_no: string;
 
-  @Column()
-  category_of_merchant_business: string;
+  @Column({ type: 'enum', enum:CategoryBusinessType, default:CategoryBusinessType.STORE })
+  category_of_merchant_business:CategoryBusinessType;
 
   @Column()
   bank: string;
@@ -97,10 +94,10 @@ export class Form {
   Account_No: number;
 
   @Column({ type: 'enum', enum:   CardType, default: CardType.LOCAL })
-  cardtype: string;
+  cardtype: CardType;
 
   @Column({type: 'enum', enum: POS, default: POS.AIRTIME_VENDING})
-  POS_Use: string;
+  POS_Use: POS;
 
   @Column({ type: 'enum', enum: FormStatus, default: FormStatus.PENDING })
   status: FormStatus;
