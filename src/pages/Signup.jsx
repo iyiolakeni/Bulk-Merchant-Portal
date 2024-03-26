@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import '../font-awesome-4.7.0/css/font-awesome.min.css';
-import '../font-awesome-4.7.0/css/font-awesome.css';
-
 const Signup = () => {
   const [showLoginDiv, setShowLoginDiv] = useState(false);
   const [email, setEmail] = useState('');
