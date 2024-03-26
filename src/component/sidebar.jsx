@@ -26,7 +26,7 @@ const SideBar = () => {
           <button onClick={dropDownOpen} className="dropDown">Request</button>
           {show && (
             <ul className="dropdown">
-              <li><Link to="/new-request">New Request</Link></li>
+              <li><Link to="/New_Request">New Request</Link></li>
               <li><Link to="/all-requests">View All Requests</Link></li>
               <li><Link to="/in-process-requests">View In-Process Requests</Link></li>
               <li><Link to="/approved-requests">View Approved Requests</Link></li>
