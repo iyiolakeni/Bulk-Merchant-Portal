@@ -1,8 +1,15 @@
 import React, { useContext } from 'react';
-import { UserContext } from '../UserContext';
+// import { UserContext } from '../UserContext';
 
 const Navbar = () => {
-  const {user} = useContext(UserContext);
+  // const {user} = useContext(UserContext);
+  const user = {
+    firstname: 'John',
+    surname: 'Doe',
+    jobPosition: 'Software Developer'
+  
+  }
+
   return (
     <nav className="navbar">
       <div className='welcome'>

@@ -18,8 +18,8 @@ const SideBar = () => {
   return (
     <nav className="sidebar">
       <div className="menu">
-      <ul>
-        <li>
+      <ul style={{marginBottom:"15%"}}>
+        <li className="dash_board">
           <Link to="/Dashboard">Dashboard</Link>
         </li>
         <li>
@@ -39,11 +39,12 @@ const SideBar = () => {
       </ul>
       </div>
       <div className="logout">
-       <button onClick={handleLogout}>
+       <button style={{color: "white"}} onClick={handleLogout}>
        Logout
         </button>
       </div>
     </nav>
   );
+  
 };
 export default SideBar;
