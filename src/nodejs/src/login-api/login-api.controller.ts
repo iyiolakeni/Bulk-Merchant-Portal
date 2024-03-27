@@ -19,19 +19,19 @@ export class LoginController {
     return { success: true, user };
   }
 
-  @Post('logout')
-  async logout(@Req() req: Request & { session: { user: User } }, @Res() res: Response) {
-    const user: User = req.session?.user;
+  // @Post('logout')
+  // async logout(@Req() req: Request & { session: { user: User } }, @Res() res: Response) {
+  //   const user: User = req.session?.user;
 
-    if (!user) {
-      throw new UnauthorizedException('User not logged in');
-    }
+  //   if (!user) {
+  //     throw new UnauthorizedException('User not logged in');
+  //   }
 
-    req.session.destroy((err) => {
-      if (err) {
-        throw new Error('Error destroying session');
-      }
-      res.send({ message: 'Logged out successfully' });
-    });
-  }
+  //   req.session.destroy((err) => {
+  //     if (err) {
+  //       throw new Error('Error destroying session');
+  //     }
+  //     res.send({ message: 'Logged out successfully' });
+  //   });
+  // }
 }

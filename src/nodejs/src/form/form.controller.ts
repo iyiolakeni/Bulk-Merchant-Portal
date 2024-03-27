@@ -14,7 +14,7 @@ export class FormController {
 
   @Post()
   @UseGuards(JobPositionGuard)
-  @AllowedPositions(JobPosition.ACCOUNT_DEVELOPER) 
+  @AllowedPositions(JobPosition.ACCOUNT_OFFICER) 
   @ApiTags('Form')
   createForm(@Body() formData: CreateFormDto): Promise<Form> {
     return this.formService.createForm(formData);
