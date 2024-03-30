@@ -4,6 +4,7 @@ import { UserService } from './user/user.service';
 import {DatabaseModule} from '../database/database.module'
 import { LoginApiModule } from './login-api/login-api.module';
 import { FormModule } from './form/form.module';
+import { AccessContorlService } from './form/access-contorl/access-contorl.service';
 
 @Module({
   imports:[
@@ -12,6 +13,6 @@ import { FormModule } from './form/form.module';
             FormModule
           ],
   controllers: [UserController],
-  providers: [UserService],
+  providers: [UserService, AccessContorlService],
 })
 export class AppModule {}
