@@ -17,9 +17,13 @@ export class LoginService {
     if (!user) {
       throw new UnauthorizedException('Invalid username');
     }
-    if (!user.password) {
+    const isPasswordValid = await user.comparePassword(password);
+    if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid password');
     }
-    return user;
+    // if (!user.password) {
+    //   throw new UnauthorizedException('Invalid password');
+    // }
+    return user;
   }
 }
