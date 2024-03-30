@@ -84,7 +84,7 @@ import Notification
               {requests.map((request, index) => (
                 <div key={index} className="request_card">
                   <div className="card_name_icon">
-                    <p className="pending">TOTAL</p>
+                    <p className="total">TOTAL</p>
                   </div>
                   <div className="amount_clickmore">
                     <p>{request.amount}</p>
@@ -108,7 +108,7 @@ import Notification
               {requests.map((request, index) => (
                 <div key={index} className="request_card">
                   <div className="card_name_icon">
-                    <p className="pending">APPROVED</p>
+                    <p className="approved">APPROVED</p>
                   </div>
                   <div className="amount_clickmore">
                     <p>{request.amount}</p>
@@ -119,7 +119,7 @@ import Notification
               {requests.map((request, index) => (
                 <div key={index} className="request_card">
                   <div className="card_name_icon">
-                    <p className="pending">REJECTED</p>
+                    <p className="reject">REJECTED</p>
                   </div>
                   <div className="amount_clickmore">
                     <p>{request.amount}</p>

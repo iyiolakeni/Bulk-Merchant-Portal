@@ -13,7 +13,7 @@ export class LoginService {
   ) { }
 
   async findByUsernameAndPassword(username: string, password: string): Promise<User | null> {
-    const user = await this.userRepository.findOne({ where: { username } });
+    const user = await this.userRepository.findOne({ where: { username: username, password: password } });
     if (!user) {
       throw new UnauthorizedException('Invalid username');
     }
