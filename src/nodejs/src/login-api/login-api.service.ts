@@ -2,7 +2,15 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '../user/entities/user.entity'
+import { User } from '../user/entities/user.entity';
+import { Request } from 'express';
+
+
+interface SessionData {
+  user?: User;
+}
+
+
 
 @Injectable()
 export class LoginService {
@@ -11,7 +19,16 @@ export class LoginService {
     private readonly userRepository: Repository<User>,
   ) { }
 
-  async findByUsernameAndPassword(username: string, password: string): Promise<User | null> {
+  async findByUsernameAndPassword(username: string, password: string, req: Request): Promise<User | null> {
+    const session = req.session as SessionData; 
+    if (session.user) {
+      if (session.user.username !== username) {
+        throw new UnauthorizedException('Another user is already logged in.');
+      } else {
+       
+        return session.user;
+      }
+    }
     const user = await this.userRepository.findOne({ where: { username: username } });
     if (!user) {
       throw new UnauthorizedException('Invalid username or password');
@@ -20,6 +37,10 @@ export class LoginService {
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid username or password');
     }
+    session.user = user;
+    
     return user;
   }
+
+
 }

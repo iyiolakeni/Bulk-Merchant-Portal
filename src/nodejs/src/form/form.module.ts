@@ -2,23 +2,21 @@ import { FormService } from './form.service';
 import { FormController } from './form.controller';
 import { DatabaseModule } from 'database/database.module';
 import { Module,  MiddlewareConsumer } from '@nestjs/common';
-import { BusinessDeveloperMiddleware } from './middleware/business-developer.middleware';
-import { AccountOfficerMiddleware } from './middleware/account-officer.middleware';
-import { AccountOfficerGuard } from './guard/account-officer.guard';
-import { BusinessDeveloperGuard } from './guard/business-developer.guard';
+import { LoginService } from 'src/login-api/login-api.service';
+
 
 @Module({
   imports: [DatabaseModule],
   controllers: [FormController],
-  providers: [FormService, AccountOfficerGuard,BusinessDeveloperGuard],
+  providers: [FormService,LoginService],
 })
 export class FormModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(BusinessDeveloperMiddleware)
-      .forRoutes(FormController); 
-    consumer
-      .apply(AccountOfficerMiddleware)
-      .forRoutes(FormController); 
-  }
+  // configure(consumer: MiddlewareConsumer) {
+  //   consumer
+  //     .apply(BusinessDeveloperMiddleware)
+  //     .forRoutes(FormController); 
+  //   consumer
+  //     .apply(AccountOfficerMiddleware)
+  //     .forRoutes(FormController); 
+  // }
 }
