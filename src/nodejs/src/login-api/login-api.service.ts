@@ -12,17 +12,14 @@ export class LoginService {
   ) { }
 
   async findByUsernameAndPassword(username: string, password: string): Promise<User | null> {
-    const user = await this.userRepository.findOne({ where: { username: username, password: password } });
+    const user = await this.userRepository.findOne({ where: { username: username } });
     if (!user) {
-      throw new UnauthorizedException('Invalid username');
+      throw new UnauthorizedException('Invalid username or password');
     }
     const isPasswordValid = await user.comparePassword(password);
     if (!isPasswordValid) {
-      throw new UnauthorizedException('Invalid password');
+      throw new UnauthorizedException('Invalid username or password');
     }
-    // if (!user.password) {
-    //   throw new UnauthorizedException('Invalid password');
-    // }
     return user;
-  }
+  }
 }
