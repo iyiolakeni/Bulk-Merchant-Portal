@@ -1,6 +1,5 @@
 import React from "react";
 import "../css/chatsidebar.css";
-import Navbar from "../component/navbar";
 import ChatSidebar from "../component/chatbox";
 import arabella4 from "../images/arabella4(0).jpg";
 import image2 from "../images/DSC_4119.jpg";
@@ -57,11 +56,15 @@ import Notification
       status: reques.status,
       amount: reques.amount
     },
+    {
+      message: `The Request ${reques.id} has been Approved By the Business Developer Awaiting Retrievel`,
+      name: "User 1",
+      approved_date: "29-Feb-2024",
+      status: reques.status,
+      amount: reques.amount
+    },
   ]
       return (
-    <div className="request-cards">
-      <Navbar/>
-      {/* TOTAL AMOUNT OF REQUEST */}
       <div className="request_info">
         <div className="card_overview">
           <div className="overview">
@@ -133,7 +136,6 @@ import Notification
         </div>
         <ChatSidebar chats={chats} />
       </div>
-    </div>
   );
 };
 

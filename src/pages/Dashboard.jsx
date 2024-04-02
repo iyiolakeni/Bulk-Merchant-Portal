@@ -1,5 +1,6 @@
 import SideBar from "../component/sidebar";
 import RequestCards from "../component/requestcards";
+import Navbar from "../component/navbar";
 
 const Dashboard = () => {
 
@@ -7,7 +8,10 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <SideBar />
+      <div className="content">
+      <Navbar/>
           <RequestCards requests={requests}/>
+      </div>
     </div>
   );
 };

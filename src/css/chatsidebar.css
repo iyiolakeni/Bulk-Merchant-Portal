@@ -1,5 +1,5 @@
 .chat-sidebar {
-  width: 35%;
+  width: 355px;
   background-color: #f5f5f5;
   padding: 20px;
   overflow: hidden;
@@ -77,14 +77,10 @@ content: "\2714\2714";
     padding: 20px;
     margin: 20px;
   }
-  .request_cards{
-    display: flex;
-    gap:10px
-    width inherit;
-  }
+
   .request_info {
     display: flex;
-    align-items: flex-start;
+    /* align-items: flex-start; */
     gap: 20px;
   }
   .card1{
@@ -100,7 +96,7 @@ content: "\2714\2714";
     background-color: #B180EF;
     width: 300px;
     border-radius: 15px;
-    padding: 2%;
+    padding: 5%;
   }
   .overview{
     margin-top: -10px;

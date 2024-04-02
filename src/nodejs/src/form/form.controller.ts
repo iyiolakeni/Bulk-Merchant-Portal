@@ -10,7 +10,7 @@ import { JobPosition } from 'src/user/entities/user.enum';
 export class FormController {
   constructor(private readonly formService: FormService) {}
 
-  @Post()
+  @Post('new')
   @ApiTags('Form')
   createForm(@Body() formData: CreateFormDto): Promise<Form> {
     return this.formService.createForm(formData);

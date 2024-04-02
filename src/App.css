@@ -13,8 +13,8 @@
 /*make the navbar a sidebar*/
 .sidebar {
   display: grid;
-  width: 250px;
-  height: 100vh;
+  width: 264px;
+  height: auto;
   background-color: #630678;
   overflow-y:hidden ;
   justify-content: center;
@@ -112,7 +112,7 @@ cursor: pointer;
 
 /* Navbar Styling */
 .navbar {
-  width: 100%;
+  width: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
