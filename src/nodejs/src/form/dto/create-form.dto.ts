@@ -12,6 +12,9 @@ export class CreateFormDto {
   id: number;
 
   @ApiProperty()
+  officer_name: string;
+
+  @ApiProperty()
   MerchantID: string;
 
    @ApiProperty()
