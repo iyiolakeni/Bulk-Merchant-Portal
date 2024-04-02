@@ -2,9 +2,7 @@ import { Module } from '@nestjs/common';
 import { LoginService } from './login-api.service';
 import { LoginController } from './login-api.controller';
 import { DatabaseModule } from 'database/database.module';
-import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './auth/jwt.strategy';
+
 
 
 @Module({imports: [
@@ -19,7 +17,6 @@ import { JwtStrategy } from './auth/jwt.strategy';
   // })
 ],
   controllers: [LoginController],
-  providers: [LoginService,JwtStrategy],
-  exports: [JwtModule, PassportModule]
+  providers: [LoginService],
 })
 export class LoginApiModule {}

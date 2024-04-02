@@ -4,10 +4,9 @@ import { CreateFormDto } from './dto/create-form.dto';
 import { UpdateFormStatusDto } from './dto/update-form-status.dto';
 import { Form } from './entities/form.entity';
 import { ApiTags } from '@nestjs/swagger';
-import { JobPosition } from 'src/user/entities/user.enum';
-import { Roles } from './decorator/role.decorator';
-import { AuthGuard } from '@nestjs/passport';
-import { RoleGuard } from './guard/role.guard';
+import { AccountOfficerGuard } from './guard/account-officer.guard';
+import { BusinessDeveloperGuard } from './guard/business-developer.guard';
+
 
 
 @Controller('forms')
@@ -15,26 +14,30 @@ export class FormController {
   constructor(private readonly formService: FormService) {}
 
   @Post()
+  @UseGuards(AccountOfficerGuard)
   @ApiTags('Form')
-  // @Roles(JobPosition.ACCOUNT_OFFICER)
-  // @UseGuards(AuthGuard, RoleGuard)
   createForm(@Body() formData: CreateFormDto): Promise<Form> {
     return this.formService.createForm(formData);
   }
 
   @Get()
+  @UseGuards(BusinessDeveloperGuard)
+  @UseGuards(AccountOfficerGuard)
   @ApiTags('Form')
   getAllForms(): Promise<Form[]> {
     return this.formService.getAllForms();
   }
 
   @Get(':MerchantID')
+  @UseGuards(BusinessDeveloperGuard)
+  @UseGuards(AccountOfficerGuard)
   @ApiTags('Form')
   getFormsByMerchantId(@Param('MerchantID') MerchantID: string): Promise<Form[]> {
     return this.formService.getFormsByMerchantId(MerchantID);
   }
 
   @Patch(':MerchantID/status')
+  @UseGuards(BusinessDeveloperGuard)
   @ApiTags('Form')
   updateFormStatus(
     @Param('MerchantID') MerchantID: string,
