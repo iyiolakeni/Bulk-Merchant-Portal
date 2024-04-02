@@ -5,6 +5,10 @@ import { UpdateFormStatusDto } from './dto/update-form-status.dto';
 import { Form } from './entities/form.entity';
 import { ApiTags } from '@nestjs/swagger';
 import { JobPosition } from 'src/user/entities/user.enum';
+import { Roles } from './decorator/role.decorator';
+import { AuthGuard } from '@nestjs/passport';
+import { RoleGuard } from './guard/role.guard';
+
 
 @Controller('forms')
 export class FormController {
@@ -12,6 +16,8 @@ export class FormController {
 
   @Post()
   @ApiTags('Form')
+  // @Roles(JobPosition.ACCOUNT_OFFICER)
+  // @UseGuards(AuthGuard, RoleGuard)
   createForm(@Body() formData: CreateFormDto): Promise<Form> {
     return this.formService.createForm(formData);
   }

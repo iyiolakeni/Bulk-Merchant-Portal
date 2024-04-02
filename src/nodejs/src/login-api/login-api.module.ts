@@ -9,14 +9,14 @@ import { JwtStrategy } from './auth/jwt.strategy';
 
 @Module({imports: [
   DatabaseModule,
-  PassportModule.register({ defaultStrategy: 'jwt' }),
-  JwtModule.register({
+  // PassportModule.register({ defaultStrategy: 'jwt' }),
+  // JwtModule.register({
 
-    secret: 'sdijsodnoefuidnjoewdji3989q0oqwjdsoohcdewjd0e90cihcdsdciofiu',
+  //   secret: 'sdijsodnoefuidnjoewdji3989q0oqwjdsoohcdewjd0e90cihcdsdciofiu',
   
-    signOptions: { expiresIn: '60s' }
+  //   signOptions: { expiresIn: '60s' }
   
-  })
+  // })
 ],
   controllers: [LoginController],
   providers: [LoginService,JwtStrategy],
