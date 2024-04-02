@@ -22,7 +22,6 @@ export class FormController {
 
   @Get()
   @UseGuards(BusinessDeveloperGuard)
-  @UseGuards(AccountOfficerGuard)
   @ApiTags('Form')
   getAllForms(): Promise<Form[]> {
     return this.formService.getAllForms();
@@ -30,7 +29,6 @@ export class FormController {
 
   @Get(':MerchantID')
   @UseGuards(BusinessDeveloperGuard)
-  @UseGuards(AccountOfficerGuard)
   @ApiTags('Form')
   getFormsByMerchantId(@Param('MerchantID') MerchantID: string): Promise<Form[]> {
     return this.formService.getFormsByMerchantId(MerchantID);
