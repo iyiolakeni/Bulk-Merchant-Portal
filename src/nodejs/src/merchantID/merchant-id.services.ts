@@ -36,13 +36,23 @@ export class MerchantIDService {
     }
 
   async findAllMerchantID() {
-    return "This action returns all merchantID";
+    return this.merchantIDRepository.find();
   }
 
-  async findOneMerchantID() {
-    return "This action returns a #${id} merchantID";
+  //Get Merchant by a specific id
+  async findOneMerchantID(merchantID: string) {
+    if (!merchantID) {
+      throw new Error('merchantID is undefined');
+    }
+  
+    const merchant = await this.merchantIDRepository.findOne({where: {MerchantID: merchantID}});
+  
+    if (!merchant) {
+      throw new Error('No merchant found with this ID');
+    }
+  
+    return merchant;
   }
-
   async updateMerchantID() {
     return "This action updates a #${id} merchantID";
   }
