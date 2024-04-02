@@ -13,12 +13,9 @@ import { BusinessDeveloperGuard } from './guard/business-developer.guard';
 export class FormController {
   constructor(private readonly formService: FormService) {}
 
-<<<<<<< HEAD
   @Post('new')
-=======
   @Post()
   @UseGuards(AccountOfficerGuard)
->>>>>>> 6d7e208eaa73c16283795f33bbe3441331478b18
   @ApiTags('Form')
   createForm(@Body() formData: CreateFormDto): Promise<Form> {
     return this.formService.createForm(formData);
