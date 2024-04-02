@@ -1,9 +1,8 @@
 import { Controller, Post, Body, ConflictException, Get, Param, Delete, NotFoundException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
-import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Controller('users')
 export class UserController {

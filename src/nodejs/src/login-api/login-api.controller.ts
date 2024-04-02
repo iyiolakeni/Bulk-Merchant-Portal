@@ -1,46 +1,32 @@
-
 import { Controller, Post, Body, UnauthorizedException,Res, Req } from '@nestjs/common';
 import { LoginService } from './login-api.service';
 import { LoginDto } from './dto/create-login-api.dto';
-import { Response, Request } from 'express';
-import { User } from '../user/entities/user.entity'
-import { JwtService } from '@nestjs/jwt';
+import { Request, Response } from 'express';
 
 @Controller('users')
 export class LoginController {
   constructor(
     private readonly loginService: LoginService,
-    private readonly jwtService: JwtService,
     ) {}
 
-  @Post('login')
-  async login(@Body() loginDto: LoginDto): Promise<any> {
-    const { username, password } = loginDto;
-    const user = await this.loginService.findByUsernameAndPassword(username, password);
-    if (!user) {
-      return { success: false, message: 'Invalid username or password' };
-    }
-    return { success: true, user};
-
-    const payload = { username: user.username, sub: user.id };
-    const token = this.jwtService.sign(payload);
-
-    return { token };
-  }
-
-  // @Post('logout')
-  // async logout(@Req() req: Request & { session: { user: User } }, @Res() res: Response) {
-  //   const user: User = req.session?.user;
-
+  // @Post('login')
+  // async login(@Body() loginDto: LoginDto): Promise<any> {
+  //   const { username, password } = loginDto;
+  //   const user = await this.loginService.findByUsernameAndPassword(username, password);
   //   if (!user) {
-  //     throw new UnauthorizedException('User not logged in');
+  //     return { success: false, message: 'Invalid username or password' };
   //   }
-
-  //   req.session.destroy((err) => {
-  //     if (err) {
-  //       throw new Error('Error destroying session');
-  //     }
-  //     res.send({ message: 'Logged out successfully' });
-  //   });
+  //   return { success: true, user};
   // }
+
+  @Post('login')
+  async login(@Body() loginDto: LoginDto, @Req() req: Request, @Res() res: Response): Promise<any> {
+    const { username, password } = loginDto;
+    try {
+      const user = await this.loginService.findByUsernameAndPassword(username, password, req);
+      return res.json({ success: true, user });
+    } catch (error) {
+      throw new UnauthorizedException('Invalid username or password');
+    }
+  }
 }
