@@ -10,6 +10,9 @@ export class Form {
   id: number;
 
   @Column()
+  officer_name: string;
+  
+  @Column()
   MerchantID: string;
 
   @Column()
@@ -43,6 +46,3 @@ export class Form {
   @Column({ type: 'enum', enum: FormStatus, default: FormStatus.PENDING })
   status: FormStatus;
 }
-
-//32 columns
-
