@@ -1,11 +1,13 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 import axios from "axios";
 import { UserContext } from "../UserContext";
+import { Link } from "react-router-dom";
 
 const NewForm = () => {
   const {user} = useContext(UserContext);
   const [merchantId, setMerchantId] = useState('');
   const [merchantExists, setMerchantExists] = useState(false);
+  const [hasChecked, setHasChecked] = useState(false);
   const [certify, setCertify] = useState(false);
   const [numRows, setNumRows] = useState(0);
   const [rows, setRows] = useState([
@@ -65,17 +67,20 @@ const NewForm = () => {
 
   useEffect (() => {
     const checkMerchantId = async () => {
+      if (merchantId){
       try{
         const response = await axios.get(`http://localhost:5000/merchant/${merchantId}`);
         setMerchantExists(response.data != null);
       } catch (e){
         console.error(e);
       }
-    };
-
-    if (merchantId){
-      checkMerchantId();
     }
+    else{
+      setHasChecked(false);
+      setMerchantExists(false);
+    }
+  };
+  checkMerchantId();
   }, [merchantId]);
 
   const handleMerchantIdChange = (event) => {
@@ -85,7 +90,7 @@ const NewForm = () => {
     <div className="form">
       <form ref={formObj} onSubmit={handleSubmit} className="request">
           <input type="text" name="MerchantID" placeholder="Search for Merchant ID" onChange={handleMerchantIdChange}/>
-          {!merchantExists && <p>Merchant ID does not exist</p>}
+          {hasChecked && !merchantExists && <Link>Create New Merchant</Link>}
           <h2>Transaction Details</h2>
           <input name="" type="number" placeholder="Number of POS Outlets" />
           <input name="" type="number" placeholder="Number of Terminal Locations" onChange={handleTableRow} />
