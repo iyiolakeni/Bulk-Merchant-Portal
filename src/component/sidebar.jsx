@@ -5,10 +5,10 @@ import { UserContext } from "../UserContext";
 const SideBar = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  const {user} = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
 
   const handleLogout = () => {
-    user(null);
+    setUser(null);
     navigate('/');
   }
 
@@ -35,6 +35,7 @@ const SideBar = () => {
               <ul className="dropdown">
                 <li><Link to="/allrequests">View All Requests</Link></li>
                 <li><Link to="/in-process-requests">View In-Process Requests</Link></li>
+                <li><Link to="/pendingrequest">Pending Requests</Link></li>
                 <li><Link to="/approved-requests">View Approved Requests</Link></li>
               </ul>)
             

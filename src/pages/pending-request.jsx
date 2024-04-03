@@ -4,7 +4,7 @@ import SideBar from "../component/sidebar";
 import axios from "axios";
 import Navbar from "../component/navbar";
 
-const Allrequests =() => {
+const Pending_requests =() => {
     // const {user} = useContext(UserContext);
     const [request, setRequest] = useState([]);
 
@@ -54,7 +54,7 @@ const Allrequests =() => {
                         </tr>
                     </thead>
                     <tbody className="form-body">
-                        {request.map((form, index) => (
+                    {request.filter(form => form.status === 'pending').map((form, index) => (
                             <tr key={form._id}>
                                 <td>{index + 1}</td>
                                 <td>{form.MerchantID}</td>
@@ -79,4 +79,4 @@ const Allrequests =() => {
 
     )
 }
-export default Allrequests;
+export default Pending_requests;

@@ -8,6 +8,7 @@ import Login from './pages/login';
 import { UserProvider } from './UserProvider';
 import NewRequest from './pages/new_request';
 import Allrequests from './pages/all-request';
+import Pending_requests from './pages/pending-request';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/Dashboard" element={<Dashboard/>} />
         <Route path="/NewRequest" element={<NewRequest/>}/>
         <Route path="/allrequests" element={<Allrequests/>}/>
+        <Route path="/pendingrequest" element={<Pending_requests/>}/>
       </Routes>
       </UserProvider>
     </div>
