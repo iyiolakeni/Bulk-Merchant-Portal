@@ -60,6 +60,15 @@
     font-weight: bold;
     color: black;
 }
+.view_more::before{
+    content: "\1F441";
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    align-content: center;
+}
 .form-body{
     font-size: 16px;
 }

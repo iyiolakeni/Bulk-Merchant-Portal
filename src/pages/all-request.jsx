@@ -69,6 +69,9 @@ const Allrequests =() => {
                                 <td>{form.POS_Use}</td>
                                 <td>{form.officer_name}</td>
                                 <td>{form.status}</td>
+                                <td>
+                                    <span className="view_more"></span>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
