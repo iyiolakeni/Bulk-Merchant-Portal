@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../css/chatsidebar.css";
 import ChatSidebar from "../component/chatbox";
 import arabella4 from "../images/arabella4(0).jpg";
 import image2 from "../images/DSC_4119.jpg";
 import image3 from "../images/Light.jpg";
 import image4 from "../images/headshot.png";
-import Notification
- from "./notification";
+import Notification from "./notification";
+import axios from "axios";
 
- const RequestCards = ({ requests}) => {
+ const RequestCards = () => {
+  const [pendingRequest, setPending] = useState(0);
+  const [approvedRequest, setApproved] = useState(0);
+  const [declinedRequest, setDeclined] = useState(0);
+  const [totalRequest, setTotal] = useState(0);
   // const user = { fname: "Iyioluwa", lname: "Awe", role: "Bank Manager" };
   const chats = [
     {
@@ -64,6 +68,32 @@ import Notification
       amount: reques.amount
     },
   ]
+
+  useEffect(() => {
+    const fetchRequests = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/forms');
+        const requests = response.data;
+  
+        const pending = requests.filter(request => request.status === 'pending').length;
+        const approved = requests.filter(request => request.status === 'approved').length;
+        const declined = requests.filter(request => request.status === 'declined').length;
+        const total = requests.length;
+  
+        setPending(pending);
+        setApproved(approved);
+        setDeclined(declined);
+        setTotal(total);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchRequests();
+    const intervalId = setInterval(fetchRequests, 5000);
+
+    return() => clearInterval(intervalId);
+  },[])
       return (
       <div className="request_info">
         <div className="card_overview">
@@ -84,54 +114,46 @@ import Notification
           </div>
           <div className="card_allview">
             <div className="card1">
-              {requests.map((request, index) => (
-                <div key={index} className="request_card">
+                <div className="request_card">
                   <div className="card_name_icon">
                     <p className="total">TOTAL</p>
                   </div>
                   <div className="amount_clickmore">
-                    <p>{request.amount}</p>
+                    <p>{totalRequest}</p>
                   </div>
                 </div>
-              ))}
               {/* TOTAL AMOUNT OF PENDING REQUESTS */}
-              {requests.map((request, index) => (
-                <div key={index} className="request_card">
+                <div className="request_card">
                   <div className="card_name_icon">
                     <p className="pending">Pending</p>
                   </div>
                   <div className="amount_clickmore">
-                    <p>{request.amount}</p>
+                    <p>{pendingRequest}</p>
                   </div>
                 </div>
-              ))}
             </div>
             {/* // TOTAL AMOUNT OF APPROVED REQUESTS */}
             <div className="card2">
-              {requests.map((request, index) => (
-                <div key={index} className="request_card">
+                <div className="request_card">
                   <div className="card_name_icon">
                     <p className="approved">APPROVED</p>
                   </div>
                   <div className="amount_clickmore">
-                    <p>{request.amount}</p>
+                    <p>{approvedRequest}</p>
                   </div>
                 </div>
-              ))}
+              
               {/* TOTAL AMOUNT OF REJECTED REQUESTS */}
-              {requests.map((request, index) => (
-                <div key={index} className="request_card">
+                <div className="request_card">
                   <div className="card_name_icon">
                     <p className="reject">REJECTED</p>
                   </div>
                   <div className="amount_clickmore">
-                    <p>{request.amount}</p>
+                    <p>{declinedRequest}</p>
                   </div>
                 </div>
-              ))}
             </div>
           </div>
-
             <Notification notifications={notification}/>
         </div>
         <ChatSidebar chats={chats} />
