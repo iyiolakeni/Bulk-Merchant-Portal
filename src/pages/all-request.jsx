@@ -11,9 +11,7 @@ const Allrequests =() => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response1 = await axios.get('http://localhost:5000/forms', {
-                    'userRole': user.jobPosition
-                });
+                const response1 = await axios.get('http://localhost:5000/forms');
                 const response2 = await axios.get('http://localhost:5000/merchant/allMerchants'); 
 
                 const forms = response1.data;
