@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../css/chatsidebar.css";
 import ChatSidebar from "../component/chatbox";
 import arabella4 from "../images/arabella4(0).jpg";
@@ -7,8 +7,10 @@ import image3 from "../images/Light.jpg";
 import image4 from "../images/headshot.png";
 import Notification from "./notification";
 import axios from "axios";
+import { UserContext } from "../UserContext";
 
  const RequestCards = () => {
+  const {user} = useContext(UserContext);
   const [pendingRequest, setPending] = useState(0);
   const [approvedRequest, setApproved] = useState(0);
   const [declinedRequest, setDeclined] = useState(0);
@@ -75,6 +77,9 @@ import axios from "axios";
         const response = await axios.get('http://localhost:5000/forms');
         const requests = response.data;
   
+        if (user.jobPosition === 'Account Officer') {
+          requests = requests.filter(request => request.officer_name === user.name);
+        }
         const pending = requests.filter(request => request.status === 'pending').length;
         const approved = requests.filter(request => request.status === 'approved').length;
         const declined = requests.filter(request => request.status === 'declined').length;
