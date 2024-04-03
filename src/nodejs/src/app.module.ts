@@ -4,12 +4,14 @@ import { UserService } from './user/user.service';
 import {DatabaseModule} from '../database/database.module'
 import { LoginApiModule } from './login-api/login-api.module';
 import { FormModule } from './form/form.module';
+import { MerchantIDModule } from './merchantID/merchant-id.module';
 
 @Module({
   imports:[
             DatabaseModule,
             LoginApiModule,
-            FormModule
+            FormModule,
+            MerchantIDModule
           ],
   controllers: [UserController],
   providers: [UserService],

@@ -10,79 +10,23 @@ export class Form {
   id: number;
 
   @Column()
-  MerchantID: string;
-
-  @Column()
-  Merchant_Trade_Name: string;
-
-  @Column()
-  Business_type: string;
-
-  @Column()
-  Business_location: string;
+  officer_name: string;
   
   @Column()
-  Rc_Number: number;
-
-  @Column()
-  No_of_branches: number;
-
-  @Column()
-  opening_hours: string;
-
-  @Column()
-  website: string;
-
-  @Column()
-  Office_address: string;
-
-  @Column()
-  LGA: string;
-
-  @Column()
-  state: string;
-
-  @Column()
-  Name_of_Primary_Contact: string;
-
-  @Column()
-  Designation: string;
-
-  @Column()
-  office_No: number;
-
-  @Column()
-  mobile_No: number;
-
-  @Column()
-  email: string;
-
-  @Column()
-  Name_of_Secondary_Contact: string;
-
-  @Column()
-  Secondary_Designation: string;
-
-  @Column()
-  Secondary_office_No: number;
-
-  @Column()
-  Secondary_mobile_No: number;
-
-  @Column()
-  Secondary_email: string;
+  MerchantID: string;
 
   @Column()
   No_of_POS_terminal: number;
 
-  @Column()
-  location_of_terminal: string;
+  //Location of terminal is to be a list of locations
+  @Column('simple-array')
+  location_of_terminal: string[];
 
-  @Column()
-  contact_person: string;
+  @Column('simple-array')
+  contact_person: string[];
 
-  @Column()
-  contact_mobile_no: string;
+  @Column('simple-array')
+  contact_mobile_no: string[];
 
   @Column({ type: 'enum', enum:CategoryBusinessType, default:CategoryBusinessType.STORE })
   category_of_merchant_business:CategoryBusinessType;
@@ -102,6 +46,3 @@ export class Form {
   @Column({ type: 'enum', enum: FormStatus, default: FormStatus.PENDING })
   status: FormStatus;
 }
-
-//32 columns
-

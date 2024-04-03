@@ -17,7 +17,9 @@ export class FormController {
 
     ) {}
 
+  @Post('new')
   @Post()
+  // @UseGuards(AccountOfficerGuard)
   @ApiTags('Form')
   createForm(@Body() formData: CreateFormDto): Promise<Form> {
     return this.formService.createForm(formData);
@@ -25,6 +27,7 @@ export class FormController {
 
   @Get()
   @UseGuards()
+  // @UseGuards(BusinessDeveloperGuard)
   @ApiTags('Form')
   getAllForms(): Promise<Form[]> {
     return this.formService.getAllForms();
@@ -32,6 +35,7 @@ export class FormController {
 
   @Get(':MerchantID')
   @UseGuards()
+  // @UseGuards(BusinessDeveloperGuard)
   @ApiTags('Form')
   getFormsByMerchantId(@Param('MerchantID') MerchantID: string): Promise<Form[]> {
     return this.formService.getFormsByMerchantId(MerchantID);

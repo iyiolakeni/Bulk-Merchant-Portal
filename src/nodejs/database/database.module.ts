@@ -2,12 +2,13 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {User} from '../src/user/entities/user.entity'
 import {Form} from '../src/form/entities/form.entity'
+import { MerchantID } from 'src/merchantID/merchantID.entity';
 
 
 
 @Module({
   imports: [
-      TypeOrmModule.forFeature([User, Form]),
+      TypeOrmModule.forFeature([User, Form, MerchantID]),
         TypeOrmModule.forRoot({
           type: 'postgres',
           host: 'localhost',
@@ -15,7 +16,7 @@ import {Form} from '../src/form/entities/form.entity'
           password: 'admin',
           username: 'postgres',
           database: 'BMP_DB',
-          entities: [User, Form],
+          entities: [User, Form, MerchantID],
           synchronize: true,
           // logging: true,
         }),

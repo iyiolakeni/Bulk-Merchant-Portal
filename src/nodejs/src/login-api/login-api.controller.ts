@@ -9,6 +9,18 @@ export class LoginController {
     private readonly loginService: LoginService,
     ) {}
 
+<<<<<<< HEAD
+=======
+  // @Post('login')
+  // async login(@Body() loginDto: LoginDto): Promise<any> {
+  //   const { username, password } = loginDto;
+  //   const user = await this.loginService.findByUsernameAndPassword(username, password);
+  //   if (!user) {
+  //     return { success: false, message: 'Invalid username or password' };
+  //   }
+  //   return { success: true, user};
+  // }
+>>>>>>> ed1a8f1c32a9c049e38b15c6356cd95811da32e6
 
   @Post('login')
   async login(@Body() loginDto: LoginDto, @Req() req: Request, @Res() res: Response): Promise<any> {

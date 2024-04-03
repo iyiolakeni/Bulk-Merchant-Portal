@@ -12,89 +12,24 @@ export class CreateFormDto {
   id: number;
 
   @ApiProperty()
+  officer_name: string;
+
+  @ApiProperty()
   MerchantID: string;
 
-  @ApiProperty()
-  Merchant_Trade_Name: string;
-
-  @ApiProperty()
-  Business_type: string;
-
-  @ApiProperty()
-  Business_location: string;
-
-  @ApiProperty()
-  @IsInt()
-  Rc_Number: number;
-
-  @ApiProperty()
-  @IsInt()
-  No_of_branches: number;
-
-  @ApiProperty()
-  opening_hours: string;
-  
-  @ApiProperty()
-  website: string;
-
-  @ApiProperty()
-  Office_address:string;
-
-  @ApiProperty()
-  LGA: string;
-
-  @ApiProperty()
-  state: string;
-
-  @ApiProperty()
-  Name_of_Primary_Contact: string;
-
-  @ApiProperty()
-  Designation: string;
-
-  @ApiProperty()
-  @IsInt()
-  office_No: number;
-
-  @ApiProperty()
-  @IsInt()
-  mobile_No: number;
-
-  @ApiProperty()
-  @IsEmail(null, { message: 'Please provide valid Email.' })
-  email: string;
-
-  @ApiProperty()
-  Name_of_Secondary_Contact: string;
-
-  @ApiProperty()
-  Secondary_Designation: string;
-
-  @ApiProperty()
-  @IsInt()
-  Secondary_office_No: number;
-
-  @ApiProperty()
-  @IsInt()
-  Secondary_mobile_No: number;
-
-  @ApiProperty()
-  @IsEmail(null, { message: 'Please provide valid Email.' })
-   Secondary_email: string;
-
-  @ApiProperty()
+   @ApiProperty()
   @IsInt()
    No_of_POS_terminal: number;
 
   @ApiProperty()
-  location_of_terminal: string;
+  location_of_terminal: string[];
 
 
   @ApiProperty()
-  contact_person: string;
+  contact_person: string[];
 
   @ApiProperty()
-  contact_mobile_no: string;
+  contact_mobile_no: string[];
   
   @ApiProperty()
   @IsEnum(CategoryBusinessType)

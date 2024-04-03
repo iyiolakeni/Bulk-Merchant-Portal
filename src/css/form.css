@@ -4,7 +4,7 @@
     font-weight: bold;
 }
 .request {
-    display: flex;
+    display: grid;
   }
   
   .request .requestForm, .request .requestForm1 {
@@ -44,3 +44,40 @@
     padding: 5px;
     border-radius: 5px;
 }
+.form-table{
+    width:auto;
+    border-collapse: collapse;
+    table-layout: fixed;
+    padding: 0px 20px;
+}
+.form-table th, .form-table td{
+    text-align: left;
+    padding: 8px;
+    text-transform: uppercase;
+}
+.form-header{
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+.view_more::before{
+    content: "\1F441";
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    align-content: center;
+}
+.form-body{
+    font-size: 16px;
+}
+.form-body tr:nth-child(even) {
+    background-color: #f2f2f2; /* Grey */
+    color: black;
+  }
+  
+  .form-body tr:nth-child(odd) {
+    background-color: white;
+    color: black;
+  }
