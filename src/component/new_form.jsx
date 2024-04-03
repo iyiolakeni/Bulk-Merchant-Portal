@@ -1,24 +1,23 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import axios from "axios";
 import { UserContext } from "../UserContext";
 
 const NewForm = () => {
   const {user} = useContext(UserContext);
-  const [others, setOthers] = useState(false);
+  const [merchantId, setMerchantId] = useState('');
+  const [merchantExists, setMerchantExists] = useState(false);
   const [certify, setCertify] = useState(false);
+  const [numRows, setNumRows] = useState(0);
   const [rows, setRows] = useState([
     { location: "", contactPerson: "", mobilePhone: "" },
   ]);
   const [error, setError] = useState("");
   const formObj = useRef();
-  const handleChange = (e) => {
-    if (!others && e.target.value === "others") {
-      setOthers(true);
-    } else {
-      setOthers(false);
-    }
-  };
 
+
+  const handleTableRow = (event) =>{
+    setNumRows(event.target.value);
+  };
   const changeHandler = (e, index) => {
     const { name, value } = e.target;
     if (!value) {
@@ -30,8 +29,15 @@ const NewForm = () => {
     setRows(list);
     setError(""); // Clear the error message
   };
-  const handleAddRow = (e) => {
+  const handleCheckBox = (e) => {
+    setCertify(e.target.checked);
+  };
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!certify) {
+      alert("You must certify the information provided is accurate");
+    }
+
     const lastRow = rows[rows.length - 1];
     const isAnyFieldEmpty = Object.values(lastRow).every((value) => !value);
 
@@ -41,15 +47,7 @@ const NewForm = () => {
       setError(""); // Clear the error message
       setRows([...rows, { location: "", contactPerson: "", mobilePhone: "" }]);
     }
-  };
-  const handleCheckBox = (e) => {
-    setCertify(e.target.checked);
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!certify) {
-      alert("You must certify the information provided is accurate");
-    }
+
     const form = new FormData(formObj.current);
     const info = {};
     form.forEach((value, key) => {
@@ -64,53 +62,36 @@ const NewForm = () => {
     }
     //retrieve all information on forms and send it to an api
   };
+
+  useEffect (() => {
+    const checkMerchantId = async () => {
+      try{
+        const response = await axios.get(`http://localhost:5000/merchant/${merchantId}`);
+        setMerchantExists(response.data != null);
+      } catch (e){
+        console.error(e);
+      }
+    };
+
+    if (merchantId){
+      checkMerchantId();
+    }
+  }, [merchantId]);
+
+  const handleMerchantIdChange = (event) => {
+    setMerchantId(event.target.value);
+  };
   return (
     <div className="form">
       <form ref={formObj} onSubmit={handleSubmit} className="request">
-        <div className="requestForm">
-          <h2>Merchant Information</h2>
-
-          <input type="text" name="MerchantID" placeholder="Search for Merchant ID" />
-          <input type="date" />
-          <select name="Business_type" onChange={handleChange}>
-            <option name="Business_type" value="">Business Type</option>
-            <option name="Business_type" value="Sole Owner">Sole Owner</option>
-            <option name="Business_type" value="Partnership">Partnership</option>
-            <option name="Business_type" value="Limited Liabitily Company">
-              Limited Liabitily Company
-            </option>
-            <option value="Public Limited Company">
-              Public Limited Company
-            </option>
-            <option value="others">others</option>
-          </select>
-          {others && <input name="Business_type" type="text" placeholder="Please specify" />}
-          <select onChange={handleChange}>
-            <option>Select Business Location</option>
-            <option name="Business_location" value="Store Front"> Store Front</option>
-            <option name="Business_location" value="Office">Office</option>
-            <option name="Business_location" value="Home">Home</option>
-            <option name="Business_location" value="Others">Others</option>
-          </select>
-          <input name="Rc_Number" type="number" placeholder="RC Number" />
-          <input name="No_of_branches" type="text" placeholder="Number of Branches" />
-          <input name="opening_hours" type="text" placeholder="Opening Hours" />
-          <input name="website" type="text" placeholder="Website" />
-          <input name="Office_address" type="text" placeholder="Office Address" />
-          <input name="LGA" type="text" placeholder="LGA" />
-          <input name="state" type="text" placeholder="State" />
-          <input name="Name_of_Primary_Contact" type="text" placeholder="Name of Primary Contact Person" />
-          <input name="Designation" type="text" placeholder="Designation of Contact Person" />
-        </div>
-        <div className="requestForm1">
+          <input type="text" name="MerchantID" placeholder="Search for Merchant ID" onChange={handleMerchantIdChange}/>
+          {!merchantExists && <p>Merchant ID does not exist</p>}
           <h2>Transaction Details</h2>
-          <input name="office_No" type="text" placeholder="Phone Number" />
-          <input name="email" type="text" placeholder="Email Address" />
           <input name="" type="number" placeholder="Number of POS Outlets" />
-          <input name="" type="number" placeholder="Number of Terminal Locations" />
-          {others && <input name="" type="text" placeholder="Please specify" />}
+          <input name="" type="number" placeholder="Number of Terminal Locations" onChange={handleTableRow} />
           <table>
             {/* Table Headers */}
+            {numRows > 0 && (
             <thead>
               <tr>
                 <th>Terminal Location</th>
@@ -118,28 +99,26 @@ const NewForm = () => {
                 <th>Mobile Phone</th>
               </tr>
             </thead>
-            {/* Table Body */}
+  )}
+  {/* Table Body */}
             <tbody>
-              {rows.map((row, index) => (
+              {Array.from({length: numRows},(_, index) => (
                 <tr key={index}>
                   <td>
                     <input
                       name="location"
-                      value={row.location}
                       onChange={(e) => changeHandler(e, index)}
                     />
                   </td>
                   <td>
                     <input
                       name="contactPerson"
-                      value={row.contactPerson}
                       onChange={(e) => changeHandler(e, index)}
                     />
                   </td>
                   <td>
                     <input
                       name="mobilePhone"
-                      value={row.mobilePhone}
                       onChange={(e) => changeHandler(e, index)}
                     />
                   </td>
@@ -148,7 +127,6 @@ const NewForm = () => {
             </tbody>
           </table>
             {error && <p>{error}</p>}
-          <button onClick={handleAddRow}>Add Row</button>
           <select>
             <option value="">Select Category of Merchant's Business</option>
             <option value="Store/Supermarket">Store/Supermarket</option>
@@ -179,7 +157,6 @@ const NewForm = () => {
             <option value="International Visa">International Visa</option>
             <option value="None">None</option>
           </select>
-        </div>
       <label>
         <input type="checkbox" checked={certify} onChange={handleCheckBox} />
         I, on behalf of {user.name}, hereby certify that the information
