@@ -1,9 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import axios from "axios";
-// import { UserContext } from "../UserContext";
+import { UserContext } from "../UserContext";
 
 const NewForm = () => {
-  const user = { name: "John Doe", email: "johndoe@email.com" };
+  const {user} = useContext(UserContext);
   const [others, setOthers] = useState(false);
   const [certify, setCertify] = useState(false);
   const [rows, setRows] = useState([
