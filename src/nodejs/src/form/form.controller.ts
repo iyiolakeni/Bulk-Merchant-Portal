@@ -15,21 +15,21 @@ export class FormController {
 
   @Post('new')
   @Post()
-  @UseGuards(AccountOfficerGuard)
+  // @UseGuards(AccountOfficerGuard)
   @ApiTags('Form')
   createForm(@Body() formData: CreateFormDto): Promise<Form> {
     return this.formService.createForm(formData);
   }
 
   @Get()
-  @UseGuards(BusinessDeveloperGuard)
+  // @UseGuards(BusinessDeveloperGuard)
   @ApiTags('Form')
   getAllForms(): Promise<Form[]> {
     return this.formService.getAllForms();
   }
 
   @Get(':MerchantID')
-  @UseGuards(BusinessDeveloperGuard)
+  // @UseGuards(BusinessDeveloperGuard)
   @ApiTags('Form')
   getFormsByMerchantId(@Param('MerchantID') MerchantID: string): Promise<Form[]> {
     return this.formService.getFormsByMerchantId(MerchantID);

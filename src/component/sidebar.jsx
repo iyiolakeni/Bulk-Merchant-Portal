@@ -5,10 +5,10 @@ import { UserContext } from "../UserContext";
 const SideBar = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  const {setUser} = useContext(UserContext);
+  const {user} = useContext(UserContext);
 
   const handleLogout = () => {
-    setUser(null);
+    user(null);
     navigate('/');
   }
 
@@ -25,13 +25,20 @@ const SideBar = () => {
         <li>
           <button onClick={dropDownOpen} className="dropDown">Request</button>
           {show && (
+            user.jobPosition === 'Account Officer' ? (
             <ul className="dropdown">
               <li><Link to="/NewRequest">New Request</Link></li>
-              <li><Link to="/all-requests">View All Requests</Link></li>
+              <li><Link to="/allrequests">View All Requests</Link></li>
               <li><Link to="/in-process-requests">View In-Process Requests</Link></li>
               <li><Link to="/approved-requests">View Approved Requests</Link></li>
-            </ul>
-          )}
+            </ul>) : (
+              <ul className="dropdown">
+                <li><Link to="/allrequests">View All Requests</Link></li>
+                <li><Link to="/in-process-requests">View In-Process Requests</Link></li>
+                <li><Link to="/approved-requests">View Approved Requests</Link></li>
+              </ul>)
+            
+            )}
         </li>
         <li>
           <Link to="/report">Report and Analysis</Link>

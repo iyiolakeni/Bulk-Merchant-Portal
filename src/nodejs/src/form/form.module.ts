@@ -13,12 +13,12 @@ import { BusinessDeveloperGuard } from './guard/business-developer.guard';
   providers: [FormService, AccountOfficerGuard,BusinessDeveloperGuard],
 })
 export class FormModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(BusinessDeveloperMiddleware)
-      .forRoutes(FormController); 
-    consumer
-      .apply(AccountOfficerMiddleware)
-      .forRoutes(FormController); 
-  }
+  // configure(consumer: MiddlewareConsumer) {
+  //   consumer
+  //     .apply(BusinessDeveloperMiddleware)
+  //     .forRoutes(FormController); 
+  //   consumer
+  //     .apply(AccountOfficerMiddleware)
+  //     .forRoutes(FormController); 
+  // }
 }

@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/login';
 import { UserProvider } from './UserProvider';
 import NewRequest from './pages/new_request';
+import Allrequests from './pages/all-request';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Dashboard" element={<Dashboard/>} />
         <Route path="/NewRequest" element={<NewRequest/>}/>
+        <Route path="/allrequests" element={<Allrequests/>}/>
       </Routes>
       </UserProvider>
     </div>

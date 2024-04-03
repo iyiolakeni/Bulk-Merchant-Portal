@@ -1,6 +1,6 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import { JobPosition } from 'src/user/entities/user.enum';
+import { JobPosition } from '../../user/entities/user.enum';
 
 @Injectable()
 export class BusinessDeveloperMiddleware implements NestMiddleware {
