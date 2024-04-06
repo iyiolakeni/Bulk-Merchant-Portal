@@ -6,6 +6,7 @@ import { LoginApiModule } from './login-api/login-api.module';
 import { FormModule } from './form/form.module';
 import { MerchantIDModule } from './merchantID/merchant-id.module';
 
+
 @Module({
   imports:[
             DatabaseModule,
@@ -14,6 +15,8 @@ import { MerchantIDModule } from './merchantID/merchant-id.module';
             MerchantIDModule
           ],
   controllers: [UserController],
-  providers: [UserService],
+  providers: [
+    UserService
+  ],
 })
 export class AppModule {}

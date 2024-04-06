@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UnauthorizedException,Res, Req } from '@nestjs/common';
+import { Controller, Post, Body, UnauthorizedException, Res, Req, Session } from '@nestjs/common';
 import { LoginService } from './login-api.service';
 import { LoginDto } from './dto/create-login-api.dto';
 import { Request, Response } from 'express';
@@ -7,27 +7,25 @@ import { Request, Response } from 'express';
 export class LoginController {
   constructor(
     private readonly loginService: LoginService,
-    ) {}
-
-
-  // @Post('login')
-  // async login(@Body() loginDto: LoginDto): Promise<any> {
-  //   const { username, password } = loginDto;
-  //   const user = await this.loginService.findByUsernameAndPassword(username, password);
-  //   if (!user) {
-  //     return { success: false, message: 'Invalid username or password' };
-  //   }
-  //   return { success: true, user};
-  // }
+  ) {}
 
   @Post('login')
   async login(@Body() loginDto: LoginDto, @Req() req: Request, @Res() res: Response): Promise<any> {
     const { username, password } = loginDto;
     try {
-      const user = await this.loginService.findByUsernameAndPassword(username, password, req);
-      return res.json({ success: true, user });
+      const { user, jobPosition } = await this.loginService.findByUsernameAndPassword(username, password, req);
+      return res.json({ success: true, user, jobPosition });
     } catch (error) {
       throw new UnauthorizedException('Invalid username or password');
     }
+  }
+
+  @Post('logout')
+  async logout(@Session() session: Record<string, any>): Promise<void> {
+    if (!session.user) {
+      throw new UnauthorizedException('User is not logged in');
+    }
+    // Clear user information from the session upon logout
+    delete session.user;
   }
 }

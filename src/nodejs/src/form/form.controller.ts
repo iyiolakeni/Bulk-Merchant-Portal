@@ -9,6 +9,7 @@ import { LoginService } from 'src/login-api/login-api.service';
 
 
 
+
 @Controller('forms')
 export class FormController {
   constructor(
@@ -19,7 +20,6 @@ export class FormController {
 
   @Post('new')
   @Post()
-  // @UseGuards(AccountOfficerGuard)
   @ApiTags('Form')
   createForm(@Body() formData: CreateFormDto): Promise<Form> {
     return this.formService.createForm(formData);
@@ -27,7 +27,6 @@ export class FormController {
 
   @Get()
   @UseGuards()
-  // @UseGuards(BusinessDeveloperGuard)
   @ApiTags('Form')
   getAllForms(): Promise<Form[]> {
     return this.formService.getAllForms();

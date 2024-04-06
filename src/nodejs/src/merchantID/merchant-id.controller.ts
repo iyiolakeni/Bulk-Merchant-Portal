@@ -1,7 +1,9 @@
-import { Body, Controller, Get, InternalServerErrorException, NotFoundException, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, InternalServerErrorException, NotFoundException, Param, Post, Req, UnauthorizedException, UseGuards } from "@nestjs/common";
 import { MerchantIDService } from "./merchant-id.services";
 import { ApiBody, ApiTags } from "@nestjs/swagger";
 import { createMerchantIdDto } from "./createMerchantID.dto";
+
+
 
 @Controller('merchant')
 export class MerchantIDController{
@@ -12,8 +14,14 @@ export class MerchantIDController{
     @ApiBody({type: createMerchantIdDto})
     @Post('newMerchant')
     async createMerchantID(@Body() dto: createMerchantIdDto) {
-        return this.merchantIdService.newMerchant(dto);
+        
+      return this.merchantIdService.newMerchant(dto);
+        // console.log('Request received with DTO:', dto); // Log the DTO received in the request
+        // const result = await this.merchantIdService.newMerchant(dto);
+        // console.log('Result from merchantIdService:', result); // Log the result from the service
+        // return result;
       }
+
 
     //Get All Merchants details
     @ApiTags('MerchantID')
@@ -23,6 +31,7 @@ export class MerchantIDController{
     }
 
       @ApiTags('MerchantID')
+      // @UseGuards(AccountOfficerGuard)
       @Get(':merchantID')
       async findOneMerchant(@Param('merchantID') merchantID: string) {
         try {
