@@ -15,9 +15,10 @@ const Allrequests =() => {
                 const response2 = await axios.get('http://localhost:5000/merchant/allMerchants'); 
                 let forms = response1.data;
                 const merchants = response2.data;
+                const username = user.firstname + ' ' + user.surname;
 
                 if (user.jobPosition === 'Account Officer') {
-                    forms = response1.data.filter(request => request.officer_name === user.name);
+                    forms = response1.data.filter(request => request.officer_name === username);
                     setRequest(response1.data);
                 } 
 

@@ -42,10 +42,10 @@ export class NotificationService {
   }
 
   private async getAccountOfficers(): Promise<User[]> {
-    return this.userRepository.find({ where: { JobPosition } });
+    return this.userRepository.find({ where: { jobPosition: JobPosition.ACCOUNT_OFFICER } });
   }
 
   private async getBusinessDevelopers(): Promise<User[]> {
-    return this.userRepository.find({ where: { jobPosition: 'Business Developer' } });
+    return this.userRepository.find({ where: { jobPosition: JobPosition.BUSINESS_DEVELOPER } });
   }
 }
