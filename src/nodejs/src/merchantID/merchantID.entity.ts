@@ -18,7 +18,7 @@ export class MerchantID{
     Business_location: string;
 
     @Column()
-    RC_Number: number;
+    RC_Number: string;
 
     @Column()
     No_of_branches: number;
@@ -42,10 +42,11 @@ export class MerchantID{
     Name_of_Primary_Contact: string;
 
     @Column()
-    office_No: number;
+    office_No: string;
 
-    @Column()
-    Mobile_No1: number;
+    // Set value to null can be null
+    @Column({nullable: true})
+    Mobile_No1: string;
 
     @Column()
     office_email: string;
@@ -60,10 +61,10 @@ export class MerchantID{
     Designation2: string;
 
     @Column()
-    office_No2: number;
+    office_No2: string;
 
-    @Column()
-    Mobile_No2: number;
+    @Column({nullable: true})
+    Mobile_No2: string;
 
     @Column()
     office_email2: string;

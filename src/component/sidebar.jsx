@@ -31,14 +31,14 @@ const SideBar = () => {
               <li><Link to="/allrequests">View All Requests</Link></li>
                 <li><Link to="/in-process-requests">View In-Process Requests</Link></li>
                 <li><Link to="/pendingrequest">Pending Requests</Link></li>
-                <li><Link to="/approvedrequests">View Approved Requests</Link></li>
+                <li><Link to="/approved">View Approved Requests</Link></li>
                 <li><Link to="/denied_request">View Denied Requests</Link></li>
             </ul>) : (
               <ul className="dropdown">
                 <li><Link to="/allrequests">View All Requests</Link></li>
                 <li><Link to="/in-process-requests">View In-Process Requests</Link></li>
                 <li><Link to="/pendingrequest">Pending Requests</Link></li>
-                <li><Link to="/approvedrequests">View Approved Requests</Link></li>
+                <li><Link to="/approved">View Approved Requests</Link></li>
                 <li><Link to="/denied_request">View Denied Requests</Link></li>
               </ul>)
             

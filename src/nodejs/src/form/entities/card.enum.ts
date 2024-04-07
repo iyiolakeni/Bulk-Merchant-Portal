@@ -1,5 +1,6 @@
 export enum CardType {
-    LOCAL = 'local',
-    INTERNATIONAL_MASTERCARD = 'international mastercard',
-    INTERNATIONAL_VISA = 'international visa',
+    INTERNATIONAL_MASTERCARD = 'International Mastercard',
+    INTERNATIONAL_VISA = 'International Visa',
+    NONE = 'None',
+    LOCAL_CARD = 'Local Card'
   }

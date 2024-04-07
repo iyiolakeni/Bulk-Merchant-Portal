@@ -37,8 +37,8 @@ export class Form {
   @Column()
   Account_No: number;
 
-  @Column({ type: 'enum', enum:   CardType, default: CardType.LOCAL })
-  cardtype: CardType;
+  @Column({ type: 'enum', enum: CardType, default: CardType.LOCAL_CARD })
+  card_type: CardType;
 
   @Column({type: 'enum', enum: POS, default: POS.AIRTIME_VENDING})
   POS_Use: POS;

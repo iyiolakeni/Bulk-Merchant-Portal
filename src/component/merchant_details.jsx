@@ -1,19 +1,44 @@
-const MerchantDetails = () =>{
+import React, { useState, useRef } from "react";
+import axios from "axios";
+
+const MerchantDetails = (props) => {
   const [others, setOthers] = useState(false);
-    const formObj = useRef();
+    const merchantObj = useRef();
+
     const handleChange = (e) => {
-        if (!others && e.target.value === "others") {
+        if (!others && e.target.value === "Others") {
           setOthers(true);
         } else {
           setOthers(false);
         }
       };
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        const form = new FormData(merchantObj.current);
+        const info = {};
+        form.forEach((value, key) => {
+          info[key] = value;
+        });
+        console.log("Form data", info);
+        try {
+          const response = await axios.post("http://localhost:5000/merchant/newMerchant", info);
+          alert("Successfully submitted!");
+          const merchantId = response.data.MerchantID;
+          await navigator.clipboard.writeText(merchantId);
+          // window.alert(`Merchant ID Created: ${merchantId}`);
+
+          props.closeForm();
+          props.setMerchantId(merchantId);
+        } catch (err) {
+          console.log("An error occurred while submitting the form", err);
+        }
+      };
+    
     return (
-        <div>
-            <h1>Merchant Details</h1>
-      <form ref={formObj} onSubmit={handleSubmit} className="request">
-      <input type="date" />
-      <input type="text" name="" placeholder="Merchant Trade Name"/>
+      <form ref={merchantObj} onSubmit={handleSubmit} className="request">
+      <input className="inputField1" type="text" name="Merchant_Trade_Name" placeholder="Merchant Trade Name"/>
+      <div className="inputDiv">
           <select name="Business_type" onChange={handleChange}>
             <option name="Business_type" value="">Business Type</option>
             <option name="Business_type" value="Sole Owner">Sole Owner</option>
@@ -21,35 +46,44 @@ const MerchantDetails = () =>{
             <option name="Business_type" value="Limited Liabitily Company">
               Limited Liabitily Company
             </option>
-            <option value="Public Limited Company">
+            <option name="Business_type" value="Public Limited Company">
               Public Limited Company
             </option>
-            <option value="others">others</option>
+            <option value="Others">Others</option>
           </select>
-          {others && <input name="Business_type" type="text" placeholder="Please specify" />}
-          <select onChange={handleChange}>
+          {others && <input className="inputField1" name="Business_type" type="text" placeholder="Please specify" />}
+          <select name="Business_location" onChange={handleChange}>
             <option>Select Business Location</option>
             <option name="Business_location" value="Store Front"> Store Front</option>
             <option name="Business_location" value="Office">Office</option>
             <option name="Business_location" value="Home">Home</option>
             <option name="Business_location" value="Others">Others</option>
           </select>
-          <input name="Rc_Number" type="number" placeholder="RC Number" />
-          <input name="No_of_branches" type="text" placeholder="Number of Branches" />
-          <input name="opening_hours" type="text" placeholder="Opening Hours" />
-          <input name="website" type="text" placeholder="Website" />
-          <input name="Office_address" type="text" placeholder="Office Address" />
-          <input name="LGA" type="text" placeholder="LGA" />
-          <input name="state" type="text" placeholder="State" />
-          <input name="Name_of_Primary_Contact" type="text" placeholder="Name of Primary Contact Person" />
-          <input name="Designation" type="text" placeholder="Designation of Primary Contact Person" />
-          <input name="office_No" type="text" placeholder="Phone Number of Primary Contact Person" />
-          <input name="email" type="text" placeholder="Email Address of Primary Contact Person" />
-          <input name="Name_of_Secondary_Contact" type="text" placeholder="Name of Secondary Contact Person" />
-          <input name="Designation" type="text" placeholder="Designation of Secondary Contact Person" />
-          <input name="office_No" type="text" placeholder="Phone Number of Secondary Contact Person" />
-          <input name="email" type="text" placeholder="Email Address of Secondary Contact Person" />  
+          {others && <input className="inputField1" name="Business_location" type="text" placeholder="Please specify" />}
+      </div>
+          <div className="inputDiv">
+          <input className="inputField1" name="RC_Number" type="text" placeholder="RC Number" />
+          <input className="inputField1" name="No_of_branches" type="number" placeholder="Number of Branches" />
+          <input className="inputField1" name="opening_hours" type="text" placeholder="Opening Hours" />
+          </div>
+          <input className="inputField1" name="website" type="text" placeholder="Website" />
+          <input className="inputField1" name="Office_address" type="text" placeholder="Office Address" />
+          <input className="inputField1" name="LGA" type="text" placeholder="LGA" />
+          <input className="inputField1" name="state" type="text" placeholder="State" />
+          <div className="inputDiv">
+          <input className="inputField1" name="Name_of_Primary_Contact" type="text" placeholder="Name of Primary Contact Person" />
+          <input className="inputField1" name="Designation" type="text" placeholder="Designation of Primary Contact Person" />
+          <input className="inputField1" name="office_No" type="text" placeholder="Phone Number of Primary Contact Person" />
+          <input className="inputField1" name="office_email" type="text" placeholder="Email Address of Primary Contact Person" />
+          </div>
+          <div className="inputDiv">
+          <input className="inputField1" name="Name_of_Secondary_Contact" type="text" placeholder="Name of Secondary Contact Person" />
+          <input className="inputField1" name="Designation2" type="text" placeholder="Designation of Secondary Contact Person" />
+          <input className="inputField1" name="office_No2" type="text" placeholder="Phone Number of Secondary Contact Person" />
+          <input className="inputField1" name="office_email2" type="text" placeholder="Email Address of Secondary Contact Person" />  
+          </div>
+          <button type="submit">Create Merchant</button>
       </form>
-        </div>
     )
 }
+export default MerchantDetails;

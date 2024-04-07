@@ -1,40 +1,45 @@
 .form{
     color: black;
     font-size: 20px;
-    font-weight: bold;
+    margin-top: 5%;
+    justify-content: center;
+
+}
+.inputDiv{
+    display: flex;
+    gap: 2%;
+    justify-items: center;
+    width: 100%;
+}
+.inputField1{
+    width: 99%;
+    height: 30px;
+    border-radius: 10px;
 }
 .request {
     display: grid;
-  }
-  
-  .request .requestForm, .request .requestForm1 {
-    flex: 1;
-    align-items: center;
-    justify-content: flex-start;
-  }
-.requestForm input::placeholder, .requestForm1 input::placeholder{
+    gap: 2%;
+    justify-items: center;
+}
+.request .inputField::placeholder{
     color: black;
     font-weight: bold;
-    padding: 20px;
+    padding: 10px;
 }
-.requestForm{
-    display:flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.requestForm1{
-    display:flex;
-    flex-direction: column;
-    gap: 10px;
-}
-.requestForm input, .requestForm1 input{
+.request .inputField{
     width: 70%;
     height: 30px;
+    border-radius: 10px;
 }
-.requestForm select, .requestForm1 select{
+.request select{
+    width: 70.5% !important;
+    height: 40px;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+.request label{
     width: 70%;
-    height: 30px;
 }
 .form button{
     width: 150px;

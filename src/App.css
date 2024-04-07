@@ -14,7 +14,7 @@
 .sidebar {
   display: grid;
   width: 264px;
-  height: auto;
+  height: 100vh;
   background-color: #630678;
   overflow-y:hidden ;
   justify-content: center;

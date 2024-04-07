@@ -19,7 +19,16 @@ export class MerchantIDService {
     for (let i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    return `${Merchant_Trade_Name.substring(0, 4)}${result}`;
+  // Split the Merchant_Trade_Name into words
+  const names = Merchant_Trade_Name.split(' ');
+
+  // Get the first two letters of the first word
+  const fname = names[0].substring(0, 2);
+
+  // Get the first letter of each remaining word
+  const otherName = names.slice(1).map(name => name[0]).join('');
+
+  return `${fname}${otherName}${result}`;
   }
   async newMerchant(dto: createMerchantIdDto) {
     if (!dto){

@@ -15,7 +15,7 @@ export class createMerchantIdDto{
     Business_location: string;
 
     @ApiProperty()
-    RC_Number: number;
+    RC_Number: string;
 
     @ApiProperty()
     No_of_branches: number;
@@ -39,10 +39,7 @@ export class createMerchantIdDto{
     Name_of_Primary_Contact: string;
 
     @ApiProperty()
-    office_No: number;
-
-    @ApiProperty()
-    Mobile_No1: number;
+    office_No: string;
 
     @ApiProperty()
     office_email: string;
@@ -57,10 +54,7 @@ export class createMerchantIdDto{
     Designation2: string;
 
     @ApiProperty()
-    office_No2: number;
-
-    @ApiProperty()
-    Mobile_No2: number;
+    office_No2: string;
 
     @ApiProperty()
     office_email2: string;

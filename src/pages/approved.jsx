@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import SideBar from "../component/sidebar";
-// import { UserContext } from "../UserContext";
+import { UserContext } from "../UserContext";
 import axios from "axios";
 import Navbar from "../component/navbar";
 
-const Approved_request =() => {
-    // const {user} = useContext(UserContext);
+const Approved_Request =() => {
+    const {user} = useContext(UserContext);
     const [request, setRequest] = useState([]);
 
     useEffect(() => {
@@ -14,9 +14,14 @@ const Approved_request =() => {
                 const response1 = await axios.get('http://localhost:5000/forms');
                 const response2 = await axios.get('http://localhost:5000/merchant/allMerchants'); 
 
-                const forms = response1.data;
+                let forms = response1.data;
                 const merchants = response2.data;
 
+                if (user.jobPosition === 'Account Officer') {
+                    forms = response1.data.filter(request => request.officer_name === user.name);
+                    setRequest(response1.data);
+                } 
+                
                 const mergedData = forms.map(form => ({
                     ...form,
                     merchant: merchants.find(merchant => merchant.MerchantID === form.MerchantID)
@@ -28,7 +33,8 @@ const Approved_request =() => {
             }
         };
         fetchData(); // Call once on component mount
-    } , []); // Only run on component mount and never again
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    } , []); // Keep the dependency array empty
     
 
     return (
@@ -79,4 +85,4 @@ const Approved_request =() => {
 
     )
 }
-export default Approved_request;
+export default Approved_Request;

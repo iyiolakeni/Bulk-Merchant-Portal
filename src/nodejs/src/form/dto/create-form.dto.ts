@@ -44,11 +44,11 @@ export class CreateFormDto {
 
    @ApiProperty()
    @IsEnum(CardType)
-   CardType: CategoryBusinessType;
+   CardType: CardType;
 
-   @ApiProperty()
-   @IsEnum(POS)
-   POS:POS;
+  //  @ApiProperty()
+  //  @IsEnum(POS)
+  //  POS:POS;
 
    @ApiProperty()
    @IsEnum(FormStatus)
