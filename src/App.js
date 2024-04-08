@@ -25,7 +25,7 @@ function App() {
         <Route path="/allrequests" element={<Allrequests/>}/>
         <Route path="/pendingrequest" element={<Pending_requests/>}/>
         <Route path="/approved" element={<Approved_Request/>}/>
-        <Route path="/in-process-request" element={<In_Process/>}/>
+        <Route path="/In_Process" element={<In_Process/>}/>
         <Route path="/denied_request" element={<Denied_Request/>}/>
       </Routes>
       </UserProvider>

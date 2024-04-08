@@ -75,10 +75,11 @@ import { UserContext } from "../UserContext";
     const fetchRequests = async () => {
       try {
         const response = await axios.get('http://localhost:5000/forms');
-        const requests = response.data;
+        let requests = response.data;
+        const username = user.firstname + ' ' + user.surname;
   
         if (user.jobPosition === 'Account Officer') {
-          requests = requests.filter(request => request.officer_name === user.name);
+          requests = requests.filter(request => request.officer_name === username);
         }
         const pending = requests.filter(request => request.status === 'pending').length;
         const approved = requests.filter(request => request.status === 'approved').length;
@@ -89,6 +90,18 @@ import { UserContext } from "../UserContext";
         setApproved(approved);
         setDeclined(declined);
         setTotal(total);
+
+        if (user.jobPosition === 'POS Business Officer'){
+        const pending = requests.filter(request => request.status === 'approved').length;
+        const approved = requests.filter(request => request.status === 'in_process').length;
+        const declined = requests.filter(request => request.status === 'declined').length;
+        const total = requests.length;
+  
+        setPending(pending);
+        setApproved(approved);
+        setDeclined(declined);
+        setTotal(total);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -98,6 +111,7 @@ import { UserContext } from "../UserContext";
     const intervalId = setInterval(fetchRequests, 5000);
 
     return() => clearInterval(intervalId);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
       return (
       <div className="request_info">

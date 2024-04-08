@@ -32,13 +32,13 @@ export class FormController {
     return this.formService.getAllForms();
   }
 
-  @Get(':MerchantID')
-  @UseGuards()
-  // @UseGuards(BusinessDeveloperGuard)
   @ApiTags('Form')
-  getFormsByMerchantId(@Param('MerchantID') MerchantID: string): Promise<Form[]> {
-    return this.formService.getFormsByMerchantId(MerchantID);
+  @Get(':requestId')
+  getFormByRequestID(@Param('requestId') requestId: string){
+    console.log(requestId)
+    return this.formService.getFormByRequestId(requestId);
   }
+
 
   @Patch(':MerchantID/status')
   @UseGuards()

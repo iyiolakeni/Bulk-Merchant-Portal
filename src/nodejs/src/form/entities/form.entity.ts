@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 import { FormStatus } from './form.enum';
 import { CardType } from './card.enum';
 import { POS } from './pos.enum';
@@ -8,6 +8,10 @@ import { CategoryBusinessType } from './cate-business.enum';
 export class Form {
   @PrimaryGeneratedColumn()
   id: number;
+
+  //Unique Column
+  @Column({unique: true})
+  RequestId: string;
 
   @Column()
   officer_name: string;
@@ -40,9 +44,21 @@ export class Form {
   @Column({ type: 'enum', enum: CardType, default: CardType.LOCAL_CARD })
   card_type: CardType;
 
-  @Column({type: 'enum', enum: POS, default: POS.AIRTIME_VENDING})
-  POS_Use: POS;
+  // @Column({type: 'enum', enum: POS, default: POS.AIRTIME_VENDING})
+  // POS_Use: POS;
 
   @Column({ type: 'enum', enum: FormStatus, default: FormStatus.PENDING })
   status: FormStatus;
+
+  @Column({nullable: true})
+  Notes: string;
+
+  @BeforeInsert()
+  generateRequestId() {
+    let uniqueNumbers = new Set();
+    while (uniqueNumbers.size < 4) {
+      uniqueNumbers.add(Math.floor(Math.random() * 10));
+    }
+    this.RequestId = 'POS' + Array.from(uniqueNumbers).join('');
+  }
 }

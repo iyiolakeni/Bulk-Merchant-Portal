@@ -23,9 +23,20 @@ export class FormService {
     return this.formRepository.find();
   }
 
-  async getFormsByMerchantId(merchantId: string): Promise<Form[]> {
-    return this.formRepository.find({ where: { MerchantID: merchantId } });
-  }
+    //get forms by RequestID
+    async getFormByRequestId(RequestID: string){
+      let found;
+      try {
+        found = await this.formRepository.findOne({where: { RequestId: RequestID}});
+      } catch (error) {
+        console.error('There was an error:', error);
+      }
+      console.log('Found:', found);
+      if (!found) {
+        throw new NotFoundException('Could not find form');
+      }
+      return found;
+    }
 
   async updateFormStatus(
     MerchantID: string,

@@ -190,7 +190,7 @@ const NewForm = ({user}) => {
           </select>
           <input name="bank" className="inputField" type="text" placeholder="Bank Name" />
           <input name="Account_No" className="inputField" type="text" placeholder="Account Number" />
-          <input className="inputField" type="text" placeholder="Additional information" />
+          <input name="Notes" className="inputField" type="text" placeholder="Additional information" />
           <select>
             <option value="">Select Card Type</option>
             <option name="CardType" value="Local Card">Local Card</option>

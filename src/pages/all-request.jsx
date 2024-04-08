@@ -63,7 +63,7 @@ const Allrequests =() => {
                         {request.map((form, index) => (
                             <tr key={form._id}>
                                 <td>{index + 1}</td>
-                                <td>{form.MerchantID}</td>
+                                <td>{form.RequestId}</td>
                                 <td>{form.merchant?.Merchant_Trade_Name}</td>
                                 <td>{form.merchant?.Business_location}</td>
                                 <td>{form.merchant?.No_of_branches}</td>
@@ -76,6 +76,9 @@ const Allrequests =() => {
                                 <td>
                                     <span className="view_more"></span>
                                 </td>
+                                {/* <td onClick={() => handleonClick(form.RequestId)}>
+                                    <span className="view_more"></span>
+                                </td> */}
                             </tr>
                         ))}
                     </tbody>

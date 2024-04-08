@@ -1,4 +1,4 @@
-import { IsEmail, IsEnum, IsInt} from 'class-validator';
+import { IsEmail, IsEnum, IsInt } from 'class-validator';
 import { FormStatus } from '../entities/form.enum';
 import { ApiProperty } from '@nestjs/swagger';
 import { PrimaryGeneratedColumn } from 'typeorm';
@@ -7,9 +7,10 @@ import { CategoryBusinessType } from '../entities/cate-business.enum';
 import { POS } from '../entities/pos.enum';
 
 export class CreateFormDto {
-
   @PrimaryGeneratedColumn()
   id: number;
+
+  RequestId: string;
 
   @ApiProperty()
   officer_name: string;
@@ -17,20 +18,19 @@ export class CreateFormDto {
   @ApiProperty()
   MerchantID: string;
 
-   @ApiProperty()
+  @ApiProperty()
   @IsInt()
-   No_of_POS_terminal: number;
+  No_of_POS_terminal: number;
 
   @ApiProperty()
   location_of_terminal: string[];
-
 
   @ApiProperty()
   contact_person: string[];
 
   @ApiProperty()
   contact_mobile_no: string[];
-  
+
   @ApiProperty()
   @IsEnum(CategoryBusinessType)
   Business_Category: CategoryBusinessType;
@@ -40,18 +40,20 @@ export class CreateFormDto {
 
   @ApiProperty()
   @IsInt()
-   Account_No: number;
+  Account_No: number;
 
-   @ApiProperty()
-   @IsEnum(CardType)
-   CardType: CardType;
+  @ApiProperty()
+  @IsEnum(CardType)
+  CardType: CardType;
 
   //  @ApiProperty()
   //  @IsEnum(POS)
   //  POS:POS;
 
-   @ApiProperty()
-   @IsEnum(FormStatus)
-   FormStatus: FormStatus;
+  @ApiProperty()
+  @IsEnum(FormStatus)
+  FormStatus: FormStatus;
 
+  @ApiProperty()
+  Notes: string;
 }
