@@ -53,6 +53,8 @@ export class Form {
   @Column({nullable: true})
   Notes: string;
 
+  @Column()
+
   @BeforeInsert()
   generateRequestId() {
     let uniqueNumbers = new Set();

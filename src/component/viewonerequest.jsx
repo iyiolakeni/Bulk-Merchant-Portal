@@ -12,8 +12,8 @@ const ViewARequest =(requestId) =>{
             <output>{requestId.location_of_terminal}</output>
             <output>{requestId.contact_person}</output>
             <output>{requestId.contact_mobile_no}</output>
-            <output>{requestId.form}</output>
-            <output>{requestId.form}</output>
+            <output>{requestId.FormStatus}</output>
+            <output>{requestId.Notes}</output>
         </div>
     )
 }
