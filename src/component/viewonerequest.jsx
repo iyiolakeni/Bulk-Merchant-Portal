@@ -1,7 +1,8 @@
 import {useEffect} from "react";
+import axios from "axios";
 const ViewARequest =(requestId) =>{
-    useEffect(async ()=> {
-       const response = await axios.get(`http://localhost:5000/forms/${requestId}`)
+    useEffect( ()=> {
+       const response = axios.get(`http://localhost:5000/forms/${requestId}`)
     })
     return(
         <div>

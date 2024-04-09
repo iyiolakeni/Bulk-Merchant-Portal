@@ -53,7 +53,8 @@ export class Form {
   @Column({nullable: true})
   Notes: string;
 
-  @Column()
+  @Column("simple-array",{nullable: true})
+  suppportingDocuments: string[];
 
   @BeforeInsert()
   generateRequestId() {

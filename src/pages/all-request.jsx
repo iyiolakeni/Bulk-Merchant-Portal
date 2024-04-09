@@ -3,10 +3,16 @@ import SideBar from "../component/sidebar";
 import { UserContext } from "../UserContext";
 import axios from "axios";
 import Navbar from "../component/navbar";
+import ViewARequest from "../component/viewonerequest";
 
 const Allrequests =() => {
     const {user} = useContext(UserContext);
     const [request, setRequest] = useState([]);
+    const [openForm, setOpenForm] = useState(false);
+
+    const handleonClick = () =>{
+        setOpenForm(true);
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -73,14 +79,32 @@ const Allrequests =() => {
                                 <td>{form.POS_Use}</td>
                                 <td>{form.officer_name}</td>
                                 <td>{form.status}</td>
-                                <td>
-                                    <span className="view_more"></span>
-                                </td>
-                                {/* <td onClick={() => handleonClick(form.RequestId)}>
+                                {/* <td>
                                     <span className="view_more"></span>
                                 </td> */}
+                                <td onClick={() => handleonClick(form.RequestId)}>
+                                    <span className="view_more"></span>
+                                </td>
                             </tr>
                         ))}
+                        {openForm &&(
+                            <div className="modal">
+                                <div
+                                 style={{
+                                    backgroundColor: "white",
+                                    borderRadius: "8px",
+                                    width: "40%",
+                                    height: "50%",
+                                    gap: "20%",
+                                    padding: "2%",
+                                    justifyContent: "center",
+                                    display: "grid",
+                                    justifyItems: "center",}}
+                                    >
+                                    <ViewARequest/>
+                                </div>
+                            </div>
+                        )}
                     </tbody>
                 </table>                
             </div>

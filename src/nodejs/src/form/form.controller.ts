@@ -1,10 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { FormService } from './form.service';
 import { CreateFormDto } from './dto/create-form.dto';
 import { UpdateFormStatusDto } from './dto/update-form-status.dto';
 import { Form } from './entities/form.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { LoginService } from 'src/login-api/login-api.service';
+import { UploadDto } from './dto/upload.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 
 
@@ -48,5 +50,32 @@ export class FormController {
     @Body() updateFormStatusDto: UpdateFormStatusDto,
   ): Promise<Form> {
     return this.formService.updateFormStatus(MerchantID, updateFormStatusDto);
+  }
+
+  @ApiTags('Form')
+  @UseInterceptors(FileInterceptor('file'))
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'The file to upload',
+    type: 'object',
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
+  @Post('file')
+  uploadFile(
+    @Body() body: UploadDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return {
+      body,
+      file: file.buffer.toString(),
+    };
   }
 }
