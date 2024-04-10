@@ -3,10 +3,26 @@ import SideBar from "../component/sidebar";
 import { UserContext } from "../UserContext";
 import axios from "axios";
 import Navbar from "../component/navbar";
+import ViewARequest from "../component/viewonerequest";
+
 
 const Approved_Request =() => {
     const {user} = useContext(UserContext);
     const [request, setRequest] = useState([]);
+    const [openForm, setOpenForm] = useState(false);
+    const [selectedID, setSelectedID] = useState(null)
+    
+    // Get a specific request by ID when the handleonclick functino is clalled
+
+    const handleonClick = (requestId) =>{
+        setSelectedID(requestId);
+        setOpenForm(true);
+    }
+
+    const closeForm = () =>{
+        setOpenForm(false);
+        setSelectedID(null);
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,6 +50,10 @@ const Approved_Request =() => {
             }
         };
         fetchData(); // Call once on component mount
+        const intervalID = setInterval(fetchData, 3000);
+
+        //clear the interval when components unmounts
+        return() => clearInterval(intervalID);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     } , []); // Keep the dependency array empty
     
@@ -74,11 +94,32 @@ const Approved_Request =() => {
                                 <td>{form.POS_Use}</td>
                                 <td>{form.officer_name}</td>
                                 <td>{form.status}</td>
-                                <td>
+                                <td onClick={() => handleonClick(form.RequestId)}>
                                     <span className="view_more"></span>
                                 </td>
                             </tr>
                         ))}
+                        {openForm &&(
+                            <div className="modal formbut">
+                                <div
+                                 style={{
+                                    backgroundColor: "white",
+                                    borderRadius: "8px",
+                                    left: 0,
+                                    width: "70%",
+                                    height: "50%",
+                                    gap: "2%",
+                                    padding: "2%",
+                                    justifyContent: "center",
+                                    display: "grid",
+                                    justifyItems: "center",
+                                color: "black"}}
+                                    >
+                                    <ViewARequest requestId={selectedID}/>
+                                    <button onClick={closeForm}>Close</button>
+                                </div>
+                            </div>
+                        )}
                     </tbody>
                 </table>                
             </div>

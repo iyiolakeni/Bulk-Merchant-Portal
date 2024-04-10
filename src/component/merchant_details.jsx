@@ -13,6 +13,10 @@ const MerchantDetails = (props) => {
         }
       };
 
+      const handleClose = () =>{
+        props.closeForm();
+      }
+
       const handleSubmit = async (e) => {
         e.preventDefault();
         const form = new FormData(merchantObj.current);
@@ -37,6 +41,7 @@ const MerchantDetails = (props) => {
     
     return (
       <form ref={merchantObj} onSubmit={handleSubmit} className="request">
+            <h4 style={{color: "black", marginBottom: 0}}>Create New Merchant</h4>
       <input className="inputField1" type="text" name="Merchant_Trade_Name" placeholder="Merchant Trade Name"/>
       <div className="inputDiv">
           <select name="Business_type" onChange={handleChange}>
@@ -82,7 +87,10 @@ const MerchantDetails = (props) => {
           <input className="inputField1" name="office_No2" type="text" placeholder="Phone Number of Secondary Contact Person" />
           <input className="inputField1" name="office_email2" type="text" placeholder="Email Address of Secondary Contact Person" />  
           </div>
+          <div className="inputDiv">
           <button type="submit">Create Merchant</button>
+          <button onClick={handleClose}>Cancel</button>
+          </div>
       </form>
     )
 }

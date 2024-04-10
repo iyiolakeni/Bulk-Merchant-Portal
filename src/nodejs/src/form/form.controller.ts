@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Put, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { FormService } from './form.service';
 import { CreateFormDto } from './dto/create-form.dto';
 import { UpdateFormStatusDto } from './dto/update-form-status.dto';
@@ -27,6 +27,15 @@ export class FormController {
     return this.formService.createForm(formData);
   }
 
+  @Put(':requestId')
+  @ApiTags('Form')
+  updateFormStatus(
+    @Param('requestId') requestId: string,
+    @Body() updateFormStatusDto: UpdateFormStatusDto,
+  ): Promise<Form> {
+    return this.formService.updateFormStatus(requestId, updateFormStatusDto);
+  }
+
   @Get()
   @UseGuards()
   @ApiTags('Form')
@@ -41,16 +50,6 @@ export class FormController {
     return this.formService.getFormByRequestId(requestId);
   }
 
-
-  @Patch(':MerchantID/status')
-  @UseGuards()
-  @ApiTags('Form')
-  updateFormStatus(
-    @Param('MerchantID') MerchantID: string,
-    @Body() updateFormStatusDto: UpdateFormStatusDto,
-  ): Promise<Form> {
-    return this.formService.updateFormStatus(MerchantID, updateFormStatusDto);
-  }
 
   @ApiTags('Form')
   @UseInterceptors(FileInterceptor('file'))

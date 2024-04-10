@@ -39,10 +39,10 @@ export class FormService {
     }
 
   async updateFormStatus(
-    MerchantID: string,
+    RequestId: string,
     updateFormStatusDto: UpdateFormStatusDto,
   ): Promise<Form> {
-    const form = await this.formRepository.findOne({where: { MerchantID: MerchantID}});
+    const form = await this.formRepository.findOne({where: { RequestId: RequestId}});
     if (!form) {
       throw new NotFoundException('Form not found');
     }
@@ -59,6 +59,7 @@ export class FormService {
     }
 
     form.status = updateFormStatusDto.status;
+    console.log('Form:', form);
     return this.formRepository.save(form);
   }
 }

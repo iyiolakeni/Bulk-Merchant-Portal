@@ -5,13 +5,22 @@ import axios from "axios";
 import Navbar from "../component/navbar";
 import ViewARequest from "../component/viewonerequest";
 
-const Allrequests =() => {
+const Allrequests =({form}) => {
     const {user} = useContext(UserContext);
     const [request, setRequest] = useState([]);
     const [openForm, setOpenForm] = useState(false);
+    const [selectedID, setSelectedID] = useState(null)
+    
+    // Get a specific request by ID when the handleonclick functino is clalled
 
-    const handleonClick = () =>{
+    const handleonClick = (requestId) =>{
+        setSelectedID(requestId);
         setOpenForm(true);
+    }
+
+    const closeForm = () =>{
+        setOpenForm(false);
+        setSelectedID(null);
     }
 
     useEffect(() => {
@@ -39,7 +48,11 @@ const Allrequests =() => {
             }
         };
         fetchData(); // Call once on component mount
-          // eslint-disable-next-line react-hooks/exhaustive-deps
+        const intervalID = setInterval(fetchData, 3000);
+
+        //clear the interval when components unmounts
+        return() => clearInterval(intervalID);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     } , []); // Only run on component mount and never again
     
 
@@ -88,20 +101,23 @@ const Allrequests =() => {
                             </tr>
                         ))}
                         {openForm &&(
-                            <div className="modal">
+                            <div className="modal formbut">
                                 <div
                                  style={{
                                     backgroundColor: "white",
                                     borderRadius: "8px",
-                                    width: "40%",
+                                    left: 0,
+                                    width: "70%",
                                     height: "50%",
-                                    gap: "20%",
+                                    gap: "2%",
                                     padding: "2%",
                                     justifyContent: "center",
                                     display: "grid",
-                                    justifyItems: "center",}}
+                                    justifyItems: "center",
+                                color: "black"}}
                                     >
-                                    <ViewARequest/>
+                                    <ViewARequest requestId={selectedID}/>
+                                    <button onClick={closeForm}>Close</button>
                                 </div>
                             </div>
                         )}
