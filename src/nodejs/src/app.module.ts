@@ -5,6 +5,7 @@ import {DatabaseModule} from '../database/database.module'
 import { LoginApiModule } from './login-api/login-api.module';
 import { FormModule } from './form/form.module';
 import { MerchantIDModule } from './merchantID/merchant-id.module';
+import { PosModule } from './pos/pos.module';
 
 
 @Module({
@@ -12,7 +13,8 @@ import { MerchantIDModule } from './merchantID/merchant-id.module';
             DatabaseModule,
             LoginApiModule,
             FormModule,
-            MerchantIDModule
+            MerchantIDModule,
+            PosModule
           ],
   controllers: [UserController],
   providers: [

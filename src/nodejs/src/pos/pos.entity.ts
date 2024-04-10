@@ -13,6 +13,9 @@ export class Pos{
     @Column()
     NumberOfPos: number;
 
+    @Column()
+    Pos_RequestId: string;
+
     @Column("text", {array: true})
     Pos_SerialNumber: string[];
 

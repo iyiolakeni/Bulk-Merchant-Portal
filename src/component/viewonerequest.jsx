@@ -19,7 +19,7 @@ const ViewARequest =({requestId}) =>{
             console.log(response2.data);
             setMerchant(response2.data);
             console.log(user.jobPosition);
-            if (user.jobPosition === "POS Business Officer" || user.jobPosition === "Business Developer"){
+            if (user.jobPosition === "Business Developer"){
               if (response.data.status === 'pending')
                 setShow(true);
             } 
