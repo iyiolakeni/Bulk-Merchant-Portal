@@ -28,6 +28,8 @@ const Allrequests =({form}) => {
             try {
                 const response1 = await axios.get('http://localhost:5000/forms');
                 const response2 = await axios.get('http://localhost:5000/merchant/allMerchants'); 
+                const response3 = await axios.get('http://localhost:5000/POS/allrequest');
+
                 let forms = response1.data;
                 const merchants = response2.data;
                 const username = user.firstname + ' ' + user.surname;
@@ -35,8 +37,8 @@ const Allrequests =({form}) => {
                 if (user.jobPosition === 'Account Officer') {
                     forms = response1.data.filter(request => request.officer_name === username);
                     setRequest(response1.data);
-                } 
-
+                }
+                
                 const mergedData = forms.map(form => ({
                     ...form,
                     merchant: merchants.find(merchant => merchant.MerchantID === form.MerchantID)
@@ -66,14 +68,13 @@ const Allrequests =({form}) => {
                     <thead className="form-header">
                         <tr>
                             <th>S/N</th>
-                            <th>Merchant ID</th>
+                            <th>Request ID</th>
                             <th>Business Name</th>
                             <th>Business Location</th>
                             <th>Number of Branches</th>
                             <th>Merchant Business Type</th>
                             <th>No of POS Terminal</th>
                             <th>Location of Terminal</th>
-                            <th>Pos Use</th>
                             <th>Officer Name</th>
                             <th>Form Status</th>
                         </tr>
@@ -89,7 +90,6 @@ const Allrequests =({form}) => {
                                 <td>{form.merchant?.Business_type}</td>
                                 <td>{form.No_of_POS_terminal}</td>
                                 <td>{form.location_of_terminal.join(' , ')}</td>
-                                <td>{form.POS_Use}</td>
                                 <td>{form.officer_name}</td>
                                 <td>{form.status}</td>
                                 {/* <td>

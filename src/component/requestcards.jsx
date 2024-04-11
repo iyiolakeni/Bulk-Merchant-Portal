@@ -75,7 +75,9 @@ import { UserContext } from "../UserContext";
     const fetchRequests = async () => {
       try {
         const response = await axios.get('http://localhost:5000/forms');
+        const response2 = await axios.get('http://localhost:5000/POS/allrequest');
         let requests = response.data;
+        let requests2 = response2.data;
         const username = user.firstname + ' ' + user.surname;
   
         if (user.jobPosition === 'Account Officer') {
@@ -93,9 +95,9 @@ import { UserContext } from "../UserContext";
 
         if (user.jobPosition === 'POS Business Officer'){
         const pending = requests.filter(request => request.status === 'approved').length;
-        const approved = requests.filter(request => request.status === 'in_process').length;
-        const declined = requests.filter(request => request.status === 'declined').length;
-        const total = requests.length;
+        const approved = requests2.filter(request => request.status === 'approved').length;
+        const declined = requests2.filter(request => request.status === 'declined').length;
+        const total = pending + approved + declined;
   
         setPending(pending);
         setApproved(approved);

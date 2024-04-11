@@ -1,10 +1,12 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException, BadRequestException } from "@nestjs/common";
 import { Pos } from "./pos.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { createPosDto } from "./createPos.dto";
 import { Form } from "src/form/entities/form.entity";
 import { randomBytes } from "crypto";
+import {updatePosStatusDto} from "./updateStatus.dto";
+import { Status } from "./enums/status.enum";
 
 @Injectable()
 export class PosService{
@@ -48,6 +50,23 @@ export class PosService{
 
     async getAllPosRequests(): Promise<Pos[]>{
         return this.posRepository.find()
+    }
+
+    async updateStatus(requestId: string,
+      dto: updatePosStatusDto): Promise<Pos>{
+        const form = await this.posRepository.findOne({where: {Pos_RequestId: requestId}});
+        if(!form){
+          throw new NotFoundException('Form not found');
+        }
+        if (form.status !== Status.PENDING && form.status !== Status.APPROVED){
+          throw new BadRequestException("You can't change this request status");
+        }
+        if (dto.status !== 'Approved' && dto.status !== 'Rejected' && dto.status !== 'Deployed'){
+          throw new BadRequestException('Invalid status transition');
+        }
+        form.status = dto.status;
+        console.log('Form:', form)
+        return await this.posRepository.save(form);
     }
     
 }

@@ -22,6 +22,10 @@ const ViewARequest =({requestId}) =>{
             if (user.jobPosition === "Business Developer"){
               if (response.data.status === 'pending')
                 setShow(true);
+            }
+            if (user.jobPosition === "POS Business Officer"){
+              if (response.data.status === 'approved')
+                setShow(true);
             } 
           } catch (error) {
             console.error('Failed to fetch request:', error);
@@ -43,6 +47,7 @@ const ViewARequest =({requestId}) =>{
               console.error('Failed to update request:', error);
           }
         }
+        if (user.jobPosition === 'POS Business Officer'){}
       }
 
       const handleDenied = async() =>{
@@ -54,7 +59,15 @@ const ViewARequest =({requestId}) =>{
               console.error('Failed to update request:', error);
           }
         }
+        if (user.jobPosition === 'POS Business Officer'){
+          try{
+            const response = await axios.put(`http://localhost:5000/forms/${requestId}`, {status: 'denied'});
+            console.log(response.data);
+        }catch(error){
+          console.error('Failed to Update request:', error);
+        }
       }
+    }
     return(
         <div className="review">
             <div className="reviewForm">

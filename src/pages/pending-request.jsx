@@ -75,14 +75,13 @@ const Pending_requests =() => {
                             <th>Merchant Business Type</th>
                             <th>No of POS Terminal</th>
                             <th>Location of Terminal</th>
-                            <th>Pos Use</th>
                             <th>Officer Name</th>
                             <th>Form Status</th>
                         </tr>
                     </thead>
                     <tbody className="form-body">
-                    {request.filter(form => form.status === 'pending').map((form, index) => (
-                            <tr key={form._id}>
+                    {request.filter(form => user.jobPosition === 'POS Business Officer' ? form.status === 'approved' : form.status === 'pending').map((form, index) => (
+                           <tr key={form._id}>
                                 <td>{index + 1}</td>
                                 <td>{form.MerchantID}</td>
                                 <td>{form.merchant?.Merchant_Trade_Name}</td>
@@ -91,7 +90,6 @@ const Pending_requests =() => {
                                 <td>{form.merchant?.Business_type}</td>
                                 <td>{form.No_of_POS_terminal}</td>
                                 <td>{form.location_of_terminal.join(' , ')}</td>
-                                <td>{form.POS_Use}</td>
                                 <td>{form.officer_name}</td>
                                 <td>{form.status}</td>
                                 <td onClick={() => handleonClick(form.RequestId)}>
