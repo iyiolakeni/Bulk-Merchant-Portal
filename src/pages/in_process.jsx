@@ -82,7 +82,7 @@ const In_Process =() => {
                         </tr>
                     </thead>
                     <tbody className="form-body">
-                    {request.filter(form => form.status === 'in-process').map((form, index) => (
+                    {request.filter(form => form.status === 'in_process').map((form, index) => (
                             <tr key={form._id}>
                                 <td>{index + 1}</td>
                                 <td>{form.MerchantID}</td>

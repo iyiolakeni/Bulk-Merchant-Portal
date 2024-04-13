@@ -16,7 +16,9 @@ const NewForm = ({ user }) => {
   const [error, setError] = useState("");
   const formObj = useRef();
   const [typingTimeout, setTypingTimeout] = useState(0);
-  const closeForm = () => {
+  
+  const closeForm = (e) => {
+    // e.preventDefault();
     setOpenForm(false);
     {
       !openForm && merchantId && <p>{merchantId} has been created</p>;
@@ -116,26 +118,7 @@ const NewForm = ({ user }) => {
   };
   return (
     <div className="form">
-      <h2 style={{ paddingLeft: "3%" }}>POS Requisition Form</h2>
-      <form ref={formObj} onSubmit={handleSubmit} className="request">
-        <input
-          className="inputField"
-          type="text"
-          name="MerchantID"
-          placeholder="Search for Merchant ID"
-          onChange={handleMerchantIdChange}
-        />
-        {hasChecked && !merchantExists && (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setOpenForm(true);
-            }}
-          >
-            Create New Merchant
-          </button>
-        )}
-        {openForm && (
+      {openForm && (
           <div className="modal">
             <div
               style={{
@@ -158,6 +141,25 @@ const NewForm = ({ user }) => {
           </div>
         )}
 
+      <h2 style={{ paddingLeft: "3%" }}>POS Requisition Form</h2>
+      <form ref={formObj} onSubmit={handleSubmit} className="request">
+        <input
+          className="inputField"
+          type="text"
+          name="MerchantID"
+          placeholder="Search for Merchant ID"
+          onChange={handleMerchantIdChange}
+        />
+        {hasChecked && !merchantExists && (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setOpenForm(true);
+            }}
+          >
+            Create New Merchant
+          </button>
+        )}
         <input
           className="inputField"
           name="No_of_POS_terminal"

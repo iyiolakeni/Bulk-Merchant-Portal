@@ -177,7 +177,9 @@ import { UserContext } from "../UserContext";
           </div>
             <Notification notifications={notification}/>
         </div>
+        <div className="chat_board">
         <ChatSidebar chats={chats} />
+        </div>
       </div>
   );
 };

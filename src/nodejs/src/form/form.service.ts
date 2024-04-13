@@ -47,13 +47,15 @@ export class FormService {
       throw new NotFoundException('Form not found');
     }
 
-    if (form.status !== FormStatus.PENDING) {
+    if (form.status === FormStatus.DENIED) {
       throw new BadRequestException('Form status cannot be updated');
     }
 
     if (
       updateFormStatusDto.status !== FormStatus.APPROVED &&
-      updateFormStatusDto.status !== FormStatus.DENIED
+      updateFormStatusDto.status !== FormStatus.DENIED &&
+      updateFormStatusDto.status !== FormStatus.IN_PROCESS &&
+      updateFormStatusDto.status !== FormStatus.DEPLOYED
     ) {
       throw new BadRequestException('Invalid status transition');
     }

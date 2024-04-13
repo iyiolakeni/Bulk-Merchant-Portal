@@ -45,7 +45,7 @@ const SideBar = () => {
             )}
         </li>
         <li>
-          <Link to="/report">Report and Analysis</Link>
+          <Link to="/merchantlist">Merchants</Link>
         </li>
       </ul>
       </div>

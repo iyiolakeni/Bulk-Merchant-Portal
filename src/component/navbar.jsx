@@ -1,15 +1,13 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../UserContext';
-
+import {useNavigate} from "react-router-dom"
 const Navbar = () => {
   const {user} = useContext(UserContext);
-  // const user = {
-  //   firstname: 'John',
-  //   surname: 'Doe',
-  //   jobPosition: 'Software Developer'
-  
-  // }
 
+  const naviagate = useNavigate();
+ const click = () =>{
+  naviagate('/email');
+ }
   return (
     <nav className="navbar">
       <div className='welcome'>
@@ -17,7 +15,7 @@ const Navbar = () => {
       <input type="search" placeholder="Search..." />
       </div>
       <div className='profile'>
-        <button>📩</button>
+        <button onClick={click}>📩</button>
         <button>🔔</button>
         {/* A box to get the User name first Letter of user fname and lname */}
         <p style={{width: 'auto', background:'#EDCFF3', color:'#630678', borderRadius:'10px', padding: '10px', fontSize:'20px', fontWeight:'bold' }}>{user.firstname[0] + '.' + user.surname[0]}</p>
