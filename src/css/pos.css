@@ -1,0 +1,39 @@
+.formNew{
+    display: grid;
+    gap: 3%;
+}
+.formNew select{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.formNew select::after{
+    content: "\25BC";
+}
+.formNew select option{
+    padding: 10px;
+    font-size: 18px;
+}
+.formNew input{
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.formNew button{
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #4b86c5;
+    color: white;
+    cursor: pointer;
+}
+.butClass{
+    display: flex;
+}

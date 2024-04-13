@@ -1,6 +1,7 @@
 import './App.css';
 import './css/login.css';
 import './css/form.css';
+import './css/pos.css';
 import { Routes, Route } from 'react-router-dom';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';

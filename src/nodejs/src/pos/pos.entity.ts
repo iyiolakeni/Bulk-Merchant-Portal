@@ -31,7 +31,7 @@ export class Pos{
     @Column({type: 'enum', enum: Processor, default: Processor.PAYMENT_PROCESSOR})
     Pos_Processor: Processor;
 
-    @Column({type:'enum', enum: Status, default: Status.PENDING})
+    @Column({type:'enum', enum: Status, default: Status.APPROVED})
     status: Status;
 
 }

@@ -16,7 +16,6 @@ const NewForm = ({ user }) => {
   const [error, setError] = useState("");
   const formObj = useRef();
   const [typingTimeout, setTypingTimeout] = useState(0);
-  const [inputValue, setInputValue] = useState('');
   
   const closeForm = (e) => {
     // e.preventDefault();

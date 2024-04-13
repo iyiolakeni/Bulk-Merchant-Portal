@@ -1,12 +1,18 @@
 import {useEffect, useState, useContext} from "react";
 import axios from "axios";
 import { UserContext } from "../UserContext";
+import PosRequest from "./posrequest";
 
 const ViewARequest =({requestId}) =>{
     const [request, setRequest] = useState(null);
     const [merchant, setMerchant] = useState(null);
     const {user} = useContext(UserContext);
     const [show, setShow] = useState(false);
+    const [show2, setShow2] = useState(false);
+
+    const closeForm =() => {
+      setShow2(false)
+    }
     
     //This function fetches the request details from the server and sets them in state.
     useEffect(() => {
@@ -47,7 +53,9 @@ const ViewARequest =({requestId}) =>{
               console.error('Failed to update request:', error);
           }
         }
-        if (user.jobPosition === 'POS Business Officer'){}
+        if (user.jobPosition === 'POS Business Officer'){
+          setShow2(true);
+        }
       }
 
       const handleDenied = async() =>{
@@ -126,6 +134,26 @@ const ViewARequest =({requestId}) =>{
                     <button onClick={handleApprove}>Aprrove</button>
                     <button onClick={handleDenied}>Decline</button>
                     </div>
+                )}
+                {show2 && (
+ <div className="modal formbut">
+ <div
+  style={{
+     backgroundColor: "white",
+     borderRadius: "8px",
+     left: 0,
+     width: "70%",
+     height: "50%",
+     gap: "2%",
+     padding: "2%",
+     justifyContent: "center",
+     display: "grid",
+     justifyItems: "center",
+ color: "black"}}
+     >
+     <PosRequest requestId={requestId} closeForm={closeForm}/>
+ </div>
+</div>                 
                 )}
             </div>
         </div>

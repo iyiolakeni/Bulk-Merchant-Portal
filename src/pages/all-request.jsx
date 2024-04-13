@@ -28,7 +28,6 @@ const Allrequests =({form}) => {
             try {
                 const response1 = await axios.get('http://localhost:5000/forms');
                 const response2 = await axios.get('http://localhost:5000/merchant/allMerchants'); 
-                const response3 = await axios.get('http://localhost:5000/POS/allrequest');
 
                 let forms = response1.data;
                 const merchants = response2.data;

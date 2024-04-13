@@ -3,4 +3,5 @@ export enum FormStatus {
     APPROVED = 'approved',
     IN_PROCESS = 'in_process',
     DENIED = 'denied',
+    DEPLOYED = 'deployed',
   }
