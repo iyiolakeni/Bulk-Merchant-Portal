@@ -20,11 +20,11 @@ const PosRequest = (props) => {
         "http://localhost:5000/POS/newposrequest",
         info
       );
-      alert("Successfully submitted!");
+      // alert("Successfully submitted!");
       console.log(props.requestId);
+      props.closeForm();
       console.log("This is the form submitted", response.data);
       await axios.put(`http://localhost:5000/forms/${props.requestId}`, {status: 'in_process'})
-      props.closeForm();
     } catch (err) {
       console.log("An error occurred while submitting the form", err);
     }

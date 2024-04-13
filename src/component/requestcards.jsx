@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../css/chatsidebar.css";
-import ChatSidebar from "../component/chatbox";
-import arabella4 from "../images/arabella4(0).jpg";
-import image2 from "../images/DSC_4119.jpg";
-import image3 from "../images/Light.jpg";
-import image4 from "../images/headshot.png";
+// import ChatSidebar from "../component/chatbox";
+// import arabella4 from "../images/arabella4(0).jpg";
+// import image2 from "../images/DSC_4119.jpg";
+// import image3 from "../images/Light.jpg";
+// import image4 from "../images/headshot.png";
 import Notification from "./notification";
 import axios from "axios";
 import { UserContext } from "../UserContext";
@@ -16,60 +16,43 @@ import { UserContext } from "../UserContext";
   const [declinedRequest, setDeclined] = useState(0);
   const [totalRequest, setTotal] = useState(0);
   // const user = { fname: "Iyioluwa", lname: "Awe", role: "Bank Manager" };
-  const chats = [
-    {
-      image: arabella4,
-      name: "Iyioluwa Awe",
-      position: "Hello",
-      time: "10:00 AM",
-      status: "unread",
-    },
-    {
-      image: image2,
-      name: "Oluwapelumi Adekola",
-      position: "Hi",
-      time: "9:30 AM",
-      status: "read",
-    },
-    {
-      image: image3,
-      name: "User 3",
-      position: "Good morning",
-      time: "9:00 AM",
-      status: "sent",
-    },
-    {
-      image: image4,
-      name: "User 4",
-      position: "How are you?",
-      time: "8:30 AM",
-      status: "typing",
-    },
-    {
-      image: image4,
-      name: "User 5",
-      position: "Have a nice day",
-      time: "8:00 AM",
-      status: "unread",
-    },
-  ];
-  const reques = { amount: "1000", status: "Approved", id: "Req9187"};
-  const notification = [
-    {
-      message: `The Request ${reques.id} has been Approved By the Business Developer Awaiting Retrievel`,
-      name: "User 1",
-      approved_date: "29-Feb-2024",
-      status: reques.status,
-      amount: reques.amount
-    },
-    {
-      message: `The Request ${reques.id} has been Approved By the Business Developer Awaiting Retrievel`,
-      name: "User 1",
-      approved_date: "29-Feb-2024",
-      status: reques.status,
-      amount: reques.amount
-    },
-  ]
+  // const chats = [
+  //   {
+  //     image: arabella4,
+  //     name: "Iyioluwa Awe",
+  //     position: "Hello",
+  //     time: "10:00 AM",
+  //     status: "unread",
+  //   },
+  //   {
+  //     image: image2,
+  //     name: "Oluwapelumi Adekola",
+  //     position: "Hi",
+  //     time: "9:30 AM",
+  //     status: "read",
+  //   },
+  //   {
+  //     image: image3,
+  //     name: "User 3",
+  //     position: "Good morning",
+  //     time: "9:00 AM",
+  //     status: "sent",
+  //   },
+  //   {
+  //     image: image4,
+  //     name: "User 4",
+  //     position: "How are you?",
+  //     time: "8:30 AM",
+  //     status: "typing",
+  //   },
+  //   {
+  //     image: image4,
+  //     name: "User 5",
+  //     position: "Have a nice day",
+  //     time: "8:00 AM",
+  //     status: "unread",
+  //   },
+  // ];
 
   useEffect(() => {
     const fetchRequests = async () => {
@@ -175,11 +158,11 @@ import { UserContext } from "../UserContext";
                 </div>
             </div>
           </div>
-            <Notification notifications={notification}/>
+            <Notification/>
         </div>
-        <div className="chat_board">
+        {/* <div className="chat_board">
         <ChatSidebar chats={chats} />
-        </div>
+        </div> */}
       </div>
   );
 };

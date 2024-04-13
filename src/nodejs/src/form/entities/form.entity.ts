@@ -1,7 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, UpdateDateColumn } from 'typeorm';
 import { FormStatus } from './form.enum';
 import { CardType } from './card.enum';
-import { POS } from './pos.enum';
 import { CategoryBusinessType } from './cate-business.enum';
 
 @Entity()
@@ -55,6 +54,9 @@ export class Form {
 
   @Column("simple-array",{nullable: true})
   suppportingDocuments: string[];
+
+  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+  updatedAt: Date;
 
   @BeforeInsert()
   generateRequestId() {

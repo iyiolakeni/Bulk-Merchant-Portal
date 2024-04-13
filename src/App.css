@@ -170,6 +170,7 @@ cursor: pointer;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  border-bottom: 1px solid rgba(53, 16, 99, 0.2);
 }
 .status::before{
   content: "\2B67";
@@ -187,6 +188,9 @@ cursor: pointer;
   align-items: center;
   /* margin-top: -25px; */
   border-bottom: 1px solid rgba(53, 16, 99, 0.2);
+}
+.notification_info:nth-last-child() {
+  border-bottom: none;
 }
 .content{
   width: 80%;
