@@ -1,7 +1,6 @@
 .chat-sidebar {
-  width: 355px;
   background-color: #f5f5f5;
-  padding: 20px;
+  padding: 20px 5px 0px 0px;
   overflow: hidden;
   }
   
@@ -73,14 +72,17 @@ content: "\2714\2714";
   .card_overview{
     display: flex;
     flex-direction: column;
+    width: 70%;
     gap: 10px;
     padding: 20px;
     margin: 20px;
   }
-
+.chat_board{
+  width: 30%;
+}
   .request_info {
     display: flex;
-    /* align-items: flex-start; */
+    width: 100%;
     gap: 20px;
   }
   .card1{
@@ -94,10 +96,38 @@ content: "\2714\2714";
   .request_card {
     border: 2px solid #f5f5f5;
     background-color: #B180EF;
-    width: 300px;
+    width: 50%;
     border-radius: 15px;
-    padding: 5%;
+    padding: 2%;
   }
   .overview{
     margin-top: -10px;
   }
+.email_box{
+  display: grid;
+  font-size: 16px;
+}
+
+.email_name{
+  display:flex;
+  background-color: grey;
+  gap: 10px;
+  border: 1px solid black;
+  height: 50px;
+  width: 100%;
+  padding: 10px;
+
+  margin-bottom: 5px;
+}
+.email_main{
+  display: grid;
+  width: 80%;
+  margin: 20px;
+}
+.intials{
+  border-radius: 50%;
+  background-color: blue;
+  width:40px;
+  height:40px;
+  text-align: center
+}

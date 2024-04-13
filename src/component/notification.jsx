@@ -10,14 +10,12 @@ const Notification = ({ notifications }) => {
       </div>
       {notifications.map((notification, index) => (
         <div key={index} className="notifications">
-          <div className="notification-icons">
-            <p style={{fontSize: "12px"}}>Request {notification.status}</p>
-          </div>
           <div className="notification-info">
             <div className="notification_info">
               <p style={{ fontSize: "14.56px", fontWeight: "normal" }}>
                 {notification.message}
               </p>
+            <p className="status" style={{fontSize: "12px"}}>Request {notification.status}</p>
             </div>
             <div className="notification-status">
               <p style={{ fontSize: "20px", fontWeight: "bold" }}>

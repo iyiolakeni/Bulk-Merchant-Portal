@@ -12,6 +12,8 @@ import Pending_requests from './pages/pending-request';
 import Approved_Request from './pages/approved';
 import In_Process from './pages/in_process';
 import Denied_Request from './pages/denied_request';
+import EmailBoard from './pages/email_board';
+import Merchants from './pages/merchants';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path="/approved" element={<Approved_Request/>}/>
         <Route path="/In_Process" element={<In_Process/>}/>
         <Route path="/denied_request" element={<Denied_Request/>}/>
+        <Route path="/email" element={<EmailBoard/>}/>
+        <Route path="/merchantlist" element={<Merchants/>}/>
       </Routes>
       </UserProvider>
     </div>
