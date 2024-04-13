@@ -6,6 +6,7 @@ import { LoginApiModule } from './login-api/login-api.module';
 import { FormModule } from './form/form.module';
 import { MerchantIDModule } from './merchantID/merchant-id.module';
 import { PosModule } from './pos/pos.module';
+import { EmailModule } from './email/email.module';
 
 
 @Module({
@@ -14,7 +15,8 @@ import { PosModule } from './pos/pos.module';
             LoginApiModule,
             FormModule,
             MerchantIDModule,
-            PosModule
+            PosModule,
+            EmailModule
           ],
   controllers: [UserController],
   providers: [
