@@ -33,10 +33,9 @@ const UserLogin = () => {
 
   return (
     <div className="App">
-      <div className='new'></div>
       <div className='loginDiv'>
         <form className='login' onSubmit={handleSubmit}>
-          <input className='username' placeholder='Username or Email' value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input className='username' placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
           <input className='password' placeholder='Password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
           {errorMessage && <p>{errorMessage}</p>}
           <button type='submit'>LOGIN</button>

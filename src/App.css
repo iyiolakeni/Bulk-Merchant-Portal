@@ -4,9 +4,10 @@
 
 .App {
   text-align: center;
-  display: flex;
-  align-items: center;
- 
+  height: 100vh;
+ background: url('../src/images/banner.jpg');
+ background-size: cover;
+ background-repeat: no-repeat;
   font: 300 36px/1.5 "Inter";
   gap: 200px;
 }
