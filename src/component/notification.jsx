@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Notification = () => {
     const [notifications, setNotifications] = useState([]);
@@ -41,7 +41,8 @@ const Notification = () => {
                     return {
                         message: `Form ${form.RequestId} is ${form.status}.`,
                         status: form.status,
-                        time: timeAgo
+                        time: timeAgo,
+                        requestId: form.RequestId
                     };
                 });
                 setNotifications(notifications);
@@ -51,6 +52,11 @@ const Notification = () => {
             });
     }, []);
 
+    const navigate = useNavigate();
+    const handleOnClick = (requestId) => {
+        console.log(requestId);
+        navigate(`/request/${requestId}`)
+    }
     return (
         <div className="notification">
             <div className="notification-header">
@@ -60,7 +66,7 @@ const Notification = () => {
             {notifications.reverse().slice(0, 5).map((notification, index) => (
     <div key={index} className="notifications">
         <div className="notification-info">
-            <div className="notification_info">
+            <div className="notification_info" onClick={() => handleOnClick(notification.requestId)}>
                 <p style={{ fontSize: "14.56px", fontWeight: "normal" }}>
                     {notification.message}
                 </p>

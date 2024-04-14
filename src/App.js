@@ -15,6 +15,7 @@ import In_Process from './pages/in_process';
 import Denied_Request from './pages/denied_request';
 import EmailBoard from './pages/email_board';
 import Merchants from './pages/merchants';
+import RequestPage from './pages/requestpage';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/denied_request" element={<Denied_Request/>}/>
         <Route path="/email" element={<EmailBoard/>}/>
         <Route path="/merchantlist" element={<Merchants/>}/>
+        <Route path="/request/:requestId" element={<RequestPage/>}/>
       </Routes>
       </UserProvider>
     </div>

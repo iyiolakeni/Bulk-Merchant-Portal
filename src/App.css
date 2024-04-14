@@ -164,7 +164,7 @@ cursor: pointer;
 }
 .notification-info{
   color: #0D163A;
-  /* margin-bottom: -20px; */
+  cursor: pointer;
 }
 .notification_info{
   display: flex;
@@ -189,7 +189,7 @@ cursor: pointer;
   /* margin-top: -25px; */
   border-bottom: 1px solid rgba(53, 16, 99, 0.2);
 }
-.notification_info:nth-last-child() {
+.notification_info:nth-last-child(5) {
   border-bottom: none;
 }
 .content{
