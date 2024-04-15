@@ -32,12 +32,13 @@ const Notification = () => {
     }
     
     useEffect(() => {
-        axios.get('http://localhost:5000/forms')
-            .then(response => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/forms');
                 const notifications = response.data.map(form => {
                     const updatedAt = new Date(form.updatedAt);
                     const timeAgo = timeSince(updatedAt);
-    
+
                     return {
                         message: `Form ${form.RequestId} is ${form.status}.`,
                         status: form.status,
@@ -46,10 +47,18 @@ const Notification = () => {
                     };
                 });
                 setNotifications(notifications);
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error fetching forms', error);
-            });
+            }
+        };
+
+        fetchData();
+
+        const interval = setInterval(fetchData, 5000);
+
+        return () => {
+            clearInterval(interval);
+        };
     }, []);
 
     const navigate = useNavigate();
