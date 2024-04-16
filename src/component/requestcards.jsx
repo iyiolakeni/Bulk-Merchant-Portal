@@ -119,42 +119,39 @@ import { UserContext } from "../UserContext";
           <div className="card_allview">
             <div className="card1">
                 <div className="request_card">
-                  <div className="card_name_icon">
-                    <p className="total">TOTAL</p>
-                  </div>
-                  <div className="amount_clickmore">
-                    <p>{totalRequest}</p>
-                  </div>
+                    <p className="app">TOTAL</p>
+                    <p className="app1">{totalRequest}</p>
+                  <p className="total"></p>
                 </div>
               {/* TOTAL AMOUNT OF PENDING REQUESTS */}
                 <div className="request_card">
-                  <div className="card_name_icon">
-                    <p className="pending">Pending</p>
-                  </div>
-                  <div className="amount_clickmore">
-                    <p>{pendingRequest}</p>
-                  </div>
+                    <p className="app">Pending</p>
+                    <p className="app1">{pendingRequest}</p>
+                    <p className="pending"></p>
+                </div>
+                <div className="request_card">
+                    <h6 className="app">Pending</h6>
+                    <p className="app1">{pendingRequest}</p>
+                    <p className="pending"></p>
                 </div>
             </div>
             {/* // TOTAL AMOUNT OF APPROVED REQUESTS */}
             <div className="card2">
                 <div className="request_card">
-                  <div className="card_name_icon">
-                    <p className="approved">APPROVED</p>
+                    <p className="app">APPROVED</p>
+                    <p className="app1">{approvedRequest}</p>
+                    <p className="approved"></p>
                   </div>
-                  <div className="amount_clickmore">
-                    <p>{approvedRequest}</p>
+                <div className="request_card">
+                    <p className="app">APPROVED</p>
+                    <p className="app1">{approvedRequest}</p>
+                    <p className="approved"></p>
                   </div>
-                </div>
-              
               {/* TOTAL AMOUNT OF REJECTED REQUESTS */}
                 <div className="request_card">
-                  <div className="card_name_icon">
-                    <p className="reject">REJECTED</p>
-                  </div>
-                  <div className="amount_clickmore">
-                    <p>{declinedRequest}</p>
-                  </div>
+                    <p className="app">REJECTED</p>
+                    <p className="app1">{declinedRequest}</p>
+                    <p className="reject"></p>
                 </div>
             </div>
           </div>

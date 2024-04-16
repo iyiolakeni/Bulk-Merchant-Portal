@@ -75,41 +75,46 @@ cursor: pointer;
   display: flex;
   background-color: #F7F1FD;
 }
-.pending{
-  border-bottom: 2px solid white;
-  padding-bottom: 5%;
-}
-.pending::before{
-  content: "\231B";
-  fill: white;
-  margin-right: 20px;
-}
 .total{
-  border-bottom: 2px solid white;
-  padding-bottom: 5%;
-}
-.total::before{
-  content: "\1F3E6";
-  margin-right: 20px;
-}
-.reject{
-  border-bottom: 2px solid white;
-  padding-bottom: 5%;
-}
-.reject::before{
-  content: "\1F6AB";
-  margin-right: 20px;
-  margin-bottom: 10px;
+  background: blue;
+  width: 25%;
+  margin-left: 75.4%;
+  height: 40%;
+  FONT-SIZE: 20px;
+  border-top-left-radius: 100%;
+  border-bottom-right-radius: 17%;
+  margin-top: -39.5px;
 }
 .approved{
-  border-bottom: 2px solid white;
-  padding-bottom: 5%;
+  background: blue;
+  width: 25%;
+  margin-left: 75.4%;
+  height: 40%;
+  FONT-SIZE: 20px;
+  border-top-left-radius: 100%;
+  border-bottom-right-radius: 17%;
+  margin-top: -39.5px;
 }
-.approved::before{
-  content: "\2714 ";
-  margin-right: 20px;
+.pending{
+  background: blue;
+  width: 25%;
+  margin-left: 75.4%;
+  height: 40%;
+  FONT-SIZE: 20px;
+  border-top-left-radius: 100%;
+  border-bottom-right-radius: 17%;
+  margin-top: -39.5px;
 }
-
+.reject{
+  background: blue;
+  width: 25%;
+  margin-left: 75.4%;
+  height: 40%;
+  FONT-SIZE: 20px;
+  border-top-left-radius: 100%;
+  border-bottom-right-radius: 17%;
+  margin-top: -39.5px;
+}
 /* Navbar Styling */
 .navbar {
   width: auto;
@@ -126,13 +131,23 @@ cursor: pointer;
   padding: 5px;
   border-radius: 10px;
 }
-
-.navbar button {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
+.navemail{
+  background-image: url('../src/images/bell.gif');
+  background-position: center center;
+  background-size: cover;
+  background: rgb(237, 207, 243);
+  width: 50px;
 }
+.instant-message {
+  background-image: url('../src/images/mesa.png');
+  background-position: center;
+  background-size: cover;
+  background: rgb(237, 207, 243);
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+}
+
 .home{
   background-color: #351063;
   color: white;
