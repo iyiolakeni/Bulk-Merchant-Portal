@@ -71,17 +71,17 @@ content: "\2714\2714";
   /* Request Card Css */
   .card_overview{
     display: flex;
-    flex-direction: column;
-    width: 70%;
+    flex-direction: row;
     gap: 10px;
     padding: 20px;
     margin: 20px;
+    justify-content: center;
   }
 .chat_board{
   width: 30%;
 }
   .request_info {
-    display: flex;
+    display: grid;
     width: 100%;
     gap: 20px;
   }
@@ -95,7 +95,7 @@ content: "\2714\2714";
   }
   .request_card {
     color: black;
-    border: 2px solid black;
+    border: 1px solid rgb(255, 255, 255);
     background-color: white;
     width: 50%;
     margin: 10px;
@@ -141,4 +141,9 @@ content: "\2714\2714";
   margin-top: 0;
   font-size: 20px;
   font-weight: bold;
+}
+.card_allview{
+  width: 70%;
+  display: grid;
+  gap: 12%;
 }

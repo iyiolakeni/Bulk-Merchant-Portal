@@ -15,45 +15,6 @@ import { UserContext } from "../UserContext";
   const [approvedRequest, setApproved] = useState(0);
   const [declinedRequest, setDeclined] = useState(0);
   const [totalRequest, setTotal] = useState(0);
-  // const user = { fname: "Iyioluwa", lname: "Awe", role: "Bank Manager" };
-  // const chats = [
-  //   {
-  //     image: arabella4,
-  //     name: "Iyioluwa Awe",
-  //     position: "Hello",
-  //     time: "10:00 AM",
-  //     status: "unread",
-  //   },
-  //   {
-  //     image: image2,
-  //     name: "Oluwapelumi Adekola",
-  //     position: "Hi",
-  //     time: "9:30 AM",
-  //     status: "read",
-  //   },
-  //   {
-  //     image: image3,
-  //     name: "User 3",
-  //     position: "Good morning",
-  //     time: "9:00 AM",
-  //     status: "sent",
-  //   },
-  //   {
-  //     image: image4,
-  //     name: "User 4",
-  //     position: "How are you?",
-  //     time: "8:30 AM",
-  //     status: "typing",
-  //   },
-  //   {
-  //     image: image4,
-  //     name: "User 5",
-  //     position: "Have a nice day",
-  //     time: "8:00 AM",
-  //     status: "unread",
-  //   },
-  // ];
-
   useEffect(() => {
     const fetchRequests = async () => {
       try {
@@ -98,9 +59,9 @@ import { UserContext } from "../UserContext";
     return() => clearInterval(intervalId);
         // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
+
       return (
       <div className="request_info">
-        <div className="card_overview">
           <div className="overview">
             <p
               style={{
@@ -110,12 +71,12 @@ import { UserContext } from "../UserContext";
                 fontWeight: "bold",
                 color: "#0D163A",
                 marginBottom: "0px",
-                marginTop: "-0.5%"
               }}
             >
               OVERVIEW
             </p>
           </div>
+        <div className="card_overview">
           <div className="card_allview">
             <div className="card1">
                 <div className="request_card">
@@ -130,7 +91,7 @@ import { UserContext } from "../UserContext";
                     <p className="pending"></p>
                 </div>
                 <div className="request_card">
-                    <h6 className="app">Pending</h6>
+                    <p className="app">Pending</p>
                     <p className="app1">{pendingRequest}</p>
                     <p className="pending"></p>
                 </div>
@@ -155,11 +116,8 @@ import { UserContext } from "../UserContext";
                 </div>
             </div>
           </div>
-            <Notification/>
+            <Notification num={3}/>
         </div>
-        {/* <div className="chat_board">
-        <ChatSidebar chats={chats} />
-        </div> */}
       </div>
   );
 };
