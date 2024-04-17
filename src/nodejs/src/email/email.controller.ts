@@ -1,20 +1,48 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Get, Req } from '@nestjs/common';
 import { EmailService } from './email.service';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Request } from 'express';
 import { User } from 'src/user/entities/user.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ImapService } from './imap.service';
 
-@Controller('email')
+@Controller('emails')
 export class EmailController {
-  constructor(private readonly emailService: EmailService) {}
+  constructor(
+    private readonly emailService: EmailService,
+    private readonly imapService: ImapService,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+  ) {}
 
-  @Post('send')
-  @ApiTags('email')
-  async sendEmail(
-    @Body('user') user: User,
-    @Body('to') to: string,
-    @Body('subject') subject: string,
-    @Body('body') body: string,
-  ): Promise<void> {
-    await this.emailService.sendEmail(user, to, subject, body);
+  @Get('send')
+  async sendEmail(@Req() req: Request) {
+    const { to, subject, body } = req.body;
+    const userEmail = req.user.email;
+    
+    try {
+        const user = await this.userRepository.findOne({ where: { email: userEmail } });
+      if (!user) throw new Error('User not found');
+
+      await this.emailService.sendEmail(user, to, subject, body);
+      return { message: 'Email sent successfully' };
+    } catch (error) {
+      return { error: 'Failed to send email' };
+    }
+  }
+
+  @Get('receive')
+  async receiveEmails(@Req() req: Request) {
+    const userEmail = req.user.email;
+    
+    try {
+        const user = await this.userRepository.findOne({ where: { email: userEmail } });
+      if (!user) throw new Error('User not found');
+
+      const emails = await this.imapService.receiveEmails(user);
+      return { emails };
+    } catch (error) {
+      return { error: 'Failed to receive emails' };
+    }
   }
 }
