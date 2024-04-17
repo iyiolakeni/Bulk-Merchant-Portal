@@ -104,34 +104,6 @@ content: "\2714\2714";
   .overview{
     margin-top: -10px;
   }
-.email_box{
-  display: grid;
-  font-size: 16px;
-}
-
-.email_name{
-  display:flex;
-  background-color: grey;
-  gap: 10px;
-  border: 1px solid black;
-  height: 50px;
-  width: 100%;
-  padding: 10px;
-
-  margin-bottom: 5px;
-}
-.email_main{
-  display: grid;
-  width: 80%;
-  margin: 20px;
-}
-.intials{
-  border-radius: 50%;
-  background-color: blue;
-  width:40px;
-  height:40px;
-  text-align: center
-}
 .app{
   padding:0 20px;
 }

@@ -1,0 +1,60 @@
+.email-system {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .email-list {
+    width: 30%;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+    overflow-y: scroll;
+    height: 500px;
+  }
+  
+  .email-summary {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .email-summary:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .email-details {
+    width: 70%;
+    padding: 10px;
+  }
+  .emailForm form {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: 0 auto;
+  }
+  
+  .emailForm label {
+    margin-bottom: 10px;
+  }
+  
+  .emailForm input[type="text"], .emailForm textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+  
+  .emailForm  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .emailForm  button[type="submit"]:hover {
+    background-color: #45a049;
+  }

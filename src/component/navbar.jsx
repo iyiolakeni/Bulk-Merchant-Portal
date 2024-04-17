@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className='profile'>
         {/* <span className='navemail'></span> */}
         <span className='navemail' onClick={click}></span>
-        <span className="instant-message"></span>
+        <span onClick={click} className="instant-message"></span>
         {/* A box to get the User name first Letter of user fname and lname */}
         <p style={{width: '30px', background:'#EDCFF3', color:'#630678', borderRadius:'10px', padding: '10px', fontSize:'20px', fontWeight:'500', textAlign: 'center' }}>{user.firstname[0] + user.surname[0]}</p>
         <div>

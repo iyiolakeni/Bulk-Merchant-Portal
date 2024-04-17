@@ -1,19 +1,32 @@
-import React from 'react';
-import '../css/chatsidebar.css';
+import React, { useState } from 'react';
+import '../css/email.css';
 
-const Email = ({emails}) =>{
-    return(
-        <div className="email_box">
-           {emails.map((email, index) => (
-          <div className='email_name'>
-            <p className='intials'>{email.name.charAt(0)}</p>
-            <p>{email.name}</p>
+const EmailSystem = ({ emails }) => {
+  const [selectedEmail, setSelectedEmail] = useState(null);
+
+  const handleEmailClick = (email) => {
+    setSelectedEmail(email);
+  };
+
+  return (
+    <div className="email-system">
+      <div className="email-list">
+        {emails.map((email, index) => (
+          <div key={index} className="email-summary" onClick={() => handleEmailClick(email)}>
             <p>{email.title}</p>
-            <p>{email.message}</p>
             <p>{email.time}</p>
           </div>
-      ))} 
+        ))}
+      </div>
+      {selectedEmail && (
+        <div className="email-details">
+          <h2>{selectedEmail.title}</h2>
+          <h3>From: {selectedEmail.name}</h3>
+          <p>{selectedEmail.message}</p>
         </div>
-    )
-}
-export default Email;
+      )}
+    </div>
+  );
+};
+
+export default EmailSystem;
