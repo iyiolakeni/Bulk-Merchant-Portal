@@ -58,6 +58,10 @@ export class Form {
   @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
 
+  //Date of creation
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
+
   @BeforeInsert()
   generateRequestId() {
     let uniqueNumbers = new Set();

@@ -1,0 +1,15 @@
+.tableRequest{
+    width: 84%;
+    background-color: white;
+    border-radius: 10px;
+    border-collapse: collapse;
+    margin: 0px 7%;
+    padding: 20px;
+}
+.overview{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 20px 15px;
+    margin: -4% 70px;
+    color: black;
+}

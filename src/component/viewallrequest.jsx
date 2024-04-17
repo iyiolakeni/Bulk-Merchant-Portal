@@ -3,65 +3,61 @@ import { UserContext } from "../UserContext";
 import axios from "axios";
 import ViewARequest from "../component/viewonerequest";
 
-const ViewRequest = ({ form, status }) => {
-    const { user } = useContext(UserContext);
+const ViewallRequest =({num}) => {
+    const {user} = useContext(UserContext);
     const [request, setRequest] = useState([]);
     const [openForm, setOpenForm] = useState(false);
-    const [selectedID, setSelectedID] = useState(null);
+    const [selectedID, setSelectedID] = useState(null)
+    
+    // Get a specific request by ID when the handleonclick functino is clalled
 
-    // Get a specific request by ID when the handleOnClick function is called
-    const handleOnClick = (requestId) => {
+    const handleonClick = (requestId) =>{
         setSelectedID(requestId);
         setOpenForm(true);
-    };
+    }
 
-    const closeForm = () => {
+    const closeForm = () =>{
         setOpenForm(false);
         setSelectedID(null);
-    };
+    }
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response1 = await axios.get("http://localhost:5000/forms");
-                const response2 = await axios.get(
-                    "http://localhost:5000/merchant/allMerchants"
-                );
+                const response1 = await axios.get('http://localhost:5000/forms');
+                const response2 = await axios.get('http://localhost:5000/merchant/allMerchants'); 
 
                 let forms = response1.data;
                 const merchants = response2.data;
-                const username = user.firstname + " " + user.surname;
+                const username = user.firstname + ' ' + user.surname;
 
-                if (user.jobPosition === "Account Officer") {
-                    forms = response1.data.filter(
-                        (request) => request.officer_name === username
-                    );
+                if (user.jobPosition === 'Account Officer') {
+                    forms = response1.data.filter(request => request.officer_name === username);
                     setRequest(response1.data);
                 }
-
-                const mergedData = forms.map((form) => ({
+                
+                const mergedData = forms.map(form => ({
                     ...form,
-                    merchant: merchants.find(
-                        (merchant) => merchant.MerchantID === form.MerchantID
-                    ),
+                    merchant: merchants.find(merchant => merchant.MerchantID === form.MerchantID)
                 }));
-                setRequest(mergedData); // Save the merged Data in the state
+                setRequest(mergedData);//Save the merged Data in the state
+                
             } catch (error) {
-                console.error(error);
+                console.error(error);                
             }
         };
         fetchData(); // Call once on component mount
         const intervalID = setInterval(fetchData, 3000);
 
-        // Clear the interval when components unmounts
-        return () => clearInterval(intervalID);
+        //clear the interval when components unmounts
+        return() => clearInterval(intervalID);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []); // Only run on component mount and never again
-
+    } , []); // Only run on component mount and never again
+    
 
     return (
         <div className="tableRequest">
-            <h2 style={{ margin: "10px", color: "black" }}>Request Overview</h2>
+            <h2 style={{margin: "10px", color:"black"}}>Request Overview</h2>
             <table className="form-table">
                 <thead className="form-header">
                     <tr>
@@ -74,19 +70,19 @@ const ViewRequest = ({ form, status }) => {
                     </tr>
                 </thead>
                 <tbody className="form-body">
-                    {request.filter(form => form.status === status).map((form) =>(
+                    {request.reverse().slice(0, num).map((form, index) => (
                         <tr key={form._id}>
                             <td>{form.RequestId}</td>
-                            <td>{form.createdAt}</td>
+                            <td>{new Date(form.createdAt).toLocaleDateString()}</td>
                             <td>{form.merchant?.Business_type}</td>
                             <td>{form.merchant?.Merchant_Trade_Name}</td>
                             <td>{form.merchant?.Business_location}</td>
-                            <td onClick={() => handleOnClick(form.RequestId)}>
+                            <td onClick={() => handleonClick(form.RequestId)}>
                                 <span className="view_more"></span>
                             </td>
                         </tr>
                     ))}
-                    {openForm && (
+                    {openForm &&(
                         <div className="modal formbut">
                             <div
                                 style={{
@@ -98,18 +94,17 @@ const ViewRequest = ({ form, status }) => {
                                     justifyContent: "center",
                                     display: "grid",
                                     justifyItems: "center",
-                                    color: "black",
+                                    color: "black"
                                 }}
                             >
-                                <ViewARequest requestId={selectedID} />
+                                <ViewARequest requestId={selectedID}/>
                                 <button onClick={closeForm}>Close</button>
                             </div>
                         </div>
                     )}
                 </tbody>
-            </table>
+            </table>                
         </div>
     );
-};
-
-export default ViewRequest;
+}
+export default ViewallRequest;

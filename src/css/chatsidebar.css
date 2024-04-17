@@ -83,7 +83,6 @@ content: "\2714\2714";
   .request_info {
     display: grid;
     width: 100%;
-    gap: 20px;
   }
   .card1{
     display: flex;

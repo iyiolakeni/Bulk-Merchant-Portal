@@ -66,15 +66,14 @@ import { UserContext } from "../UserContext";
             <p
               style={{
                 fontSize: "32px",
-                textAlign: "left",
-                marginLeft: "10px",
                 fontWeight: "bold",
                 color: "#0D163A",
                 marginBottom: "0px",
               }}
             >
-              OVERVIEW
+              Welcome {user.firstname}!
             </p>
+            <p>Manage your POS Request with ease</p>
           </div>
         <div className="card_overview">
           <div className="card_allview">

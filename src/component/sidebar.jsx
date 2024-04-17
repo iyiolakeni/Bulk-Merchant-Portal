@@ -23,7 +23,7 @@ const SideBar = () => {
           <Link to="/Dashboard" className={window.location.pathname === '/Dashboard' ?  'active' : ''}>Dashboard</Link>
         </li>
         <li>
-          <Link onClick={dropDownOpen} className={window.location.pathname=== '/NewRequest' || '/allrequests' || '/In_Process' || '/approved' || '/pendingrequest' || '/denied_request' ?  'active' : ''}>Request</Link>
+          <Link onClick={dropDownOpen} className='dropdown'>Request</Link>
           {show && (
             user.jobPosition === 'Account Officer' ? (
             <ul className="dropdown">

@@ -80,6 +80,7 @@ cursor: pointer;
 .dashboard {
   display: flex;
   background-color: #F7F1FD;
+  overflow-y: hidden;
 }
 .total{
   background: blue;
@@ -127,7 +128,7 @@ cursor: pointer;
 }
 /* Navbar Styling */
 .navbar {
-  width: auto;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
