@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const NewEmail = () => {
+const NewEmail = (props) => {
   const [recipient, setRecipient] = useState('');
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
+
+  const handleClose = () => {
+    props.closeForm();
+    
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,8 +21,9 @@ const NewEmail = () => {
     };
 
     try {
-      const response = await axios.post('/api/emails', email);
+      const response = await axios.post('http://localhost:5000/emails/send', email);
       console.log(response.data);
+      props.closeForm();
     } catch (error) {
       console.error(error);
     }

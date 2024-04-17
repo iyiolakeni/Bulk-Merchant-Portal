@@ -19,4 +19,10 @@ export class Email{
 
     @Column()
     message: string;
+    
+    @Column({nullable: true})
+    name: string;
+    
+    @Column({nullable: true})
+    cc: string;
 }

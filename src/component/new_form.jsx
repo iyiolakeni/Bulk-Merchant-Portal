@@ -125,7 +125,7 @@ const NewForm = ({ user }) => {
                 backgroundColor: "white",
                 borderRadius: "8px",
                 width: "40%",
-                height: "50%",
+                height: "60%",
                 gap: "20%",
                 padding: "2%",
                 justifyContent: "center",

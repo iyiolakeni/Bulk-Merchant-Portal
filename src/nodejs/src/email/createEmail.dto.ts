@@ -16,4 +16,7 @@ export class CreateEmailDto{
 
     @ApiProperty()
     message: string;
+
+    @ApiProperty({nullable: true})
+    name: string;
 }

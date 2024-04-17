@@ -1,20 +1,52 @@
 .email-system {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    color: black;
+    font-size: 18px;
+    width: 100%;
+    margin: 20px;
   }
   
   .email-list {
-    width: 30%;
-    border-right: 1px solid #ddd;
-    padding: 10px;
-    overflow-y: scroll;
-    height: 500px;
-  }
-  
-  .email-summary {
     border-bottom: 1px solid #ddd;
     padding: 10px;
     cursor: pointer;
+    display: grid;
+  }
+
+  .email-summary {
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    gap: 1%;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .intials{
+    color: rgb(1, 1, 1);
+    border-radius: 50%;
+    background: teal;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+    padding: 10px;
+  }
+
+  .sent{
+    color: green;
+    background-color: aqua;
+    border-radius: 50%;
+    padding: 10px;
+  }
+  .inbox{
+    color: green;
+    background-color: beige;
+    border-radius: 50%;
+    padding: 10px;
   }
   
   .email-summary:hover {
