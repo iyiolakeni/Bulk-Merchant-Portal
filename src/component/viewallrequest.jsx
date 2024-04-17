@@ -3,7 +3,14 @@ import { UserContext } from "../UserContext";
 import axios from "axios";
 import ViewARequest from "../component/viewonerequest";
 
-const ViewallRequest =({num}) => {
+const 
+
+
+
+
+
+
+ViewallRequest =({num}) => {
     const {user} = useContext(UserContext);
     const [request, setRequest] = useState([]);
     const [openForm, setOpenForm] = useState(false);
