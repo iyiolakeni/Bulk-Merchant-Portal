@@ -144,19 +144,27 @@ cursor: pointer;
 }
 .navemail{
   background-image: url('../src/images/bell.gif');
-  background-position: center center;
-  background-size: cover;
-  background: rgb(237, 207, 243);
-  width: 50px;
+  background-position: center;
+  background-size: contain;
+  background-color: rgb(237, 207, 243);
+  width: 33px;
+  height: 33px;
+  margin: 28px 0px;
+  border-radius: 10px;
+  background-blend-mode: overlay;
+  cursor: pointer;
 }
 .instant-message {
-  background-image: url('../src/images/mesa.png');
-  background-position: center;
-  background-size: cover;
-  background: rgb(237, 207, 243);
-  padding: 10px;
-  width: 30px;
-  height: 30px;
+  background: url('../src/images/mesa.png');
+    background-position: center;
+    background-size: contain;
+    background-color: rgb(237, 207, 243);
+    width: 33px;
+    height: 33px;
+    margin: 28px 0px;
+    border-radius: 10px;
+    background-blend-mode: overlay;
+  cursor: pointer;
 }
 
 .home{

@@ -3,19 +3,14 @@ import { UserContext } from "../UserContext";
 import axios from "axios";
 import ViewARequest from "../component/viewonerequest";
 
-const 
-
-
-
-
-
-
-ViewallRequest =({num}) => {
+const ViewallRequest =({num}) => {
     const {user} = useContext(UserContext);
     const [request, setRequest] = useState([]);
     const [openForm, setOpenForm] = useState(false);
     const [selectedID, setSelectedID] = useState(null)
     
+    const[currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = num;
     // Get a specific request by ID when the handleonclick functino is clalled
 
     const handleonClick = (requestId) =>{
@@ -27,7 +22,6 @@ ViewallRequest =({num}) => {
         setOpenForm(false);
         setSelectedID(null);
     }
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -77,7 +71,7 @@ ViewallRequest =({num}) => {
                     </tr>
                 </thead>
                 <tbody className="form-body">
-                    {request.reverse().slice(0, num).map((form, index) => (
+                    {request.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((form, index) => (
                         <tr key={form._id}>
                             <td>{form.RequestId}</td>
                             <td>{new Date(form.createdAt).toLocaleDateString()}</td>
@@ -110,8 +104,14 @@ ViewallRequest =({num}) => {
                         </div>
                     )}
                 </tbody>
-            </table>                
-        </div>
+            </table>
+            if (num 5) {
+                    <div className="nextPage">
+                        <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+                        <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(request.length / itemsPerPage)}>Next</button>
+                    </div>
+            }
+            </div>
     );
 }
 export default ViewallRequest;

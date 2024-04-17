@@ -72,9 +72,9 @@ content: "\2714\2714";
   .card_overview{
     display: flex;
     flex-direction: row;
-    gap: 10px;
-    padding: 20px;
-    margin: 20px;
+    gap: 50px;
+    margin: 2%;
+    /* margin-left: 0px; */
     justify-content: center;
   }
 .chat_board{
@@ -97,7 +97,7 @@ content: "\2714\2714";
     border: 1px solid rgb(255, 255, 255);
     background-color: white;
     width: 50%;
-    margin: 10px;
+    margin: 10px 0;
     border-radius: 15px;
     height: 118px;
   }
@@ -142,7 +142,7 @@ content: "\2714\2714";
   font-weight: bold;
 }
 .card_allview{
-  width: 70%;
+  width: 75%;
   display: grid;
   gap: 12%;
 }

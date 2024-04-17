@@ -1,10 +1,8 @@
 .tableRequest{
-    width: 84%;
+    width: 100%;
     background-color: white;
     border-radius: 10px;
-    border-collapse: collapse;
-    margin: 0px 7%;
-    padding: 20px;
+    margin: 0px 2%;
 }
 .overview{
     display: flex;
@@ -12,4 +10,27 @@
     padding: 0px 20px 15px;
     margin: -4% 70px;
     color: black;
+}
+.newoverview{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 20px 15px;
+    /* margin: -4% 70px; */
+    color: black;
+}
+.nextPage{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    gap: 50px;
+    margin-top: 35%;
+}
+.nextPage button{
+    background-color: #351063;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
 }

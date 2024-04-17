@@ -3,11 +3,13 @@ import { UserContext } from "../UserContext";
 import axios from "axios";
 import ViewARequest from "../component/viewonerequest";
 
-const ViewRequest = ({ form, status }) => {
+const ViewRequest = ({ num, status }) => {
     const { user } = useContext(UserContext);
     const [request, setRequest] = useState([]);
     const [openForm, setOpenForm] = useState(false);
     const [selectedID, setSelectedID] = useState(null);
+    const[currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = num;
 
     // Get a specific request by ID when the handleOnClick function is called
     const handleOnClick = (requestId) => {
@@ -74,10 +76,10 @@ const ViewRequest = ({ form, status }) => {
                     </tr>
                 </thead>
                 <tbody className="form-body">
-                    {request.filter(form => form.status === status).map((form) =>(
+                    {request.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).filter(form => form.status === status).map((form) =>(
                         <tr key={form._id}>
                             <td>{form.RequestId}</td>
-                            <td>{form.createdAt}</td>
+                            <td>{new Date(form.createdAt).toLocaleDateString()}</td>
                             <td>{form.merchant?.Business_type}</td>
                             <td>{form.merchant?.Merchant_Trade_Name}</td>
                             <td>{form.merchant?.Business_location}</td>
@@ -108,7 +110,10 @@ const ViewRequest = ({ form, status }) => {
                     )}
                 </tbody>
             </table>
-        </div>
+            <div className="nextPage">
+            <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
+<button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(request.length / itemsPerPage)}>Next</button>        </div>
+                </div>    
     );
 };
 

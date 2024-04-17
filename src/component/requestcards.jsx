@@ -15,6 +15,8 @@ import { UserContext } from "../UserContext";
   const [approvedRequest, setApproved] = useState(0);
   const [declinedRequest, setDeclined] = useState(0);
   const [totalRequest, setTotal] = useState(0);
+  const [inProcessRequest, setInProcessRequest] = useState(0);
+  const [deployedRequest, setDeployedRequest] = useState(0);
   useEffect(() => {
     const fetchRequests = async () => {
       try {
@@ -28,17 +30,23 @@ import { UserContext } from "../UserContext";
           requests = requests.filter(request => request.officer_name === username);
         }
         const pending = requests.filter(request => request.status === 'pending').length;
+        const in_process = requests.filter(request => request.status === 'in_process').length;
+        const deployed = requests.filter(request => request.status === 'deployed').length;
         const approved = requests.filter(request => request.status === 'approved').length;
-        const declined = requests.filter(request => request.status === 'declined').length;
+        const declined = requests.filter(request => request.status === 'denied').length;
         const total = requests.length;
   
         setPending(pending);
         setApproved(approved);
         setDeclined(declined);
+        setInProcessRequest(in_process);
+        setDeployedRequest(deployed);
         setTotal(total);
 
         if (user.jobPosition === 'POS Business Officer'){
         const pending = requests.filter(request => request.status === 'approved').length;
+        const in_process = requests.filter(request => request.status === 'in_process').length;
+        const deployed = requests.filter(request => request.status === 'deployed').length;
         const approved = requests2.filter(request => request.status === 'approved').length;
         const declined = requests2.filter(request => request.status === 'declined').length;
         const total = pending + approved + declined;
@@ -46,8 +54,10 @@ import { UserContext } from "../UserContext";
         setPending(pending);
         setApproved(approved);
         setDeclined(declined);
+        setInProcessRequest(in_process);
+        setDeployedRequest(deployed);
         setTotal(total);
-        }
+              }
       } catch (error) {
         console.error(error);
       }
@@ -79,7 +89,7 @@ import { UserContext } from "../UserContext";
           <div className="card_allview">
             <div className="card1">
                 <div className="request_card">
-                    <p className="app">TOTAL</p>
+                    <p className="app">Total</p>
                     <p className="app1">{totalRequest}</p>
                   <p className="total"></p>
                 </div>
@@ -90,26 +100,26 @@ import { UserContext } from "../UserContext";
                     <p className="pending"></p>
                 </div>
                 <div className="request_card">
-                    <p className="app">Pending</p>
-                    <p className="app1">{pendingRequest}</p>
+                    <p className="app">In Process</p>
+                    <p className="app1">{inProcessRequest}</p>
                     <p className="pending"></p>
                 </div>
             </div>
             {/* // TOTAL AMOUNT OF APPROVED REQUESTS */}
             <div className="card2">
                 <div className="request_card">
-                    <p className="app">APPROVED</p>
+                    <p className="app">Approved</p>
                     <p className="app1">{approvedRequest}</p>
                     <p className="approved"></p>
                   </div>
                 <div className="request_card">
-                    <p className="app">APPROVED</p>
-                    <p className="app1">{approvedRequest}</p>
+                    <p className="app">Deployed</p>
+                    <p className="app1">{deployedRequest}</p>
                     <p className="approved"></p>
                   </div>
               {/* TOTAL AMOUNT OF REJECTED REQUESTS */}
                 <div className="request_card">
-                    <p className="app">REJECTED</p>
+                    <p className="app">Rejected</p>
                     <p className="app1">{declinedRequest}</p>
                     <p className="reject"></p>
                 </div>
