@@ -25,15 +25,15 @@
       list-style-type: none;
       padding: 0px 5px 0px 5px;
   }
-  .sidebar a:active{
-    background-color: #F9BA33;
-  }
 
   .sidebar a {
       display: block;
       padding: 10px;
       color: white;
       text-decoration: none;
+  }
+  .sidebar a.active{
+    background-color: #F9BA33;
   }
 .sidebar ul li button {
   width: 80%;
@@ -43,13 +43,14 @@
   background: none;
   border: none;
   font: 16px/1.5 "Inter";
+  background-color: none;
 
 }
 .logout button{
   width: 80%;
   text-align: center;
   cursor: pointer;
-  background: #CDADF5;
+  background: none;
   border: none;
   border-radius: 30px;
   /* padding: 10px; */
@@ -70,9 +71,11 @@ background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org
 background-size: 1.5em;
 background-position: 10% 50%;
 padding-left: 25%;
-background-color: #CDADF5;
 border-radius: 30px;
 cursor: pointer;
+}
+.dropDown.active{
+  background-color: #F9BA33;
 }
 .dashboard {
   display: flex;
