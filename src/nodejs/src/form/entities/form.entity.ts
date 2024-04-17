@@ -55,6 +55,7 @@ export class Form {
   @Column("simple-array",{nullable: true})
   suppportingDocuments: string[];
 
+  //Date of Update
   @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
 
@@ -70,4 +71,10 @@ export class Form {
     }
     this.RequestId = 'POS' + Array.from(uniqueNumbers).join('');
   }
+
+  @Column({nullable: true})
+  ApprovedBy: string;
+
+  @Column({nullable: true})
+  AdditionalNotes: string;
 }

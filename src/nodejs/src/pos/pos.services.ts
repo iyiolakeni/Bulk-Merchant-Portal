@@ -7,6 +7,12 @@ import { Form } from "src/form/entities/form.entity";
 import { randomBytes } from "crypto";
 import {updatePosStatusDto} from "./updateStatus.dto";
 import { Status } from "./enums/status.enum";
+import * as json2xls from 'json2xls';
+import * as fs from 'fs';
+import * as jsonexport from 'jsonexport';
+import * as path from 'path';
+import * as ExcelJS from 'exceljs';
+
 
 @Injectable()
 export class PosService{
@@ -51,6 +57,85 @@ export class PosService{
     async getAllPosRequests(): Promise<Pos[]>{
         return this.posRepository.find()
     }
+
+    // async getPosRequestsByRequestId(requestId: string): Promise<Pos[]> {
+    //   const posRequests = await this.posRepository.find({ where: { Pos_RequestId: requestId } });
+    //   if (!posRequests || posRequests.length === 0) {
+    //       throw new NotFoundException(`No POS requests found with requestId ${requestId}`);
+    //   }
+    //   return posRequests;
+    // }
+  //   async generateExcelFile(data: any, filename: string): Promise<void> {
+  //     const xls = json2xls(data);
+  //     fs.writeFileSync(filename, xls, 'binary');
+  // }
+
+//   async generateCSVFile(data: any, filename: string): Promise<void> {
+//     jsonexport(data, function(err: any, csv: any) {
+//         if (err) {
+//             console.error('Error converting to CSV:', err);
+//             throw err;
+//         }
+//         fs.writeFileSync(filename, csv);
+//     });
+// }
+// async getPosRequestsByRequestId(requestId: string): Promise<Pos[]> {
+//   const posRequests = await this.posRepository.find({ where: { Pos_RequestId: requestId } });
+//   if (!posRequests || posRequests.length === 0) {
+//       throw new NotFoundException(`No POS requests found with requestId ${requestId}`);
+//   }
+//   return posRequests;
+// }
+
+// async generateExcelFile(data: any, filename: string): Promise<void> {
+//   const xls = json2xls(data);
+//   fs.writeFileSync(filename, xls, 'binary');
+// }
+
+// async convertPosRequestsToExcelAndDownload(requestId: string): Promise<string> {
+//   const posRequests = await this.getPosRequestsByRequestId(requestId);
+//   const filename = `pos_requests_${requestId}.xlsx`;
+//   await this.generateExcelFile(posRequests, filename);
+//   return filename;
+// }
+
+async getPosRequestsByRequestId(requestId: string): Promise<Pos[]> {
+  const posRequests = await this.posRepository.find({ where: { Pos_RequestId: requestId } });
+  if (!posRequests || posRequests.length === 0) {
+      throw new NotFoundException(`No POS requests found with requestId ${requestId}`);
+  }
+  return posRequests;
+}
+
+async generateExcelFile(data: Pos[], filename: string): Promise<void> {
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet('POS Requests');
+
+  // Add headers
+  const headers = Object.keys(data[0]);
+  worksheet.addRow(headers);
+
+  // Add data
+  data.forEach(pos => {
+      const row = [];
+      headers.forEach(header => {
+          row.push(pos[header]);
+      });
+      worksheet.addRow(row);
+  });
+
+  // Write to file
+  const filePath = path.join('C:\\Users\\VINCENT\\Desktop\\BMP\\Bulk-Merchant-Portal\\src\\nodejs\\Pos_Requests', filename);
+  await workbook.xlsx.writeFile(filePath);
+}
+
+async convertPosRequestsToExcelAndDownload(requestId: string): Promise<string> {
+  const posRequests = await this.getPosRequestsByRequestId(requestId);
+  const filename = `pos_requests_${requestId}.xlsx`;
+  await this.generateExcelFile(posRequests, filename);
+  return filename;
+}
+
 
     async updateStatus(requestId: string,
       dto: updatePosStatusDto): Promise<Pos>{

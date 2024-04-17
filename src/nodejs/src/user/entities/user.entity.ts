@@ -36,7 +36,6 @@ export class User {
   @Column({
     type: 'enum',
     enum: JobPosition,
-    //default: JobPosition.ACCOUNT_OFFICER
   })
   jobPosition: JobPosition;
 }

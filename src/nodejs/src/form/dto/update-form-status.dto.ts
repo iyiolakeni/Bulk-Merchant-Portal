@@ -8,4 +8,10 @@ export class UpdateFormStatusDto {
     description: 'New status for the form (APPROVED or DENIED)',
   })
   status: FormStatus;
+
+  @ApiProperty()
+  AdditionalNotes:string;
+
+  @ApiProperty()
+  ApprovedBy:string;
 }
