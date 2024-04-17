@@ -15,45 +15,8 @@ import { UserContext } from "../UserContext";
   const [approvedRequest, setApproved] = useState(0);
   const [declinedRequest, setDeclined] = useState(0);
   const [totalRequest, setTotal] = useState(0);
-  // const user = { fname: "Iyioluwa", lname: "Awe", role: "Bank Manager" };
-  // const chats = [
-  //   {
-  //     image: arabella4,
-  //     name: "Iyioluwa Awe",
-  //     position: "Hello",
-  //     time: "10:00 AM",
-  //     status: "unread",
-  //   },
-  //   {
-  //     image: image2,
-  //     name: "Oluwapelumi Adekola",
-  //     position: "Hi",
-  //     time: "9:30 AM",
-  //     status: "read",
-  //   },
-  //   {
-  //     image: image3,
-  //     name: "User 3",
-  //     position: "Good morning",
-  //     time: "9:00 AM",
-  //     status: "sent",
-  //   },
-  //   {
-  //     image: image4,
-  //     name: "User 4",
-  //     position: "How are you?",
-  //     time: "8:30 AM",
-  //     status: "typing",
-  //   },
-  //   {
-  //     image: image4,
-  //     name: "User 5",
-  //     position: "Have a nice day",
-  //     time: "8:00 AM",
-  //     status: "unread",
-  //   },
-  // ];
-
+  const [inProcessRequest, setInProcessRequest] = useState(0);
+  const [deployedRequest, setDeployedRequest] = useState(0);
   useEffect(() => {
     const fetchRequests = async () => {
       try {
@@ -67,17 +30,23 @@ import { UserContext } from "../UserContext";
           requests = requests.filter(request => request.officer_name === username);
         }
         const pending = requests.filter(request => request.status === 'pending').length;
+        const in_process = requests.filter(request => request.status === 'in_process').length;
+        const deployed = requests.filter(request => request.status === 'deployed').length;
         const approved = requests.filter(request => request.status === 'approved').length;
-        const declined = requests.filter(request => request.status === 'declined').length;
+        const declined = requests.filter(request => request.status === 'denied').length;
         const total = requests.length;
   
         setPending(pending);
         setApproved(approved);
         setDeclined(declined);
+        setInProcessRequest(in_process);
+        setDeployedRequest(deployed);
         setTotal(total);
 
         if (user.jobPosition === 'POS Business Officer'){
         const pending = requests.filter(request => request.status === 'approved').length;
+        const in_process = requests.filter(request => request.status === 'in_process').length;
+        const deployed = requests.filter(request => request.status === 'deployed').length;
         const approved = requests2.filter(request => request.status === 'approved').length;
         const declined = requests2.filter(request => request.status === 'declined').length;
         const total = pending + approved + declined;
@@ -85,8 +54,10 @@ import { UserContext } from "../UserContext";
         setPending(pending);
         setApproved(approved);
         setDeclined(declined);
+        setInProcessRequest(in_process);
+        setDeployedRequest(deployed);
         setTotal(total);
-        }
+              }
       } catch (error) {
         console.error(error);
       }
@@ -98,71 +69,64 @@ import { UserContext } from "../UserContext";
     return() => clearInterval(intervalId);
         // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
+
       return (
       <div className="request_info">
-        <div className="card_overview">
           <div className="overview">
             <p
               style={{
                 fontSize: "32px",
-                textAlign: "left",
-                marginLeft: "10px",
                 fontWeight: "bold",
                 color: "#0D163A",
                 marginBottom: "0px",
-                marginTop: "-0.5%"
               }}
             >
-              OVERVIEW
+              Welcome {user.firstname}!
             </p>
+            <p>Manage your POS Request with ease</p>
           </div>
+        <div className="card_overview">
           <div className="card_allview">
             <div className="card1">
                 <div className="request_card">
-                  <div className="card_name_icon">
-                    <p className="total">TOTAL</p>
-                  </div>
-                  <div className="amount_clickmore">
-                    <p>{totalRequest}</p>
-                  </div>
+                    <p className="app">Total</p>
+                    <p className="app1">{totalRequest}</p>
+                  <p className="total"></p>
                 </div>
               {/* TOTAL AMOUNT OF PENDING REQUESTS */}
                 <div className="request_card">
-                  <div className="card_name_icon">
-                    <p className="pending">Pending</p>
-                  </div>
-                  <div className="amount_clickmore">
-                    <p>{pendingRequest}</p>
-                  </div>
+                    <p className="app">Pending</p>
+                    <p className="app1">{pendingRequest}</p>
+                    <p className="pending"></p>
+                </div>
+                <div className="request_card">
+                    <p className="app">In Process</p>
+                    <p className="app1">{inProcessRequest}</p>
+                    <p className="pending"></p>
                 </div>
             </div>
             {/* // TOTAL AMOUNT OF APPROVED REQUESTS */}
             <div className="card2">
                 <div className="request_card">
-                  <div className="card_name_icon">
-                    <p className="approved">APPROVED</p>
+                    <p className="app">Approved</p>
+                    <p className="app1">{approvedRequest}</p>
+                    <p className="approved"></p>
                   </div>
-                  <div className="amount_clickmore">
-                    <p>{approvedRequest}</p>
+                <div className="request_card">
+                    <p className="app">Deployed</p>
+                    <p className="app1">{deployedRequest}</p>
+                    <p className="approved"></p>
                   </div>
-                </div>
-              
               {/* TOTAL AMOUNT OF REJECTED REQUESTS */}
                 <div className="request_card">
-                  <div className="card_name_icon">
-                    <p className="reject">REJECTED</p>
-                  </div>
-                  <div className="amount_clickmore">
-                    <p>{declinedRequest}</p>
-                  </div>
+                    <p className="app">Rejected</p>
+                    <p className="app1">{declinedRequest}</p>
+                    <p className="reject"></p>
                 </div>
             </div>
           </div>
-            <Notification/>
+            <Notification num={3}/>
         </div>
-        {/* <div className="chat_board">
-        <ChatSidebar chats={chats} />
-        </div> */}
       </div>
   );
 };

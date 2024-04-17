@@ -71,19 +71,18 @@ content: "\2714\2714";
   /* Request Card Css */
   .card_overview{
     display: flex;
-    flex-direction: column;
-    width: 70%;
-    gap: 10px;
-    padding: 20px;
-    margin: 20px;
+    flex-direction: row;
+    gap: 50px;
+    margin: 2%;
+    /* margin-left: 0px; */
+    justify-content: center;
   }
 .chat_board{
   width: 30%;
 }
   .request_info {
-    display: flex;
+    display: grid;
     width: 100%;
-    gap: 20px;
   }
   .card1{
     display: flex;
@@ -94,11 +93,13 @@ content: "\2714\2714";
     gap: 20px;
   }
   .request_card {
-    border: 2px solid #f5f5f5;
-    background-color: #B180EF;
+    color: black;
+    border: 1px solid rgb(255, 255, 255);
+    background-color: white;
     width: 50%;
+    margin: 10px 0;
     border-radius: 15px;
-    padding: 2%;
+    height: 118px;
   }
   .overview{
     margin-top: -10px;
@@ -130,4 +131,18 @@ content: "\2714\2714";
   width:40px;
   height:40px;
   text-align: center
+}
+.app{
+  padding:0 20px;
+}
+.app1{
+  padding:0 20px;
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+.card_allview{
+  width: 75%;
+  display: grid;
+  gap: 12%;
 }

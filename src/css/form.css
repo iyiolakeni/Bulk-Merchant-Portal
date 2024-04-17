@@ -52,15 +52,27 @@
     border-radius: 5px;
 }
 .form-table{
-    width:auto;
+    width:100%;
     border-collapse: collapse;
-    table-layout: fixed;
-    padding: 0px 20px;
+    table-layout:auto;
+    padding: 0px 50px;
+    color: black;
 }
 .form-table th, .form-table td{
-    text-align: left;
-    padding: 8px;
-    text-transform: uppercase;
+  text-align: left;
+  text-transform: capitalize;
+  padding: 0px 23px;
+}
+.form-table th{
+  font-size: 20px;
+  color: rgb(70, 70, 70);
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+.form-table td{
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid #ddd;
 }
 .form-header{
     font-size: 20px;
@@ -68,26 +80,14 @@
     color: black;
 }
 .view_more::before{
-    content: "\1F441";
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    align-content: center;
+  content: "\2026";
+  cursor: pointer;
+  font-size: 2rem;
+  margin: 0px 20px;
 }
 .form-body{
     font-size: 16px;
 }
-.form-body tr:nth-child(even) {
-    background-color: #f2f2f2; /* Grey */
-    color: black;
-  }
-  
-  .form-body tr:nth-child(odd) {
-    background-color: white;
-    color: black;
-  }
   .modal{
    position: fixed;
    top: 0;
@@ -98,36 +98,67 @@
    display: flex;
    justify-content: center;
    align-items: center;
-   color: white;
+   color: bwhite;
    background-color: rgba(0, 0, 0, 0.5); 
   }
   .reviewForm{
     display: grid;
     width: 90%;
+    color: black;
   }
   .reviewForm-output {
     font-size: 20px;
     font-weight: bold;
-    background-color: #e5e5ba;
+    background-color: #ffffff;
     cursor: pointer;
     pointer-events: none;
     text-transform: capitalize;
     white-space: pre-wrap;
     overflow-wrap: break-word;
-    border: none;
+    border: 1px;
+    border-radius: 10px;
+    padding:  0 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     width: 100%;
     height: 40px;
 }
   .review{
-    display: flex;
-    gap: 2%;
-    justify-items: center;
-    text-transform: uppercase;
+    text-transform: capitalize;
     padding: 4%;
+    color: black;
   }
 
   .formbut button{
+    height: 50px;
+    width: 30%;
     font-size: 20px;
-    margin: 10px;
-    width: 100px;
+    font-weight: 800;
+  }
+  .order{
+     display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .ordernav{
+    display: flex;
+    gap: 30px;
+  }
+  .ordernav li{
+    list-style-type: none;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #5D1451
+  }
+  .ordernav li.active {
+    border-bottom: 3px solid #ffa700;
+    border-radius: 4%;
+  }
+  .review label{
+    font-size: medium;
+  }
+  .review p{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 0;
   }
