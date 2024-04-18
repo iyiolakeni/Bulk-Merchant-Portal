@@ -6,31 +6,36 @@ import axios from 'axios';
 
 const PosRequest = () => {
   const [data, setData] = useState([]);
+//   const [posRequestIds, setPosRequestIds] = useState([]);
+//   const [selectedID, setSelectedID] = useState(null);
+
+const handleOnClick = async (requestId) => {
+    axios({
+      url: `http://localhost:5000/POS/request/excel/${requestId}`,
+      method: 'GET',
+      responseType: 'blob', // Important
+    }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `${requestId}.xlsx`);
+      document.body.appendChild(link);
+      link.click();
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios('http://localhost:5000/POS/allrequest');
+      const result = await axios.get('http://localhost:5000/POS/allrequest');
       setData(result.data);
-      const result2 = await axios('http://localhost:5000/POS/request')
+
+    //   setPosRequestIds(ids);
+    //   console.log(ids);
     };
 
     fetchData();
   }, []);
 
-  const downloadFile = (fileUrl, fileName) => {
-    axios({
-      url: fileUrl,
-      method: 'GET',
-      responseType: 'blob',
-    }).then((response) => {
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', fileName);
-      document.body.appendChild(link);
-      link.click();
-    });
-  };
 
 return (
     <div className="dashboard">
@@ -54,8 +59,8 @@ return (
                 </tr>
             </thead>
             <tbody className="form-body">
-                {data.map((item, index) => (
-                    <tr key={index}>
+                {data.map((item) => (
+                    <tr key={item.id}>
                         <td>{item.NumberOfPos}</td>
                         <td>{item.Pos_RequestId}</td>
                         {/* <td>{item.Pos_SerialNumber}</td> */}
@@ -64,8 +69,8 @@ return (
                         <td>{item.Pos_Model}</td>
                         <td>{item.Pos_Processor}</td>
                         <td>{item.status}</td>
-                        <td>
-                            <span className="view_more" onClick={() => downloadFile(item.fileUrl, item.fileName)}>
+                        <td onClick={() => handleOnClick(item.Pos_RequestId)}>
+                            <span className="view_more">
                             </span>
                         </td>
                     </tr>

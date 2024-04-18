@@ -5,7 +5,7 @@ const NewEmail = (props) => {
   const [recipient, setRecipient] = useState('');
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
   const handleClose = () => {
     props.closeForm();
@@ -45,7 +45,7 @@ const NewEmail = (props) => {
         <textarea value={body} onChange={(e) => setBody(e.target.value)} required />
       </label>
       <button type="submit">Send</button>
-      <button onClick={() => setOpen(false)}>Close</button>
+      <button onClick={() => handleClose}>Close</button>
     </form>
   );
 };
