@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
+import { UserContext } from "../UserContext";
+
 
 const NewEmail = (props) => {
+  const {user} = useContext(UserContext)
   const [recipient, setRecipient] = useState('');
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
@@ -16,6 +19,7 @@ const NewEmail = (props) => {
     event.preventDefault();
 
     const email = {
+      sender: user.email,
       recipient,
       subject,
       body,
@@ -45,7 +49,7 @@ const NewEmail = (props) => {
         <textarea value={body} onChange={(e) => setBody(e.target.value)} required />
       </label>
       <button type="submit">Send</button>
-      <button type='close' onClick={() => setOpen(false)}>Close</button>
+      <button type='close' onClick={handleClose}>Close</button>
     </form>
   );
 };
