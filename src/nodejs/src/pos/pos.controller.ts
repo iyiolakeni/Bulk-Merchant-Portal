@@ -43,7 +43,7 @@ export class PosController{
         // }
 
         @ApiTags('PosRequest')
-        @Get('request/:requestId/excel')
+        @Get('request/excel/:requestId')
         async getPosRequestsByRequestIdAndDownloadExcel(@Param('requestId') requestId: string, @Res() res: Response) {
             try {
                 const filename = await this.PosService.convertPosRequestsToExcelAndDownload(requestId);

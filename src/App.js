@@ -18,6 +18,7 @@ import EmailBoard from './pages/email_board';
 import Merchants from './pages/merchants';
 import RequestPage from './pages/requestpage';
 import NibssDashboard from './pages/nibss';
+import PosRequest from './pages/posrequest';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/email" element={<EmailBoard/>}/>
         <Route path="/merchantlist" element={<Merchants/>}/>
         <Route path="/request/:requestId" element={<RequestPage/>}/>
+        <Route path='/posrequest' element={<PosRequest/>}/>
       </Routes>
       </UserProvider>
     </div>

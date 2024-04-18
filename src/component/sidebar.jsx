@@ -40,6 +40,9 @@ const SideBar = () => {
                 <li><Link to="/pendingrequest" className={window.location.pathname === '/pendingrequest' ? 'active' : ''}>Pending Requests</Link></li>
                 <li><Link to="/approved" className={window.location.pathname === '/approved' ? 'active' : ''}>View Approved Requests</Link></li>
                 <li><Link to="/denied_request" className={window.location.pathname === '/denied_request' ? 'active' : ''}>View Denied Requests</Link></li>
+                {user.jobPosition === 'POS Business Officer' && (
+                  <li><Link to="/posrequest" className={window.location.pathname === '/posrequest' ? 'active' : ''}>POS Request</Link></li>
+                )}
               </ul>)
             
             )}
@@ -47,6 +50,11 @@ const SideBar = () => {
         <li>
           <Link to="/merchantlist" className={window.location.pathname === '/merchantlist' ? 'active' : ''}>Merchants</Link>
         </li>
+        {user.jobPosition === 'POS Business Officer' && (
+          <li>
+            <Link to="/posrequest" className={window.location.pathname === '/posrequest' ? 'active' : ''}>POS Request</Link>
+          </li>
+        )}
       </ul>
       </div>
       <div className="logout">
