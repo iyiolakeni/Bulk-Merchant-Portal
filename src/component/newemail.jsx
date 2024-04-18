@@ -45,7 +45,7 @@ const NewEmail = (props) => {
         <textarea value={body} onChange={(e) => setBody(e.target.value)} required />
       </label>
       <button type="submit">Send</button>
-      <button onClick={() => handleClose}>Close</button>
+      <button type='close' onClick={() => setOpen(false)}>Close</button>
     </form>
   );
 };
