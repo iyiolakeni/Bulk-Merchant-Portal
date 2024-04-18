@@ -8,6 +8,7 @@ const NewEmail = (props) => {
   const [recipient, setRecipient] = useState('');
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
+  const sender = user.email;
   // const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -19,7 +20,7 @@ const NewEmail = (props) => {
     event.preventDefault();
 
     const email = {
-      sender: user.email,
+      sender,
       recipient,
       subject,
       body,
