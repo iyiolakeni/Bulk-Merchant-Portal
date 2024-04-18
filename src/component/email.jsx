@@ -65,7 +65,7 @@ const Email = () => {
 
   return (
     <div className="email-system">
-      <div>
+      <div className="emailheader">
       <h1>Email Feed</h1>
       <Link onClick={() => setOpen(true)}>New Email</Link>
       </div>
@@ -115,7 +115,6 @@ const Email = () => {
         }}
       >
       <NewEmail closeForm={closeForm}/>
-      <button onClick={() => setOpen(false)}>Close</button>
       </div>
     </div>
     )}

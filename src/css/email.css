@@ -90,3 +90,12 @@
   .emailForm  button[type="submit"]:hover {
     background-color: #45a049;
   }
+  .emailheader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ }
+  .nibsscontent{
+    display: grid;
+    background-color: #f8f8f8;
+  }

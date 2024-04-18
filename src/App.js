@@ -17,6 +17,7 @@ import Denied_Request from './pages/denied_request';
 import EmailBoard from './pages/email_board';
 import Merchants from './pages/merchants';
 import RequestPage from './pages/requestpage';
+import NibssDashboard from './pages/nibss';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Route path='/' element={<Login/>}/>
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Dashboard" element={<Dashboard/>} />
+        <Route path="/NibssDashboard" element={<NibssDashboard/>} />
         <Route path="/NewRequest" element={<NewRequest/>}/>
         <Route path="/allrequests" element={<Allrequests/>}/>
         <Route path="/pendingrequest" element={<Pending_requests/>}/>

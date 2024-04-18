@@ -125,7 +125,14 @@ async generateExcelFile(data: Pos[], filename: string): Promise<void> {
   });
 
   // Write to file
-  const filePath = path.join('C:\\Users\\VINCENT\\Desktop\\BMP\\Bulk-Merchant-Portal\\src\\nodejs\\Pos_Requests', filename);
+  const dirPath = path.join(__dirname, '..', '..', '..', '..', 'nodejs');
+  const filePath = path.join(dirPath, filename);
+
+  // Create the directory if it doesn't exist
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
+
   await workbook.xlsx.writeFile(filePath);
 }
 
@@ -135,7 +142,6 @@ async convertPosRequestsToExcelAndDownload(requestId: string): Promise<string> {
   await this.generateExcelFile(posRequests, filename);
   return filename;
 }
-
 
     async updateStatus(requestId: string,
       dto: updatePosStatusDto): Promise<Pos>{

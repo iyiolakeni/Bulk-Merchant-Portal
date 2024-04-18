@@ -21,7 +21,13 @@ const UserLogin = () => {
       if (response.data.success) {
         const user = response.data.user;
         setUser(user);
-        navigate('/Dashboard');
+        if (user.jobPosition === 'NBSS')
+        {
+          navigate('/NibssDashboard');
+        }
+        else{
+          navigate('/Dashboard');
+        }
         console.log(user);
     }
   } 
