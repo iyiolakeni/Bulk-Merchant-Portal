@@ -82,37 +82,32 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    resize: vertical;
+    resize: none;
     height: auto;
-    min-height: 50px;
+    min-height: 300px;
   }
   
-  .emailForm  button[type="submit"] {
+  .emailForm  button {
     background-color: #008000;
     color: white;
-    font-size: 30px;
+    font-size: 20px;
     padding: 1px 5px; 
-    margin: 20px 0px; 
     border: 1px solid #008000; 
     border-radius: 6px; 
     cursor: pointer;
   }
 
-  .emailForm  button[type="close"] {
-  background-color: #FF0000;
-  color: white;
-  font-size: 30px;
-  padding: 1px 5px;
-  margin: 20px 10px;
-  border: 1px solid #FF0000;
-  border-radius: 6px;
-  cursor: pointer;
-}
-  
-  .emailForm  button[type="submit"]:hover {
+  .emailForm button:hover {
     background-color: #45a049;
   }
   
+  .emailBut{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 5%;
+  }
   .emailheader{
     display: flex;
     justify-content: space-between;

@@ -48,8 +48,10 @@ const NewEmail = (props) => {
         Body:
         <textarea name='message' required />
       </label>
+      <div className='emailBut'>
       <button type="submit">Send</button>
       <button type='close' onClick={handleClose}>Close</button>
+      </div>
     </form>
   );
 };
