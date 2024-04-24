@@ -3,6 +3,7 @@ import axios from "axios";
 
 const MerchantDetails = (props) => {
   const [others, setOthers] = useState(false);
+  const [message, setMessage] = useState('');
   const merchantObj = useRef();
 
   const handleChange = (e) => {
@@ -31,13 +32,14 @@ const MerchantDetails = (props) => {
         "http://localhost:5000/merchant/newMerchant",
         info
       );
-      alert("Successfully submitted!");
+      // alert("Successfully submitted!");
       const merchantId = response.data.MerchantID;
       await navigator.clipboard.writeText(merchantId);
       // window.alert(`Merchant ID Created: ${merchantId}`);
-
       props.closeForm();
       props.setMerchantId(merchantId);
+      console.log(merchantId);
+    
     } catch (err) {
       console.log("An error occurred while submitting the form", err);
     }
@@ -199,6 +201,7 @@ const MerchantDetails = (props) => {
         <button type="submit">Create Merchant</button>
         <button onClick={handleClose}>Cancel</button>
       </div>
+      {message && <div>{message}</div>}
     </form>
   );
 };

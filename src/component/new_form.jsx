@@ -16,12 +16,15 @@ const NewForm = ({ user }) => {
   const [error, setError] = useState("");
   const formObj = useRef();
   const [typingTimeout, setTypingTimeout] = useState(0);
-  
+  const [inputValue, setInputValue] = useState(false);
+ 
   const closeForm = (e) => {
     // e.preventDefault();
     setOpenForm(false);
+    // setMerchantValue(merchantId);
+    setInputValue(true);
     {
-      !openForm && merchantId && <p>{merchantId} has been created</p>;
+      !openForm && merchantId && <p>{inputValue}has been created</p>;
     }
   };
 
@@ -143,13 +146,22 @@ const NewForm = ({ user }) => {
 
       <h2 style={{ paddingLeft: "3%" }}>POS Requisition Form</h2>
       <form ref={formObj} onSubmit={handleSubmit} className="request">
-        <input
+        {!inputValue && (<input
           className="inputField"
           type="text"
           name="MerchantID"
           placeholder="Search for Merchant ID"
           onChange={handleMerchantIdChange}
-        />
+        />)}
+        {inputValue && (<input
+          className="inputField"
+          type="text"
+          readOnly
+          value={merchantId}
+          name="MerchantID"
+          placeholder={merchantId}
+          onChange={handleMerchantIdChange}
+        />)}
         {hasChecked && !merchantExists && (
           <button
             onClick={(e) => {
@@ -160,12 +172,7 @@ const NewForm = ({ user }) => {
             Create New Merchant
           </button>
         )}
-        <input
-          className="inputField"
-          name="No_of_POS_terminal"
-          type="number"
-          placeholder="Number of POS Outlets"
-        />
+        
         <input
           className="inputField"
           name=""
