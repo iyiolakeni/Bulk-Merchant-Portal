@@ -75,11 +75,11 @@ const Signup = () => {
   <option value="Account Developer">Account Developer</option>
 </select>
 
-    <button style={{ color: 'white', backgroundColor: '#CDADF5', border: '25px', width:'150%'}} onClick={handleOnClick}>CONFIRM</button>
+    <button style={{ color: 'white', backgroundColor: '#CDADF5', border: '25px', width:'100%'}} onClick={handleOnClick}>CONFIRM</button>
   </div>
 )}
       {showLoginDiv && (
-        <div className="loginDiv">
+        <div className="signupDiv">
           <form className="login" onSubmit={handleSubmit}>
             <input className="username" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <input className="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />

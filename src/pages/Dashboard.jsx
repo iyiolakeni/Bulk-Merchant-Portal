@@ -1,13 +1,18 @@
 import SideBar from "../component/sidebar";
 import RequestCards from "../component/requestcards";
+import Navbar from "../component/navbar";
+import ViewallRequest from "../component/viewallrequest";
 
 const Dashboard = () => {
-
-  const requests = [{ amount: "1000", status: "Approved" }];
+  const num = 5;
   return (
     <div className="dashboard">
       <SideBar />
-          <RequestCards requests={requests}/>
+      <div className="content">
+        <Navbar/>
+        <RequestCards/>
+        <ViewallRequest num={num}/>
+      </div>
     </div>
   );
 };

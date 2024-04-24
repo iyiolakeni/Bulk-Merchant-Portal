@@ -1,37 +1,31 @@
-
-import { Controller, Post, Body, UnauthorizedException,Res, Req } from '@nestjs/common';
+import { Controller, Post, Body, UnauthorizedException, Res, Req, Session } from '@nestjs/common';
 import { LoginService } from './login-api.service';
 import { LoginDto } from './dto/create-login-api.dto';
-import { Response, Request } from 'express';
-import { User } from '../user/entities/user.entity'
+import { Request, Response } from 'express';
 
 @Controller('users')
 export class LoginController {
-  constructor(private readonly loginService: LoginService) {}
+  constructor(
+    private readonly loginService: LoginService,
+  ) {}
 
   @Post('login')
-  async login(@Body() loginDto: LoginDto): Promise<any> {
+  async login(@Body() loginDto: LoginDto, @Req() req: Request, @Res() res: Response): Promise<any> {
     const { username, password } = loginDto;
-    const user = await this.loginService.findByUsernameAndPassword(username, password);
-    if (!user) {
-      return { success: false, message: 'Invalid username or password' };
+    try {
+      const { user, jobPosition } = await this.loginService.findByUsernameAndPassword(username, password, req);
+      return res.json({ success: true, user, jobPosition });
+    } catch (error) {
+      throw new UnauthorizedException('Invalid username or password');
     }
-    return { success: true, user };
-  }
+  }
 
   @Post('logout')
-  async logout(@Req() req: Request & { session: { user: User } }, @Res() res: Response) {
-    const user: User = req.session?.user;
-
-    if (!user) {
-      throw new UnauthorizedException('User not logged in');
+  async logout(@Session() session: Record<string, any>): Promise<void> {
+    if (!session.user) {
+      throw new UnauthorizedException('User is not logged in');
     }
-
-    req.session.destroy((err) => {
-      if (err) {
-        throw new Error('Error destroying session');
-      }
-      res.send({ message: 'Logged out successfully' });
-    });
+    // Clear user information from the session upon logout
+    delete session.user;
   }
 }

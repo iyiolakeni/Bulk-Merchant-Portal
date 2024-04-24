@@ -1,26 +1,67 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateFormDto } from './dto/create-form.dto';
-import { UpdateFormDto } from './dto/update-form.dto';
+import { UpdateFormStatusDto } from './dto/update-form-status.dto';
+import { Form } from './entities/form.entity';
+import { FormStatus } from './entities/form.enum';
+
 
 @Injectable()
 export class FormService {
-  create(createFormDto: CreateFormDto) {
-    return 'This action adds a new form';
+  constructor(
+    @InjectRepository(Form)
+    private readonly formRepository: Repository<Form>,
+  ) {}
+
+  async createForm(formData: CreateFormDto): Promise<Form> {
+    const form = this.formRepository.create(formData);
+    return this.formRepository.save(form);
   }
 
-  findAll() {
-    return `This action returns all form`;
+  async getAllForms(): Promise<Form[]> {
+    return this.formRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} form`;
-  }
+    //get forms by RequestID
+    async getFormByRequestId(RequestID: string){
+      let found;
+      try {
+        found = await this.formRepository.findOne({where: { RequestId: RequestID}});
+      } catch (error) {
+        console.error('There was an error:', error);
+      }
+      console.log('Found:', found);
+      if (!found) {
+        throw new NotFoundException('Could not find form');
+      }
+      return found;
+    }
 
-  update(id: number, updateFormDto: UpdateFormDto) {
-    return `This action updates a #${id} form`;
-  }
+  async updateFormStatus(
+    RequestId: string,
+    updateFormStatusDto: UpdateFormStatusDto,
+  ): Promise<Form> {
+    const form = await this.formRepository.findOne({where: { RequestId: RequestId}});
+    if (!form) {
+      throw new NotFoundException('Form not found');
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} form`;
+    if (form.status === FormStatus.DENIED) {
+      throw new BadRequestException('Form status cannot be updated');
+    }
+
+    if (
+      updateFormStatusDto.status !== FormStatus.APPROVED &&
+      updateFormStatusDto.status !== FormStatus.DENIED &&
+      updateFormStatusDto.status !== FormStatus.IN_PROCESS &&
+      updateFormStatusDto.status !== FormStatus.DEPLOYED
+    ) {
+      throw new BadRequestException('Invalid status transition');
+    }
+
+    form.status = updateFormStatusDto.status;
+    console.log('Form:', form);
+    return this.formRepository.save(form);
   }
 }

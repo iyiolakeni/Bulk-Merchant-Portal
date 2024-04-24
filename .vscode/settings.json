@@ -1,0 +1,6 @@
+{
+    "github.copilot.advanced": {
+    //Allow text wrapping in the co-pilot chatbox
+    "wrapChat": true
+    }
+}

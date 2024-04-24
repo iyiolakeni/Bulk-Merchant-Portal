@@ -22,21 +22,22 @@ export class User {
   @Column()
   password: string;
 
-  // @BeforeInsert()
-  //   async setPassword(rawPassword: string) {
-  //   this.password = await bcrypt.hash(rawPassword, 10); 
-  // }
+  @BeforeInsert()
+  async setPassword() {
+    if (this.password) {
+      this.password = await bcrypt.hash(this.password, 10); 
+    }
+  }
 
-  // async comparePassword(rawPassword: string) {
-  //   return await bcrypt.compare(rawPassword, this.password); 
-  // }
+  async comparePassword(password: string): Promise<boolean> {
+    return await bcrypt.compare(password, this.password); 
+  }
 
   @Column({
     type: 'enum',
     enum: JobPosition,
-    //default: JobPosition.ACCOUNT_OFFICER
   })
   jobPosition: JobPosition;
 }
-// export { JobPosition };
+export { JobPosition };
 
