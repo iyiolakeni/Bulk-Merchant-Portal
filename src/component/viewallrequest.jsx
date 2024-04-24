@@ -66,7 +66,7 @@ const ViewallRequest =({num}) => {
                         <th>Registration Date</th>
                         <th>Business Type</th>
                         <th>Business Name</th>
-                        <th>Location</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -77,7 +77,7 @@ const ViewallRequest =({num}) => {
                             <td>{new Date(form.createdAt).toLocaleDateString()}</td>
                             <td>{form.merchant?.Business_type}</td>
                             <td>{form.merchant?.Merchant_Trade_Name}</td>
-                            <td>{form.merchant?.Business_location}</td>
+                            <td style={{textTransform: "uppercase"}}>{form.status}</td>
                             <td onClick={() => handleonClick(form.RequestId)}>
                                 <span className="view_more"></span>
                             </td>
